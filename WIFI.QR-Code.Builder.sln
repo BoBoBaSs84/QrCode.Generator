@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12439B47-309E-4CB7-8FF8-EF559D5EAB56}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		LICENSE = LICENSE
+		PublicKey.snk = PublicKey.snk
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E780644-C4DD-4E17-B2F5-B3426803E8A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WIFI.QR-Code.Builder", "src\WIFI.QR-Code.Builder\WIFI.QR-Code.Builder.csproj", "{B7FAFFD5-90C3-4B11-A0BE-1650F66F69C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7FAFFD5-90C3-4B11-A0BE-1650F66F69C4}.Debug|x64.ActiveCfg = Debug|x64
+		{B7FAFFD5-90C3-4B11-A0BE-1650F66F69C4}.Debug|x64.Build.0 = Debug|x64
+		{B7FAFFD5-90C3-4B11-A0BE-1650F66F69C4}.Release|x64.ActiveCfg = Release|x64
+		{B7FAFFD5-90C3-4B11-A0BE-1650F66F69C4}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B7FAFFD5-90C3-4B11-A0BE-1650F66F69C4} = {7E780644-C4DD-4E17-B2F5-B3426803E8A0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2117179F-19CC-417D-B217-BEF1AA796CCA}
+	EndGlobalSection
+EndGlobal
