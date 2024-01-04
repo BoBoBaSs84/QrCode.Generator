@@ -16,6 +16,7 @@
   <ItemGroup>
     <PackageReference Include="BB84.Notifications" Version="1.8.2" />
     <PackageReference Include="Net.Codecrete.QrCodeGenerator" Version="2.0.4" />
+    <PackageReference Include="PropertyTools.Wpf" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
