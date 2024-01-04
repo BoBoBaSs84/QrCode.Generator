@@ -1,0 +1,68 @@
+﻿<Window x:Class="WIFI.QRCode.Builder.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:WIFI.QRCode.Builder.ViewModels"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+        mc:Ignorable="d"
+        Title="WIFI.QR-Code.Builder"
+        Height="540"
+        Width="960"
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+  <DockPanel LastChildFill="True">
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="_File">
+        <MenuItem Header="_About"
+                  Click="AboutItem_Click" />
+        <Separator />
+        <MenuItem Header="_Quit"
+                  Click="QuitItem_Click" />
+      </MenuItem>
+    </Menu>
+    <StackPanel Width="250"
+                HorizontalAlignment="Left">
+      <Label Content="SSID:" />
+      <TextBox x:Name="SsidTextBox"
+               Text="{Binding SSID, UpdateSourceTrigger=PropertyChanged}"
+               Margin="16,0,0,0" />
+      <Label Content="Transmission:" />
+      <ComboBox x:Name="TransmissionCombo"
+                ItemsSource="{Binding TransmissionTypes}"
+                DisplayMemberPath="Item1"
+                SelectedValuePath="Item2"
+                SelectedValue="{Binding Transmission}"
+                Margin="16,0,0,0" />
+      <Label Content="Password:" />
+      <TextBox x:Name="PasswordTextBox"
+               Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+               Margin="16,0,0,0" />
+      <Label Content="Hidden:" />
+      <CheckBox x:Name="HiddenCheckBox"
+                IsChecked="{Binding Hidden}"
+                Margin="16,0,0,0" />
+      <Label Content="Error Correction:" />
+      <ComboBox x:Name="ErrorCorrectionCombo"
+                ItemsSource="{Binding ErrorCorrectionLevels}"
+                DisplayMemberPath="Item1"
+                SelectedValuePath="Item2"
+                SelectedValue="{Binding ErrorCorrection}"
+                Margin="16,0,0,0" />
+      <Label Content="Border Width:" />
+      <TextBox x:Name="BorderWidthTextBox"
+               Text="{Binding BorderWidth, UpdateSourceTrigger=PropertyChanged}"
+               Margin="16,0,0,0" />
+    </StackPanel>
+    <Image x:Name="QrCodeImage"
+           Margin="16,0,16,16"
+           RenderOptions.BitmapScalingMode="NearestNeighbor"
+           RenderOptions.EdgeMode="Aliased" />
+    <Button x:Name="CopyButton"
+            Content="Copy QR Code"
+            HorizontalAlignment="Right"
+            Padding="10,3"
+            Click="CopyButton_Click"
+            VerticalAlignment="Bottom"
+            Margin="0,0,16,16" />
+  </DockPanel>
+</Window>

@@ -1,0 +1,72 @@
+<Project>
+
+  <PropertyGroup>
+    <VersionMajor>$([System.DateTime]::UtcNow.Year)</VersionMajor>
+    <VersionMinor>$([System.DateTime]::UtcNow.Month)</VersionMinor>
+    <VersionPatch>$([System.DateTime]::UtcNow.Day)</VersionPatch>
+    <VersionRevision>$([System.DateTime]::UtcNow.TimeOfDay.TotalMinutes.ToString("0"))</VersionRevision>
+    <VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionRevision)</VersionPrefix>
+    <VersionSuffix Condition="$(Configuration.Equals('Debug'))">Development</VersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AssemblyOriginatorKeyFile>..\..\PublicKey.snk</AssemblyOriginatorKeyFile>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DebugType>none</DebugType>
+    <Deterministic>True</Deterministic>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <GeneratedAssemblyInfoFile>Properties\AssemblyInfo.cs</GeneratedAssemblyInfoFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
+    <SignAssembly>true</SignAssembly>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="!$(MSBuildProjectName.EndsWith('Tests'))">
+    <Authors>BoBoBaSs84</Authors>
+    <Company>https://github.com/BoBoBaSs84</Company>
+    <Copyright>Copyright © $(VersionMajor) BoBoBaSs84</Copyright>
+    <Description>As we all know: "Why did you change your password again? And why is it so long?"</Description>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Product>$(AssemblyName)</Product>
+    <Title>$(AssemblyName)</Title>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/BoBoBaSs84/$(Product)</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.Equals('Debug'))">
+    <DebugType>full</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup Condition="!$(MSBuildProjectName.EndsWith('Tests'))">
+    <InternalsVisibleTo Include="$(AssemblyName)Tests" Key="00240000048000009400000006020000002400005253413100040000010001003d151960c65927941af507e3d642c85ad27908548b7c3b254993ba149e4a956d63912f939808d541b2ff09c7dc03a9989b6e45f3e1e64d94e5008419b3c98c40cd39b8a12f5e53bfd2bb36c3fbcd7a165bd8d1b70a833113264544f1879f0359cec455060956f955aaefdc56fb1a95f50b13af6d5d2897dfc3a7dada204d9dd7"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Diagnostics.CodeAnalysis" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
