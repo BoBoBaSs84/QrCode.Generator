@@ -1,47 +1,55 @@
-﻿using BB84.Notifications;
-using BB84.Notifications.Attributes;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+
+using BB84.Notifications;
 
 using Net.Codecrete.QrCodeGenerator;
 
+using WIFI.QRCode.Builder.Common;
+using WIFI.QRCode.Builder.Enumerators;
+using WIFI.QRCode.Builder.Interfaces.Common;
+using WIFI.QRCode.Builder.Interfaces.Services;
+using WIFI.QRCode.Builder.Models;
+using WIFI.QRCode.Builder.Services;
+
 namespace WIFI.QRCode.Builder.ViewModels;
 
+/// <summary>
+/// The main view model class.
+/// </summary>
 public sealed class MainViewModel : NotifyPropertyBase
 {
-  private TransmissionType _transmission;
-  private string _sSID;
-  private string _password;
-  private bool _hidden;
-  private int _borderWidth;
-  private QrCode.Ecc _errorCorrection;
+  private readonly IQrCodeService _qrCodeService;
+  private IRelayCommand? _aboutCommand;
+  private IRelayCommand? _copyCommand;
+  private IRelayCommand? _exitCommand;
 
+  /// <summary>
+  /// Initializes an instance of <see cref="MainViewModel"/> class.
+  /// </summary>
   public MainViewModel()
   {
-    _transmission = TransmissionType.WPA;
-    _sSID = string.Empty;
-    _password = string.Empty;
-    _hidden = false;
-    _borderWidth = 3;
-    _errorCorrection = QrCode.Ecc.Medium;
+    _qrCodeService = new QrCodeService();
+    QrCodeImage = new();
+    Model = new();
+    Model.PropertyChanged += (s, e) => UpdateQrCode();
+    UpdateQrCode();
   }
 
-  [NotifyChanged(nameof(Text))]
-  public TransmissionType Transmission { get => _transmission; set => SetProperty(ref _transmission, value); }
+  /// <summary>
+  /// The rendered QR code image.
+  /// </summary>
+  public Image QrCodeImage { get; private set; }
 
-  [NotifyChanged(nameof(Text))]
-  public string SSID { get => _sSID; set => SetProperty(ref _sSID, value); }
+  /// <summary>
+  /// The main model instance.
+  /// </summary>
+  public MainModel Model { get; }
 
-  [NotifyChanged(nameof(Text))]
-  public string Password { get => _password; set => SetProperty(ref _password, value); }
-
-  [NotifyChanged(nameof(Text))]
-  public bool Hidden { get => _hidden; set => SetProperty(ref _hidden, value); }
-
-  public int BorderWidth { get => _borderWidth; set => SetProperty(ref _borderWidth, value); }
-
-  public QrCode.Ecc ErrorCorrection { get => _errorCorrection; set => SetProperty(ref _errorCorrection, value); }
-
-  public string Text => $"WIFI:T:{Transmission};S:{SSID};P:{Password};H:{Hidden}";
-
+  /// <summary>
+  /// The error correction levels to select from.
+  /// </summary>
   public Tuple<string, QrCode.Ecc>[] ErrorCorrectionLevels { get; } = [
     new Tuple<string, QrCode.Ecc>("Low", QrCode.Ecc.Low),
     new Tuple<string, QrCode.Ecc>("Medium", QrCode.Ecc.Medium),
@@ -49,17 +57,51 @@ public sealed class MainViewModel : NotifyPropertyBase
     new Tuple<string, QrCode.Ecc>("High", QrCode.Ecc.High)
   ];
 
+  /// <summary>
+  /// The transmission types to select from.
+  /// </summary>
   public Tuple<string, TransmissionType>[] TransmissionTypes { get; } = [
     new("nopass", TransmissionType.NOPASS),
     new("WPA", TransmissionType.WPA),
     new("WEP", TransmissionType.WEP)
     ];
 
-  public enum TransmissionType
+  /// <summary>
+  /// The command to show the about window.
+  /// </summary>
+  public IRelayCommand AboutCommand
+    => _aboutCommand ??= new RelayCommand(() => Environment.Exit(1));
+
+  /// <summary>
+  /// The command for copying the QR code.
+  /// </summary>
+  public IRelayCommand CopyCommand
+    => _copyCommand ??= new RelayCommand(CopyQrCode);
+
+  /// <summary>
+  /// The command to exit the application.
+  /// </summary>
+  public IRelayCommand ExitCommand
+    => _exitCommand ??= new RelayCommand(() => Environment.Exit(0));
+
+  /// <summary>
+  /// Updates the QR code.
+  /// </summary>
+  private void UpdateQrCode()
   {
-    NOPASS = 0,
-    WPA = 1,
-    WEP = 2,
+    QrCode qrCode = QrCode.EncodeText(Model.Value, Model.ErrorCorrection);
+    QrCodeImage.Source = _qrCodeService.CreateDrawing(qrCode, 192, Model.BorderWidth, Model.ForegroundColor, Model.BackgroundColor);
+  }
+
+  /// <summary>
+  /// Copies the QR code into the clipboard.
+  /// </summary>
+  private void CopyQrCode()
+  {
+    QrCode qrCode = QrCode.EncodeText(Model.Value, Model.ErrorCorrection);
+    BitmapSource bitmap = _qrCodeService.CreateBitmapImage(qrCode, 20, Model.BorderWidth, Model.ForegroundColor, Model.BackgroundColor);
+    DataObject dataObject = new();
+    dataObject.SetData(DataFormats.Bitmap, bitmap);
+    Clipboard.SetDataObject(dataObject);
   }
 }
-
