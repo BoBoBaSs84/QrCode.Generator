@@ -22,6 +22,7 @@ public sealed class MainViewModel : NotifyPropertyBase
 {
   private readonly IQrCodeService _qrCodeService;
   private IRelayCommand? _aboutCommand;
+  private IRelayCommand? _createCommand;
   private IRelayCommand? _copyCommand;
   private IRelayCommand? _exitCommand;
 
@@ -33,8 +34,6 @@ public sealed class MainViewModel : NotifyPropertyBase
     _qrCodeService = new QrCodeService();
     QrCodeImage = new();
     Model = new();
-    Model.PropertyChanged += (s, e) => UpdateQrCode();
-    UpdateQrCode();
   }
 
   /// <summary>
@@ -71,6 +70,12 @@ public sealed class MainViewModel : NotifyPropertyBase
   /// </summary>
   public IRelayCommand AboutCommand
     => _aboutCommand ??= new RelayCommand(() => Environment.Exit(1));
+
+  /// <summary>
+  /// The command to create or update the QR code.
+  /// </summary>
+  public IRelayCommand CreateCommand
+    => _createCommand ??= new RelayCommand(UpdateQrCode);
 
   /// <summary>
   /// The command for copying the QR code.
