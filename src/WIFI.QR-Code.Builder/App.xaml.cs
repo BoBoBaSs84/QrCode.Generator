@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-using WIFI.QRCode.Builder.Windows;
+using WIFI.QRCode.Builder.Views;
 
 namespace WIFI.QRCode.Builder;
 
@@ -11,7 +11,7 @@ public partial class App : Application
 {
   private void Application_Startup(object sender, StartupEventArgs e)
   {
-    MainWindow mainWindow = new();
-    mainWindow.Show();
+    MainView mainView = new();
+    mainView.Show();
   }
 }
