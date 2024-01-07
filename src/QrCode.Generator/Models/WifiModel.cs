@@ -1,42 +1,32 @@
-﻿using System.Windows.Media;
-
-using BB84.Notifications;
-using BB84.Notifications.Attributes;
+﻿using BB84.Notifications.Attributes;
 
 using QRCoder;
 
+using WIFI.QRCode.Builder.Models.Base;
+
 using static QRCoder.PayloadGenerator.WiFi;
-using static QRCoder.QRCodeGenerator;
 
 namespace WIFI.QRCode.Builder.Models;
 
 /// <summary>
 /// The main model class.
 /// </summary>
-public sealed class MainModel : NotifyPropertyBase
+public sealed class WifiModel : QrCodeModel
 {
   private Authentication _authentication;
   private string _sSID;
   private string _password;
   private bool _hidden;
-  private int _borderWidth;
-  private ECCLevel _errorCorrection;
-  private Color _foregroundColor;
-  private Color _backgroundColor;
 
   /// <summary>
-  /// Initializes an instance of <see cref="MainModel"/> class.
+  /// Initializes an instance of <see cref="WifiModel"/> class.
   /// </summary>
-  public MainModel()
+  public WifiModel()
   {
     _authentication = Authentication.WPA;
     _sSID = string.Empty;
     _password = string.Empty;
     _hidden = false;
-    _borderWidth = 3;
-    _errorCorrection = ECCLevel.M;
-    _foregroundColor = Colors.Black;
-    _backgroundColor = Colors.White;
   }
 
   /// <summary>
@@ -63,30 +53,8 @@ public sealed class MainModel : NotifyPropertyBase
   [NotifyChanged(nameof(PayLoad))]
   public bool Hidden { get => _hidden; set => SetProperty(ref _hidden, value); }
 
-  /// <summary>
-  /// The border width of the QR code.
-  /// </summary>
-  public int BorderWidth { get => _borderWidth; set => SetProperty(ref _borderWidth, value); }
-
-  /// <summary>
-  /// The error correction level to use.
-  /// </summary>
-  public ECCLevel ErrorCorrection { get => _errorCorrection; set => SetProperty(ref _errorCorrection, value); }
-
-  /// <summary>
-  /// The foreground color to use.
-  /// </summary>
-  public Color ForegroundColor { get => _foregroundColor; set => SetProperty(ref _foregroundColor, value); }
-
-  /// <summary>
-  /// The background color to use.
-  /// </summary>
-  public Color BackgroundColor { get => _backgroundColor; set => SetProperty(ref _backgroundColor, value); }
-
-  /// <summary>
-  /// The resulting qr code value.
-  /// </summary>
-  public string PayLoad => GetPayLoad();
+  /// <inheritdoc cref="QrCodeModel.PayLoad"/>
+  public override string PayLoad => GetPayLoad();
 
   private string GetPayLoad()
   {

@@ -12,9 +12,10 @@ public partial class MainView : Window
   /// <summary>
   /// Initializes an instance of <see cref="MainView"/> class.
   /// </summary>
-  public MainView()
+  /// <param name="mainViewModel">The main view model instance to use.</param>
+  public MainView(MainViewModel mainViewModel)
   {
-    DataContext = new MainViewModel();
+    DataContext = mainViewModel;
     InitializeComponent();
   }
 }
