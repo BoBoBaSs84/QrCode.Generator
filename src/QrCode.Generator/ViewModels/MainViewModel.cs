@@ -1,17 +1,18 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using BB84.Notifications;
 
-using Net.Codecrete.QrCodeGenerator;
-
 using WIFI.QRCode.Builder.Common;
-using WIFI.QRCode.Builder.Enumerators;
 using WIFI.QRCode.Builder.Interfaces.Common;
 using WIFI.QRCode.Builder.Interfaces.Services;
 using WIFI.QRCode.Builder.Models;
 using WIFI.QRCode.Builder.Services;
+
+using static QRCoder.PayloadGenerator.WiFi;
+using static QRCoder.QRCodeGenerator;
 
 namespace WIFI.QRCode.Builder.ViewModels;
 
@@ -49,21 +50,14 @@ public sealed class MainViewModel : NotifyPropertyBase
   /// <summary>
   /// The error correction levels to select from.
   /// </summary>
-  public Tuple<string, QrCode.Ecc>[] ErrorCorrectionLevels { get; } = [
-    new Tuple<string, QrCode.Ecc>("Low", QrCode.Ecc.Low),
-    new Tuple<string, QrCode.Ecc>("Medium", QrCode.Ecc.Medium),
-    new Tuple<string, QrCode.Ecc>("Quartile", QrCode.Ecc.Quartile),
-    new Tuple<string, QrCode.Ecc>("High", QrCode.Ecc.High)
-  ];
+  public Tuple<string, ECCLevel>[] ErrorCorrectionLevels
+    => [new("Low", ECCLevel.L), new("Medium", ECCLevel.M), new("Quartile", ECCLevel.Q), new("High", ECCLevel.H)];
 
   /// <summary>
-  /// The transmission types to select from.
+  /// The Authentication types to select from.
   /// </summary>
-  public Tuple<string, TransmissionType>[] TransmissionTypes { get; } = [
-    new("nopass", TransmissionType.NOPASS),
-    new("WPA", TransmissionType.WPA),
-    new("WEP", TransmissionType.WEP)
-    ];
+  public Tuple<string, Authentication>[] AuthenticationTypes
+    => [new("nopass", Authentication.nopass), new("WPA", Authentication.WPA), new("WEP", Authentication.WEP)];
 
   /// <summary>
   /// The command to show the about window.
@@ -94,8 +88,10 @@ public sealed class MainViewModel : NotifyPropertyBase
   /// </summary>
   private void UpdateQrCode()
   {
-    QrCode qrCode = QrCode.EncodeText(Model.Value, Model.ErrorCorrection);
-    QrCodeImage.Source = _qrCodeService.CreateDrawing(qrCode, 192, Model.BorderWidth, Model.ForegroundColor, Model.BackgroundColor);
+    DrawingImage drawing =
+      _qrCodeService.CreateDrawing(Model.PayLoad, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection);
+
+    QrCodeImage.Source = drawing;
   }
 
   /// <summary>
@@ -103,8 +99,9 @@ public sealed class MainViewModel : NotifyPropertyBase
   /// </summary>
   private void CopyQrCode()
   {
-    QrCode qrCode = QrCode.EncodeText(Model.Value, Model.ErrorCorrection);
-    BitmapSource bitmap = _qrCodeService.CreateBitmapImage(qrCode, 20, Model.BorderWidth, Model.ForegroundColor, Model.BackgroundColor);
+    BitmapSource bitmap =
+      _qrCodeService.CreateBitmap(Model.PayLoad, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection);
+
     DataObject dataObject = new();
     dataObject.SetData(DataFormats.Bitmap, bitmap);
     Clipboard.SetDataObject(dataObject);

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:pt="clr-namespace:PropertyTools.Wpf;assembly=PropertyTools.Wpf"
+        xmlns:pt="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
         xmlns:vm="clr-namespace:WIFI.QRCode.Builder.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
@@ -27,12 +27,12 @@
       <TextBox x:Name="SsidTextBox"
                Text="{Binding Model.SSID, UpdateSourceTrigger=PropertyChanged}"
                Margin="16,0,0,0" />
-      <Label Content="Transmission:" />
+      <Label Content="Authentication:" />
       <ComboBox x:Name="TransmissionCombo"
-                ItemsSource="{Binding TransmissionTypes}"
+                ItemsSource="{Binding AuthenticationTypes}"
                 DisplayMemberPath="Item1"
                 SelectedValuePath="Item2"
-                SelectedValue="{Binding Model.Transmission}"
+                SelectedValue="{Binding Model.Authentication}"
                 Margin="16,0,0,0" />
       <Label Content="Password:" />
       <TextBox x:Name="PasswordTextBox"

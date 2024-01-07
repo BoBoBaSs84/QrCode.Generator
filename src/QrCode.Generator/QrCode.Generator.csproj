@@ -6,7 +6,6 @@
     <RootNamespace>WIFI.QRCode.Builder</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Application.ico</ApplicationIcon>
-    <Platforms>x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,9 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BB84.Extensions" Version="1.9.0" />
     <PackageReference Include="BB84.Notifications" Version="1.8.2" />
-    <PackageReference Include="Net.Codecrete.QrCodeGenerator" Version="2.0.4" />
-    <PackageReference Include="PropertyTools.Wpf" Version="3.1.0" />
+    <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.113" />
+    <PackageReference Include="QRCoder.Xaml" Version="1.4.3" />
   </ItemGroup>
 
 </Project>
