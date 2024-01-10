@@ -5,5 +5,5 @@ namespace WIFI.QRCode.Builder.ViewModels.Base;
 /// <summary>
 /// The view model base class.
 /// </summary>
-public abstract class ViewModel : NotifyPropertyBase
+public abstract class ViewModel : NotificationObject
 { }

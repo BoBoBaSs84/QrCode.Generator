@@ -1,4 +1,6 @@
-﻿using WIFI.QRCode.Builder.Interfaces.Services;
+﻿using QRCoder;
+
+using WIFI.QRCode.Builder.Interfaces.Services;
 using WIFI.QRCode.Builder.Models;
 using WIFI.QRCode.Builder.ViewModels.Base;
 
@@ -26,4 +28,11 @@ public sealed class WifiViewModel(IQrCodeService qrCodeService, WifiModel model)
   /// </summary>
   public Tuple<string, Authentication>[] AuthenticationTypes
     => [new("nopass", Authentication.nopass), new("WPA", Authentication.WPA), new("WEP", Authentication.WEP)];
+
+  /// <inheritdoc/>
+  protected override void SetPayLoad()
+  {
+    PayloadGenerator.WiFi generator = new(Model.SSID, Model.Password, Model.Authentication, Model.Hidden);
+    Payload = generator.ToString();
+  }
 }

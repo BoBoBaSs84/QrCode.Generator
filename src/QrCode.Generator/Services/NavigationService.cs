@@ -12,7 +12,7 @@ namespace WIFI.QRCode.Builder.Services;
 /// Initializes an instance of <see cref="NavigationService"/> class.
 /// </remarks>
 /// <param name="viewModelFactory"></param>
-internal sealed class NavigationService(Func<Type, ViewModel> viewModelFactory) : NotifyPropertyBase, INavigationService
+internal sealed class NavigationService(Func<Type, ViewModel> viewModelFactory) : NotificationObject, INavigationService
 {
   private ViewModel _currentView = default!;
 

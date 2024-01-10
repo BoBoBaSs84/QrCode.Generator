@@ -1,4 +1,6 @@
-﻿using WIFI.QRCode.Builder.Interfaces.Services;
+﻿using QRCoder;
+
+using WIFI.QRCode.Builder.Interfaces.Services;
 using WIFI.QRCode.Builder.Models;
 using WIFI.QRCode.Builder.ViewModels.Base;
 
@@ -26,4 +28,11 @@ public sealed class EventViewModel(IQrCodeService qrCodeService, EventModel mode
   /// </summary>
   public Tuple<string, EventEncoding>[] EventEncodingTypes
     => [new("iCalComplete", EventEncoding.iCalComplete), new("Universal", EventEncoding.Universal)];
+
+  /// <inheritdoc />
+  protected override void SetPayLoad()
+  {
+    PayloadGenerator.CalendarEvent generator = new(Model.Subject, Model.Description, Model.Location, Model.Start, Model.End, Model.AllDay, Model.Encoding);
+    Payload = generator.ToString();
+  }
 }

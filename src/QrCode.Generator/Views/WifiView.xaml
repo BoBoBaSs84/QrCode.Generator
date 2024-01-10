@@ -10,8 +10,16 @@
              d:Background="WhiteSmoke"
              d:Height="600"
              d:Width="900">
-  <Grid>
-    <StackPanel Width="250"
+  <Grid Grid.ColumnSpan="2">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="250" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Column="0"
+                Width="250"
                 HorizontalAlignment="Left">
       <Label Content="SSID:" />
       <TextBox x:Name="SsidTextBox"
@@ -38,10 +46,6 @@
                 DisplayMemberPath="Item1"
                 SelectedValuePath="Item2"
                 SelectedValue="{Binding Model.ErrorCorrection}"
-                Margin="16,0,0,0" />
-      <Label Content="Quiet Zones:" />
-      <CheckBox x:Name="QuietZonesCheckBox"
-                IsChecked="{Binding Model.DrawQuietZones}"
                 Margin="16,0,0,0" />
       <Label x:Name="ForegroundColorLabel"
              Content="Foreground Color:" />
@@ -78,7 +82,8 @@
                 Margin="16,0,0,0" />
       </Grid>
     </StackPanel>
-    <Image x:Name="QrCodeImage"
+    <Image Grid.Column="1"
+           x:Name="QrCodeImage"
            Source="{Binding QrCodeImage.Source}"
            Margin="16,0,16,16"
            RenderOptions.BitmapScalingMode="NearestNeighbor"

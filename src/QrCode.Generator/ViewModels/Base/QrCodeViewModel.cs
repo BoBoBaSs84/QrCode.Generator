@@ -3,8 +3,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-using WIFI.QRCode.Builder.Common;
-using WIFI.QRCode.Builder.Interfaces.Common;
+using BB84.Notifications;
+using BB84.Notifications.Interfaces;
+
 using WIFI.QRCode.Builder.Interfaces.Services;
 using WIFI.QRCode.Builder.Models.Base;
 
@@ -23,6 +24,11 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
   private IRelayCommand? _createCommand;
   private IRelayCommand? _copyCommand;
   private Image _qrCodeImage = new();
+
+  /// <summary>
+  /// The actual qr code payload to encode.
+  /// </summary>
+  public string Payload { get; protected set; } = string.Empty;
 
   /// <summary>
   /// The error correction levels to select from.
@@ -48,12 +54,19 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
     => _copyCommand ??= new RelayCommand<QrCodeModel>(CopyQrCode);
 
   /// <summary>
+  /// Sets the payload to encode.
+  /// </summary>
+  protected abstract void SetPayLoad();
+
+  /// <summary>
   /// Updates the QR code.
   /// </summary>
   protected void UpdateQrCode(QrCodeModel model)
   {
+    SetPayLoad();
+
     DrawingImage drawing =
-      qrCodeService.CreateDrawing(model.PayLoad, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
+      qrCodeService.CreateDrawing(Payload, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
 
     QrCodeImage.Source = drawing;
   }
@@ -63,8 +76,10 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
   /// </summary>
   protected void CopyQrCode(QrCodeModel model)
   {
+    SetPayLoad();
+
     BitmapSource bitmap =
-      qrCodeService.CreateBitmap(model.PayLoad, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
+      qrCodeService.CreateBitmap(Payload, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
 
     DataObject dataObject = new();
     dataObject.SetData(DataFormats.Bitmap, bitmap);
