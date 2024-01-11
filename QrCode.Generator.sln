@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 		global.json = global.json
 		LICENSE = LICENSE
 		PublicKey.snk = PublicKey.snk
@@ -16,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E780644-C4DD-4E17-B2F5-B3426803E8A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrCode.Generator", "src\QrCode.Generator\QrCode.Generator.csproj", "{D4D8455D-D072-4B72-93E8-76914526C4AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrCode.Generator", "src\QrCode.Generator\QrCode.Generator.csproj", "{596425AD-EF50-4C67-82EB-2391A0A6EF7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,16 +25,16 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D4D8455D-D072-4B72-93E8-76914526C4AB}.Debug|x64.ActiveCfg = Debug|x64
-		{D4D8455D-D072-4B72-93E8-76914526C4AB}.Debug|x64.Build.0 = Debug|x64
-		{D4D8455D-D072-4B72-93E8-76914526C4AB}.Release|x64.ActiveCfg = Release|x64
-		{D4D8455D-D072-4B72-93E8-76914526C4AB}.Release|x64.Build.0 = Release|x64
+		{596425AD-EF50-4C67-82EB-2391A0A6EF7D}.Debug|x64.ActiveCfg = Debug|x64
+		{596425AD-EF50-4C67-82EB-2391A0A6EF7D}.Debug|x64.Build.0 = Debug|x64
+		{596425AD-EF50-4C67-82EB-2391A0A6EF7D}.Release|x64.ActiveCfg = Release|x64
+		{596425AD-EF50-4C67-82EB-2391A0A6EF7D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D4D8455D-D072-4B72-93E8-76914526C4AB} = {7E780644-C4DD-4E17-B2F5-B3426803E8A0}
+		{596425AD-EF50-4C67-82EB-2391A0A6EF7D} = {7E780644-C4DD-4E17-B2F5-B3426803E8A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2117179F-19CC-417D-B217-BEF1AA796CCA}
