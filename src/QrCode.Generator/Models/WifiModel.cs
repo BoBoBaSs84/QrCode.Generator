@@ -1,4 +1,6 @@
-﻿using WIFI.QRCode.Builder.Models.Base;
+﻿using System.ComponentModel.DataAnnotations;
+
+using WIFI.QRCode.Builder.Models.Base;
 
 using static QRCoder.PayloadGenerator.WiFi;
 
@@ -28,20 +30,37 @@ public sealed class WifiModel : QrCodeModel
   /// <summary>
   /// The authentication mode to use.
   /// </summary>
-  public Authentication Authentication { get => _authentication; set => SetProperty(ref _authentication, value); }
+  public Authentication Authentication
+  {
+    get => _authentication;
+    set => SetProperty(ref _authentication, value);
+  }
 
   /// <summary>
   /// The service set identifier.
   /// </summary>
-  public string SSID { get => _sSID; set => SetProperty(ref _sSID, value); }
+  [Required]
+  public string SSID
+  {
+    get => _sSID;
+    set => SetPropertyAndValidate(ref _sSID, value);
+  }
 
   /// <summary>
   /// The password to use.
   /// </summary>
-  public string Password { get => _password; set => SetProperty(ref _password, value); }
+  public string Password
+  {
+    get => _password;
+    set => SetProperty(ref _password, value);
+  }
 
   /// <summary>
   /// Is the wifi hidden?
   /// </summary>
-  public bool Hidden { get => _hidden; set => SetProperty(ref _hidden, value); }
+  public bool Hidden
+  {
+    get => _hidden;
+    set => SetProperty(ref _hidden, value);
+  }
 }

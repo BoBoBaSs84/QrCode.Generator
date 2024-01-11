@@ -9,7 +9,7 @@ namespace WIFI.QRCode.Builder.Models.Base;
 /// <summary>
 /// The qr code model class.
 /// </summary>
-public abstract class QrCodeModel : NotificationObject
+public abstract class QrCodeModel : ValidatableObject
 {
   private ECCLevel _errorCorrection;
   private Color _foregroundColor;

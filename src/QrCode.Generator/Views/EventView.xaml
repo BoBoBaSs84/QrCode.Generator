@@ -10,6 +10,32 @@
              d:Background="WhiteSmoke"
              d:Height="600"
              d:Width="900">
+  <UserControl.Resources>
+    <ControlTemplate x:Key="ValidationErrorTemplate">
+      <StackPanel>
+        <Border BorderBrush="Red"
+                BorderThickness="1">
+          <!-- Placeholder for the TextBox itself -->
+          <AdornedElementPlaceholder x:Name="AdornedElement" />
+        </Border>
+        <Border Background="White"
+                BorderBrush="Red"
+                Padding="4"
+                BorderThickness="1,0,1,1"
+                HorizontalAlignment="Left">
+          <ItemsControl ItemsSource="{Binding}"
+                        HorizontalAlignment="Left">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding ErrorContent}"
+                           Foreground="Red" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </Border>
+      </StackPanel>
+    </ControlTemplate>
+  </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="250" />
@@ -23,8 +49,9 @@
                 HorizontalAlignment="Left">
       <Label Content="Subject:" />
       <TextBox x:Name="SubjectTextBox"
-               Text="{Binding Model.Subject, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
+               Text="{Binding Model.Subject, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+               Margin="16,0,0,0"
+               Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}" />
       <Label Content="Description:" />
       <TextBox x:Name="DescriptionTextBox"
                Text="{Binding Model.Description, UpdateSourceTrigger=PropertyChanged}"
@@ -43,7 +70,7 @@
                          Margin="16,0,0,0" />
       <Label Content="All day event?" />
       <CheckBox x:Name="AllDayCheckbox"
-                IsChecked="{Binding Model.AllDay}"
+                IsChecked="{Binding Model.AllDay, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
       <Label Content="Event Endoding:" />
       <ComboBox x:Name="EventEndodingCombo"
@@ -62,12 +89,14 @@
                 Margin="16,0,0,0" />
       <Label x:Name="ForegroundColorLabel"
              Content="Foreground Color:" />
-      <pt:ColorPicker SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
+      <pt:ColorPicker x:Name="ForegroundColorPicker"
+                      SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
                       IsEnabled="True"
                       Margin="16,0,0,0" />
       <Label x:Name="BackgroundColorLabel"
              Content="Background Color:" />
-      <pt:ColorPicker SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
+      <pt:ColorPicker x:Name="BackgroundColorPicker"
+                      SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
                       IsEnabled="True"
                       Margin="16,0,0,0" />
       <Separator Margin="0,8,0,8" />
@@ -85,6 +114,7 @@
                 CommandParameter="{Binding Model}"
                 Grid.Column="0"
                 Grid.Row="0"
+                IsEnabled="{Binding IsModelValid, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
         <Button x:Name="CopyButton"
                 Content="Copy"
@@ -92,6 +122,7 @@
                 CommandParameter="{Binding Model}"
                 Grid.Column="1"
                 Grid.Row="0"
+                IsEnabled="{Binding IsModelValid, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
       </Grid>
     </StackPanel>

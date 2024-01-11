@@ -38,7 +38,7 @@
                Margin="16,0,0,0" />
       <Label Content="Hidden:" />
       <CheckBox x:Name="HiddenCheckBox"
-                IsChecked="{Binding Model.Hidden}"
+                IsChecked="{Binding Model.Hidden, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
       <Label Content="Error Correction:" />
       <ComboBox x:Name="ErrorCorrectionCombo"
@@ -49,12 +49,14 @@
                 Margin="16,0,0,0" />
       <Label x:Name="ForegroundColorLabel"
              Content="Foreground Color:" />
-      <pt:ColorPicker SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
+      <pt:ColorPicker x:Name="ForegroundColorPicker"
+                      SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
                       IsEnabled="True"
                       Margin="16,0,0,0" />
       <Label x:Name="BackgroundColorLabel"
              Content="Background Color:" />
-      <pt:ColorPicker SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
+      <pt:ColorPicker x:Name="BackgroundColorPicker"
+                      SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
                       IsEnabled="True"
                       Margin="16,0,0,0" />
       <Separator Margin="0,8,0,8" />

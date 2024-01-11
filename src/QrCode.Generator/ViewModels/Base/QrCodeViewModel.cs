@@ -19,16 +19,36 @@ namespace WIFI.QRCode.Builder.ViewModels.Base;
 /// <remarks>
 /// Initializes an instance of <see cref="QrCodeViewModel"/> class.
 /// </remarks>
+/// <param name="qrCodeService">The QR code service instance to use.</param>
 public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
 {
   private IRelayCommand? _createCommand;
   private IRelayCommand? _copyCommand;
   private Image _qrCodeImage = new();
+  private string _payload = string.Empty;
 
   /// <summary>
   /// The actual qr code payload to encode.
   /// </summary>
-  public string Payload { get; protected set; } = string.Empty;
+  public string Payload
+  {
+    get => _payload;
+    protected set => SetProperty(ref _payload, value);
+  }
+
+  /// <summary>
+  /// The rendered QR code image.
+  /// </summary>
+  public Image QrCodeImage
+  {
+    get => _qrCodeImage;
+    private set => SetProperty(ref _qrCodeImage, value);
+  }
+
+  /// <summary>
+  /// Is the model valid for processing?
+  /// </summary>
+  public abstract bool IsModelValid { get; protected set; }
 
   /// <summary>
   /// The error correction levels to select from.
@@ -37,21 +57,16 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
     => [new("Low", ECCLevel.L), new("Medium", ECCLevel.M), new("Quartile", ECCLevel.Q), new("High", ECCLevel.H)];
 
   /// <summary>
-  /// The rendered QR code image.
-  /// </summary>
-  public Image QrCodeImage { get => _qrCodeImage; private set => SetProperty(ref _qrCodeImage, value); }
-
-  /// <summary>
   /// The command to create or update the QR code.
   /// </summary>
   public IRelayCommand CreateCommand
-    => _createCommand ??= new RelayCommand<QrCodeModel>(UpdateQrCode);
+    => _createCommand ??= new RelayCommand<QrCodeModel>(UpdateQrCode, x => IsModelValid);
 
   /// <summary>
   /// The command for copying the QR code.
   /// </summary>
   public IRelayCommand CopyCommand
-    => _copyCommand ??= new RelayCommand<QrCodeModel>(CopyQrCode);
+    => _copyCommand ??= new RelayCommand<QrCodeModel>(CopyQrCode, x => IsModelValid);
 
   /// <summary>
   /// Sets the payload to encode.
