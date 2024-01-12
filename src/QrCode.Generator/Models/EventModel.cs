@@ -20,6 +20,7 @@ public sealed class EventModel : QrCodeModel
   private DateTime _end;
   private bool _allDay;
   private EventEncoding _encoding;
+  private bool _isValid;
 
   /// <summary>
   /// Initializes an instance of <see cref="EventModel"/> class.
@@ -33,12 +34,14 @@ public sealed class EventModel : QrCodeModel
     _end = DateTime.Today.EndOfWeek().AddHours(18);
     _allDay = false;
     _encoding = EventEncoding.iCalComplete;
+
+    PropertyChanged += (s, e) => IsValid = HasErrors.IsFalse();
   }
 
   /// <summary>
   /// The subject / title of the calender event.
   /// </summary>
-  [Required]
+  [Required(AllowEmptyStrings = false), StringLength(100, MinimumLength = 1)]
   public string Subject
   {
     get => _subject;
@@ -103,5 +106,12 @@ public sealed class EventModel : QrCodeModel
   {
     get => _encoding;
     set => SetProperty(ref _encoding, value);
+  }
+
+  /// <inheritdoc/>
+  public override bool IsValid
+  {
+    get => _isValid;
+    protected set => SetProperty(ref _isValid, value);
   }
 }

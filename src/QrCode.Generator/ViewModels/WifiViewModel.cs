@@ -1,6 +1,4 @@
-﻿using BB84.Extensions;
-
-using QRCoder;
+﻿using QRCoder;
 
 using WIFI.QRCode.Builder.Interfaces.Services;
 using WIFI.QRCode.Builder.Models;
@@ -16,7 +14,6 @@ namespace WIFI.QRCode.Builder.ViewModels;
 public sealed class WifiViewModel : QrCodeViewModel
 {
   private readonly IQrCodeService _qrCodeService;
-  private bool _isModelValid;
 
   /// <summary>
   /// Initializes an instance of <see cref="WifiViewModel"/> class.
@@ -27,7 +24,6 @@ public sealed class WifiViewModel : QrCodeViewModel
   {
     _qrCodeService = qrCodeService;
     Model = model;
-    Model.PropertyChanged += (s, e) => OnModelPropertyChanged();
   }
 
   /// <summary>
@@ -42,16 +38,9 @@ public sealed class WifiViewModel : QrCodeViewModel
     => [new("nopass", Authentication.nopass), new("WPA", Authentication.WPA), new("WEP", Authentication.WEP)];
 
   /// <inheritdoc/>
-  public override bool IsModelValid { get => _isModelValid; protected set => _isModelValid = value; }
-
-
-  /// <inheritdoc/>
   protected override void SetPayLoad()
   {
     PayloadGenerator.WiFi generator = new(Model.SSID, Model.Password, Model.Authentication, Model.Hidden);
     Payload = generator.ToString();
   }
-
-  private void OnModelPropertyChanged()
-  => IsModelValid = Model.HasErrors.IsFalse();
 }

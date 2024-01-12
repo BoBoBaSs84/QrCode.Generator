@@ -1,6 +1,4 @@
-﻿using BB84.Extensions;
-
-using QRCoder;
+﻿using QRCoder;
 
 using WIFI.QRCode.Builder.Interfaces.Services;
 using WIFI.QRCode.Builder.Models;
@@ -16,7 +14,6 @@ namespace WIFI.QRCode.Builder.ViewModels;
 public sealed class EventViewModel : QrCodeViewModel
 {
   private readonly IQrCodeService _qrCodeService;
-  private bool _isModelValid;
 
   /// <summary>
   /// Initializes an instance of <see cref="EventViewModel"/> class.
@@ -27,7 +24,6 @@ public sealed class EventViewModel : QrCodeViewModel
   {
     _qrCodeService = qrCodeService;
     Model = model;
-    Model.PropertyChanged += (s, e) => OnModelPropertyChanged();
   }
 
   /// <summary>
@@ -42,19 +38,9 @@ public sealed class EventViewModel : QrCodeViewModel
     => [new("iCalComplete", EventEncoding.iCalComplete), new("Universal", EventEncoding.Universal)];
 
   /// <inheritdoc />
-  public override bool IsModelValid
-  {
-    get => _isModelValid;
-    protected set => SetProperty(ref _isModelValid, value);
-  }
-
-  /// <inheritdoc />
   protected override void SetPayLoad()
   {
     PayloadGenerator.CalendarEvent generator = new(Model.Subject, Model.Description, Model.Location, Model.Start, Model.End, Model.AllDay, Model.Encoding);
     Payload = generator.ToString();
   }
-
-  private void OnModelPropertyChanged()
-    => IsModelValid = Model.HasErrors.IsFalse();
 }

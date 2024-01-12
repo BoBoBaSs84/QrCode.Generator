@@ -91,13 +91,11 @@
              Content="Foreground Color:" />
       <pt:ColorPicker x:Name="ForegroundColorPicker"
                       SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
-                      IsEnabled="True"
                       Margin="16,0,0,0" />
       <Label x:Name="BackgroundColorLabel"
              Content="Background Color:" />
       <pt:ColorPicker x:Name="BackgroundColorPicker"
                       SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
-                      IsEnabled="True"
                       Margin="16,0,0,0" />
       <Separator Margin="0,8,0,8" />
       <Grid Grid.ColumnSpan="2">
@@ -114,7 +112,7 @@
                 CommandParameter="{Binding Model}"
                 Grid.Column="0"
                 Grid.Row="0"
-                IsEnabled="{Binding IsModelValid, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
         <Button x:Name="CopyButton"
                 Content="Copy"
@@ -122,7 +120,7 @@
                 CommandParameter="{Binding Model}"
                 Grid.Column="1"
                 Grid.Row="0"
-                IsEnabled="{Binding IsModelValid, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
       </Grid>
     </StackPanel>

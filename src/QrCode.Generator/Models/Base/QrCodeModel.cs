@@ -39,4 +39,9 @@ public abstract class QrCodeModel : ValidatableObject
   /// The background color to use.
   /// </summary>
   public Color BackgroundColor { get => _backgroundColor; set => SetProperty(ref _backgroundColor, value); }
+
+  /// <summary>
+  /// Is the model valid for processing?
+  /// </summary>
+  public abstract bool IsValid { get; protected set; }
 }

@@ -46,11 +46,6 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
   }
 
   /// <summary>
-  /// Is the model valid for processing?
-  /// </summary>
-  public abstract bool IsModelValid { get; protected set; }
-
-  /// <summary>
   /// The error correction levels to select from.
   /// </summary>
   public Tuple<string, ECCLevel>[] ErrorCorrectionLevels
@@ -60,13 +55,13 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
   /// The command to create or update the QR code.
   /// </summary>
   public IRelayCommand CreateCommand
-    => _createCommand ??= new RelayCommand<QrCodeModel>(UpdateQrCode, x => IsModelValid);
+    => _createCommand ??= new RelayCommand<QrCodeModel>(UpdateQrCode);
 
   /// <summary>
   /// The command for copying the QR code.
   /// </summary>
   public IRelayCommand CopyCommand
-    => _copyCommand ??= new RelayCommand<QrCodeModel>(CopyQrCode, x => IsModelValid);
+    => _copyCommand ??= new RelayCommand<QrCodeModel>(CopyQrCode);
 
   /// <summary>
   /// Sets the payload to encode.

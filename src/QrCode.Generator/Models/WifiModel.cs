@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using BB84.Extensions;
+
 using WIFI.QRCode.Builder.Models.Base;
 
 using static QRCoder.PayloadGenerator.WiFi;
@@ -15,6 +17,7 @@ public sealed class WifiModel : QrCodeModel
   private string _sSID;
   private string _password;
   private bool _hidden;
+  private bool _isValid;
 
   /// <summary>
   /// Initializes an instance of <see cref="WifiModel"/> class.
@@ -25,6 +28,12 @@ public sealed class WifiModel : QrCodeModel
     _sSID = string.Empty;
     _password = string.Empty;
     _hidden = false;
+
+    PropertyChanged += (s, e) =>
+    {
+      if (e.PropertyName != nameof(IsValid))
+        IsValid = HasErrors.IsFalse();
+    };
   }
 
   /// <summary>
@@ -62,5 +71,12 @@ public sealed class WifiModel : QrCodeModel
   {
     get => _hidden;
     set => SetProperty(ref _hidden, value);
+  }
+
+  /// <inheritdoc/>
+  public override bool IsValid
+  {
+    get => _isValid;
+    protected set => SetProperty(ref _isValid, value);
   }
 }
