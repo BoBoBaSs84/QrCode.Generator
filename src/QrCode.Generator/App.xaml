@@ -1,0 +1,16 @@
+﻿<Application x:Class="WIFI.QRCode.Builder.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:WIFI.QRCode.Builder.ViewModels"
+             xmlns:v="clr-namespace:WIFI.QRCode.Builder.Views"
+             Startup="Application_Startup"
+             Exit="Application_Exit">
+  <Application.Resources>
+    <DataTemplate DataType="{x:Type TypeName=vm:EventViewModel}">
+      <v:EventView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type TypeName=vm:WifiViewModel}">
+      <v:WifiView />
+    </DataTemplate>
+  </Application.Resources>
+</Application>

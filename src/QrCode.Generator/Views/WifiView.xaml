@@ -1,38 +1,36 @@
-﻿<Window x:Class="WIFI.QRCode.Builder.Views.MainView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:pt="clr-namespace:PropertyTools.Wpf;assembly=PropertyTools.Wpf"
-        xmlns:vm="clr-namespace:WIFI.QRCode.Builder.ViewModels"
-        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
-        mc:Ignorable="d"
-        Title="WIFI.QR-Code.Builder"
-        Height="540"
-        Width="960"
-        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-  <DockPanel LastChildFill="True">
-    <Menu DockPanel.Dock="Top">
-      <MenuItem Header="_File">
-        <MenuItem Header="_About"
-                  Command="{Binding AboutCommand}" />
-        <Separator />
-        <MenuItem Header="_Quit"
-                  Command="{Binding ExitCommand}" />
-      </MenuItem>
-    </Menu>
-    <StackPanel Width="250"
+﻿<UserControl x:Class="WIFI.QRCode.Builder.Views.WifiView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pt="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
+             xmlns:vm="clr-namespace:WIFI.QRCode.Builder.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:WifiViewModel}"
+             d:Background="WhiteSmoke"
+             d:Height="600"
+             d:Width="900">
+  <Grid Grid.ColumnSpan="2">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="250" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Column="0"
+                Width="250"
                 HorizontalAlignment="Left">
       <Label Content="SSID:" />
       <TextBox x:Name="SsidTextBox"
                Text="{Binding Model.SSID, UpdateSourceTrigger=PropertyChanged}"
                Margin="16,0,0,0" />
-      <Label Content="Transmission:" />
-      <ComboBox x:Name="TransmissionCombo"
-                ItemsSource="{Binding TransmissionTypes}"
+      <Label Content="Authentication:" />
+      <ComboBox x:Name="AuthenticationCombo"
+                ItemsSource="{Binding AuthenticationTypes}"
                 DisplayMemberPath="Item1"
                 SelectedValuePath="Item2"
-                SelectedValue="{Binding Model.Transmission}"
+                SelectedValue="{Binding Model.Authentication}"
                 Margin="16,0,0,0" />
       <Label Content="Password:" />
       <TextBox x:Name="PasswordTextBox"
@@ -40,7 +38,7 @@
                Margin="16,0,0,0" />
       <Label Content="Hidden:" />
       <CheckBox x:Name="HiddenCheckBox"
-                IsChecked="{Binding Model.Hidden}"
+                IsChecked="{Binding Model.Hidden, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
       <Label Content="Error Correction:" />
       <ComboBox x:Name="ErrorCorrectionCombo"
@@ -49,19 +47,15 @@
                 SelectedValuePath="Item2"
                 SelectedValue="{Binding Model.ErrorCorrection}"
                 Margin="16,0,0,0" />
-      <Label Content="Border Width:" />
-      <TextBox x:Name="BorderWidthTextBox"
-               Text="{Binding Model.BorderWidth, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
       <Label x:Name="ForegroundColorLabel"
              Content="Foreground Color:" />
-      <pt:ColorPicker SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
-                      IsEnabled="True"
+      <pt:ColorPicker x:Name="ForegroundColorPicker"
+                      SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
                       Margin="16,0,0,0" />
       <Label x:Name="BackgroundColorLabel"
              Content="Background Color:" />
-      <pt:ColorPicker SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
-                      IsEnabled="True"
+      <pt:ColorPicker x:Name="BackgroundColorPicker"
+                      SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
                       Margin="16,0,0,0" />
       <Separator Margin="0,8,0,8" />
       <Grid Grid.ColumnSpan="2">
@@ -75,21 +69,26 @@
         <Button x:Name="CreateButton"
                 Content="Create"
                 Command="{Binding CreateCommand}"
+                CommandParameter="{Binding Model}"
                 Grid.Column="0"
                 Grid.Row="0"
+                IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
         <Button x:Name="CopyButton"
                 Content="Copy"
                 Command="{Binding CopyCommand}"
+                CommandParameter="{Binding Model}"
                 Grid.Column="1"
                 Grid.Row="0"
+                IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
       </Grid>
     </StackPanel>
-    <Image x:Name="QrCodeImage"
+    <Image Grid.Column="1"
+           x:Name="QrCodeImage"
            Source="{Binding QrCodeImage.Source}"
            Margin="16,0,16,16"
            RenderOptions.BitmapScalingMode="NearestNeighbor"
            RenderOptions.EdgeMode="Aliased" />
-  </DockPanel>
-</Window>
+  </Grid>
+</UserControl>
