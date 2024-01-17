@@ -22,6 +22,8 @@
       <MenuItem Header="QrCodes">
         <MenuItem Header="_Event"
                   Command="{Binding EventCommand}" />
+        <MenuItem Header="_Giro"
+                  Command="{Binding GiroCommand}" />
         <MenuItem Header="_Wifi"
                   Command="{Binding WifiCommand}" />
       </MenuItem>
