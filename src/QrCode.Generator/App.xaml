@@ -7,10 +7,13 @@
              Exit="Application_Exit">
   <Application.Resources>
     <DataTemplate DataType="{x:Type TypeName=vm:EventViewModel}">
-      <v:EventView />
+      <v:EventCodeControl />
     </DataTemplate>
     <DataTemplate DataType="{x:Type TypeName=vm:WifiViewModel}">
-      <v:WifiView />
+      <v:WifiCodeControl />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type TypeName=vm:GiroCodeViewModel}">
+      <v:GiroCodeControl />
     </DataTemplate>
   </Application.Resources>
 </Application>

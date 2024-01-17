@@ -27,8 +27,9 @@ internal static class ServiceCollectionExtensions
 	/// <returns>The enriched service collection.</returns>
   internal static IServiceCollection RegisterModels(this IServiceCollection services)
   {
-    services.TryAddTransient<EventModel>();
-    services.TryAddTransient<WifiModel>();
+    services.TryAddSingleton<EventModel>();
+    services.TryAddSingleton<GiroCodeModel>();
+    services.TryAddSingleton<WifiModel>();
 
     return services;
   }
@@ -65,9 +66,9 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterViewModels(this IServiceCollection services)
   {
     services.TryAddSingleton<MainViewModel>();
-
-    services.TryAddTransient<EventViewModel>();
-    services.TryAddTransient<WifiViewModel>();
+    services.TryAddSingleton<EventViewModel>();
+    services.TryAddSingleton<GiroCodeViewModel>();
+    services.TryAddSingleton<WifiViewModel>();
 
     return services;
   }

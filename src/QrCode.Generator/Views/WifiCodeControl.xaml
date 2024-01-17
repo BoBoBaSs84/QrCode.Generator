@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WIFI.QRCode.Builder.Views.WifiView"
+﻿<UserControl x:Class="WIFI.QRCode.Builder.Views.WifiCodeControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -40,6 +40,7 @@
       <CheckBox x:Name="HiddenCheckBox"
                 IsChecked="{Binding Model.Hidden, UpdateSourceTrigger=PropertyChanged}"
                 Margin="16,0,0,0" />
+      <Separator Margin="0,8,0,8" />
       <Label Content="Error Correction:" />
       <ComboBox x:Name="ErrorCorrectionCombo"
                 ItemsSource="{Binding ErrorCorrectionLevels}"

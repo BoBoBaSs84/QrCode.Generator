@@ -17,6 +17,7 @@ public sealed class MainViewModel(INavigationService navigationService) : Notifi
   private IRelayCommand? _aboutCommand;
   private IRelayCommand? _exitCommand;
   private IRelayCommand? _eventCommand;
+  private IRelayCommand? _giroCommand;
   private IRelayCommand? _wifiCommand;
 
   /// <summary>
@@ -41,13 +42,19 @@ public sealed class MainViewModel(INavigationService navigationService) : Notifi
     => _exitCommand ??= new RelayCommand(x => Environment.Exit(0));
 
   /// <summary>
-  /// The command to show the event qr code window.
+  /// The command to show the event code control.
   /// </summary>
   public IRelayCommand EventCommand
     => _eventCommand ??= new RelayCommand(x => NavigationService.NavigateTo<EventViewModel>());
 
   /// <summary>
-  /// The command to show the event qr code window.
+  /// The command to show the giro code control.
+  /// </summary>
+  public IRelayCommand GiroCommand
+    => _giroCommand ??= new RelayCommand(x => NavigationService.NavigateTo<GiroCodeViewModel>());
+
+  /// <summary>
+  /// The command to show the wifi code control.
   /// </summary>
   public IRelayCommand WifiCommand
     => _wifiCommand ??= new RelayCommand(x => NavigationService.NavigateTo<WifiViewModel>());
