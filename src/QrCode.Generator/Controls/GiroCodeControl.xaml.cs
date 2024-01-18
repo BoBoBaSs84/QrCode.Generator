@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WIFI.QRCode.Builder.Views;
+namespace QrCode.Generator.Controls;
 
 /// <summary>
 /// Interaction logic for GiroCodeControl.xaml

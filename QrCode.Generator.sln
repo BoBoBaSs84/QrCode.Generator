@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E780644-C4D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrCode.Generator", "src\QrCode.Generator\QrCode.Generator.csproj", "{596425AD-EF50-4C67-82EB-2391A0A6EF7D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D745F8D-9212-4CBC-8B84-1C6E762F8B3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrCode.GeneratorTests", "tests\QrCode.GeneratorTests\QrCode.GeneratorTests.csproj", "{B87BFC39-D7D6-4A84-9448-B43B3372EE5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -29,12 +33,17 @@ Global
 		{596425AD-EF50-4C67-82EB-2391A0A6EF7D}.Debug|x64.Build.0 = Debug|x64
 		{596425AD-EF50-4C67-82EB-2391A0A6EF7D}.Release|x64.ActiveCfg = Release|x64
 		{596425AD-EF50-4C67-82EB-2391A0A6EF7D}.Release|x64.Build.0 = Release|x64
+		{B87BFC39-D7D6-4A84-9448-B43B3372EE5A}.Debug|x64.ActiveCfg = Debug|x64
+		{B87BFC39-D7D6-4A84-9448-B43B3372EE5A}.Debug|x64.Build.0 = Debug|x64
+		{B87BFC39-D7D6-4A84-9448-B43B3372EE5A}.Release|x64.ActiveCfg = Release|x64
+		{B87BFC39-D7D6-4A84-9448-B43B3372EE5A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{596425AD-EF50-4C67-82EB-2391A0A6EF7D} = {7E780644-C4DD-4E17-B2F5-B3426803E8A0}
+		{B87BFC39-D7D6-4A84-9448-B43B3372EE5A} = {4D745F8D-9212-4CBC-8B84-1C6E762F8B3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2117179F-19CC-417D-B217-BEF1AA796CCA}

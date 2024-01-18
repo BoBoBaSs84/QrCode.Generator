@@ -1,13 +1,13 @@
 ﻿using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+using QrCode.Generator.Extensions;
+using QrCode.Generator.Interfaces.Services;
+
 using QRCoder;
 using QRCoder.Xaml;
 
-using WIFI.QRCode.Builder.Extensions;
-using WIFI.QRCode.Builder.Interfaces.Services;
-
-namespace WIFI.QRCode.Builder.Services;
+namespace QrCode.Generator.Services;
 
 /// <summary>
 /// The QR-Code service class.
@@ -34,7 +34,7 @@ internal sealed class QrCodeService : IQrCodeService
 
   private static BitmapSource CreateBitmap(QRCodeData codeData, int moduleSize, string darkColorHex, string lightColorHex)
   {
-    QRCoder.QRCode code = new(codeData);
+    QRCode code = new(codeData);
     return Convert(code.GetGraphic(moduleSize, darkColorHex, lightColorHex));
   }
 

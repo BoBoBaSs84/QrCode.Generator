@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 
 using QRCoder;
 
-namespace WIFI.QRCode.Builder.Interfaces.Services;
+namespace QrCode.Generator.Interfaces.Services;
 
 /// <summary>
 /// The QR-Code service interface.

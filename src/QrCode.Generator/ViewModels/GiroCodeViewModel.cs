@@ -1,14 +1,14 @@
 ﻿using BB84.Extensions;
 
-using WIFI.QRCode.Builder.Extensions;
-using WIFI.QRCode.Builder.Interfaces.Services;
-using WIFI.QRCode.Builder.Models;
-using WIFI.QRCode.Builder.ViewModels.Base;
+using QrCode.Generator.Extensions;
+using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Models;
+using QrCode.Generator.ViewModels.Base;
 
 using static QRCoder.PayloadGenerator;
 using static QRCoder.PayloadGenerator.Girocode;
 
-namespace WIFI.QRCode.Builder.ViewModels;
+namespace QrCode.Generator.ViewModels;
 
 /// <summary>
 /// The giro code view model class.
@@ -26,19 +26,19 @@ public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, GiroCodeMode
   /// The remittance types to select from.
   /// </summary>
   public Tuple<string, TypeOfRemittance>[] ReferenceTypes
-    => TypeOfRemittance.Structured.GetValues().AsTuple();
+    => Model.TypeOfRemittance.GetValues().AsTuple();
 
   /// <summary>
   /// The giro version types to select from.
   /// </summary>
   public Tuple<string, GirocodeVersion>[] VersionTypes
-    => GirocodeVersion.Version1.GetValues().AsTuple();
+    => Model.Version.GetValues().AsTuple();
 
   /// <summary>
   /// The giro encoding types to select from.
   /// </summary>
   public Tuple<string, GirocodeEncoding>[] EncodingTypes
-    => GirocodeEncoding.ISO_8859_1.GetValues().AsTuple();
+    => Model.Encoding.GetValues().AsTuple();
 
   /// <inheritdoc/>
   protected override void SetPayLoad()

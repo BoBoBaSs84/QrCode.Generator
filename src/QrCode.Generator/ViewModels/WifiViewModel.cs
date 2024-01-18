@@ -1,15 +1,15 @@
 ﻿using BB84.Extensions;
 
-using QRCoder;
+using QrCode.Generator.Extensions;
+using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Models;
+using QrCode.Generator.ViewModels.Base;
 
-using WIFI.QRCode.Builder.Extensions;
-using WIFI.QRCode.Builder.Interfaces.Services;
-using WIFI.QRCode.Builder.Models;
-using WIFI.QRCode.Builder.ViewModels.Base;
+using QRCoder;
 
 using static QRCoder.PayloadGenerator.WiFi;
 
-namespace WIFI.QRCode.Builder.ViewModels;
+namespace QrCode.Generator.ViewModels;
 
 /// <summary>
 /// The wifi qr code view model class.
@@ -27,7 +27,7 @@ public sealed class WifiViewModel(IQrCodeService qrCodeService, WifiModel model)
   /// The authentication types to select from.
   /// </summary>
   public Tuple<string, Authentication>[] AuthenticationTypes
-    => Authentication.nopass.GetValues().AsTuple();
+    => Model.Authentication.GetValues().AsTuple();
 
   /// <inheritdoc/>
   protected override void SetPayLoad()

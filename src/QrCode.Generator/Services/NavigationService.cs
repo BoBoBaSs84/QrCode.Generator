@@ -1,9 +1,9 @@
 ﻿using BB84.Notifications;
 
-using WIFI.QRCode.Builder.Interfaces.Services;
-using WIFI.QRCode.Builder.ViewModels.Base;
+using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.ViewModels.Base;
 
-namespace WIFI.QRCode.Builder.Services;
+namespace QrCode.Generator.Services;
 
 /// <summary>
 /// The navigation service class.

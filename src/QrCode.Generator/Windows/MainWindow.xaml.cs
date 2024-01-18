@@ -1,19 +1,19 @@
 ﻿using System.Windows;
 
-using WIFI.QRCode.Builder.ViewModels;
+using QrCode.Generator.ViewModels;
 
-namespace WIFI.QRCode.Builder.Views;
+namespace QrCode.Generator.Windows;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainView : Window
+public partial class MainWindow : Window
 {
   /// <summary>
-  /// Initializes an instance of <see cref="MainView"/> class.
+  /// Initializes an instance of <see cref="MainWindow"/> class.
   /// </summary>
   /// <param name="viewModel">The view model instance to use.</param>
-  public MainView(MainViewModel viewModel)
+  public MainWindow(MainViewModel viewModel)
   {
     DataContext = viewModel;
     InitializeComponent();

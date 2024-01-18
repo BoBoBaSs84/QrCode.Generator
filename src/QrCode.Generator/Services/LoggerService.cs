@@ -2,9 +2,9 @@
 
 using Microsoft.Extensions.Logging;
 
-using WIFI.QRCode.Builder.Interfaces.Services;
+using QrCode.Generator.Interfaces.Services;
 
-namespace WIFI.QRCode.Builder.Services;
+namespace QrCode.Generator.Services;
 
 /// <summary>
 /// The logger service class.

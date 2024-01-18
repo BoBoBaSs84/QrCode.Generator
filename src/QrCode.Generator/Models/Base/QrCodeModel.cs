@@ -4,7 +4,7 @@ using BB84.Notifications;
 
 using static QRCoder.QRCodeGenerator;
 
-namespace WIFI.QRCode.Builder.Models.Base;
+namespace QrCode.Generator.Models.Base;
 
 /// <summary>
 /// The qr code model class.

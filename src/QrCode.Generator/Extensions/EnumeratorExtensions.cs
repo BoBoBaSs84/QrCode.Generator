@@ -1,4 +1,4 @@
-﻿namespace WIFI.QRCode.Builder.Extensions;
+﻿namespace QrCode.Generator.Extensions;
 
 /// <summary>
 /// The enumerator extensions class.

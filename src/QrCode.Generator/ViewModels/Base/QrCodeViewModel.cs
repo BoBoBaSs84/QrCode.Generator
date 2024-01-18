@@ -6,12 +6,12 @@ using System.Windows.Media.Imaging;
 using BB84.Notifications;
 using BB84.Notifications.Interfaces;
 
-using WIFI.QRCode.Builder.Interfaces.Services;
-using WIFI.QRCode.Builder.Models.Base;
+using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Models.Base;
 
 using static QRCoder.QRCodeGenerator;
 
-namespace WIFI.QRCode.Builder.ViewModels.Base;
+namespace QrCode.Generator.ViewModels.Base;
 
 /// <summary>
 /// The qr code view model base class.

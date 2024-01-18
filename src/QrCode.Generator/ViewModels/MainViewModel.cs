@@ -1,9 +1,9 @@
 ﻿using BB84.Notifications;
 using BB84.Notifications.Interfaces;
 
-using WIFI.QRCode.Builder.Interfaces.Services;
+using QrCode.Generator.Interfaces.Services;
 
-namespace WIFI.QRCode.Builder.ViewModels;
+namespace QrCode.Generator.ViewModels;
 
 /// <summary>
 /// The main view model class.

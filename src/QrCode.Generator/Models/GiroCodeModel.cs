@@ -2,11 +2,11 @@
 
 using BB84.Extensions;
 
-using WIFI.QRCode.Builder.Models.Base;
+using QrCode.Generator.Models.Base;
 
 using static QRCoder.PayloadGenerator.Girocode;
 
-namespace WIFI.QRCode.Builder.Models;
+namespace QrCode.Generator.Models;
 
 /// <summary>
 /// The giro code model class.
