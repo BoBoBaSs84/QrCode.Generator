@@ -28,17 +28,29 @@ public abstract class QrCodeModel : ValidatableObject
   /// <summary>
   /// The error correction level to use.
   /// </summary>
-  public ECCLevel ErrorCorrection { get => _errorCorrection; set => SetProperty(ref _errorCorrection, value); }
+  public ECCLevel ErrorCorrection
+  {
+    get => _errorCorrection;
+    set => SetProperty(ref _errorCorrection, value);
+  }
 
   /// <summary>
   /// The foreground color to use.
   /// </summary>
-  public Color ForegroundColor { get => _foregroundColor; set => SetProperty(ref _foregroundColor, value); }
+  public Color ForegroundColor
+  {
+    get => _foregroundColor;
+    set => SetProperty(ref _foregroundColor, value);
+  }
 
   /// <summary>
   /// The background color to use.
   /// </summary>
-  public Color BackgroundColor { get => _backgroundColor; set => SetProperty(ref _backgroundColor, value); }
+  public Color BackgroundColor
+  {
+    get => _backgroundColor;
+    set => SetProperty(ref _backgroundColor, value);
+  }
 
   /// <summary>
   /// Is the model valid for processing?
