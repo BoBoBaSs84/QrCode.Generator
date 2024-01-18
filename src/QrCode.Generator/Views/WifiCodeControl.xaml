@@ -21,69 +21,82 @@
     <StackPanel Grid.Column="0"
                 Width="250"
                 HorizontalAlignment="Left">
-      <Label Content="SSID:" />
-      <TextBox x:Name="SsidTextBox"
-               Text="{Binding Model.SSID, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
-      <Label Content="Authentication:" />
-      <ComboBox x:Name="AuthenticationCombo"
-                ItemsSource="{Binding AuthenticationTypes}"
-                DisplayMemberPath="Item1"
-                SelectedValuePath="Item2"
-                SelectedValue="{Binding Model.Authentication}"
-                Margin="16,0,0,0" />
-      <Label Content="Password:" />
-      <TextBox x:Name="PasswordTextBox"
-               Text="{Binding Model.Password, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
-      <Label Content="Hidden:" />
-      <CheckBox x:Name="HiddenCheckBox"
-                IsChecked="{Binding Model.Hidden, UpdateSourceTrigger=PropertyChanged}"
-                Margin="16,0,0,0" />
-      <Separator Margin="0,8,0,8" />
-      <Label Content="Error Correction:" />
-      <ComboBox x:Name="ErrorCorrectionCombo"
-                ItemsSource="{Binding ErrorCorrectionLevels}"
-                DisplayMemberPath="Item1"
-                SelectedValuePath="Item2"
-                SelectedValue="{Binding Model.ErrorCorrection}"
-                Margin="16,0,0,0" />
-      <Label x:Name="ForegroundColorLabel"
-             Content="Foreground Color:" />
-      <pt:ColorPicker x:Name="ForegroundColorPicker"
-                      SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="16,0,0,0" />
-      <Label x:Name="BackgroundColorLabel"
-             Content="Background Color:" />
-      <pt:ColorPicker x:Name="BackgroundColorPicker"
-                      SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="16,0,0,0" />
-      <Separator Margin="0,8,0,8" />
-      <Grid Grid.ColumnSpan="2">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Button x:Name="CreateButton"
-                Content="Create"
-                Command="{Binding CreateCommand}"
-                CommandParameter="{Binding Model}"
-                Grid.Column="0"
-                Grid.Row="0"
-                IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                Margin="16,0,0,0" />
-        <Button x:Name="CopyButton"
-                Content="Copy"
-                Command="{Binding CopyCommand}"
-                CommandParameter="{Binding Model}"
-                Grid.Column="1"
-                Grid.Row="0"
-                IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                Margin="16,0,0,0" />
-      </Grid>
+      <GroupBox x:Name="WifiInformation"
+                Header="Wifi Information">
+        <StackPanel>
+          <Label Content="SSID:" />
+          <TextBox x:Name="SsidTextBox"
+                   Text="{Binding Model.SSID, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="16,0,0,0" />
+          <Label Content="Authentication:" />
+          <ComboBox x:Name="AuthenticationCombo"
+                    ItemsSource="{Binding AuthenticationTypes}"
+                    DisplayMemberPath="Item1"
+                    SelectedValuePath="Item2"
+                    SelectedValue="{Binding Model.Authentication}"
+                    Margin="16,0,0,0" />
+          <Label Content="Password:" />
+          <TextBox x:Name="PasswordTextBox"
+                   Text="{Binding Model.Password, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="16,0,0,0" />
+          <Label Content="Hidden:" />
+          <CheckBox x:Name="HiddenCheckBox"
+                    IsChecked="{Binding Model.Hidden, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="16,0,0,0" />
+        </StackPanel>
+      </GroupBox>
+      <GroupBox x:Name="Settings"
+                Header="Settings">
+        <StackPanel>
+          <Label Content="Error Correction:" />
+          <ComboBox x:Name="ErrorCorrectionCombo"
+                    ItemsSource="{Binding ErrorCorrectionLevels}"
+                    DisplayMemberPath="Item1"
+                    SelectedValuePath="Item2"
+                    SelectedValue="{Binding Model.ErrorCorrection}"
+                    Margin="16,0,0,0" />
+          <Label x:Name="ForegroundColorLabel"
+                 Content="Foreground Color:" />
+          <pt:ColorPicker x:Name="ForegroundColorPicker"
+                          SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="16,0,0,0" />
+          <Label x:Name="BackgroundColorLabel"
+                 Content="Background Color:" />
+          <pt:ColorPicker x:Name="BackgroundColorPicker"
+                          SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="16,0,0,0" />
+        </StackPanel>
+      </GroupBox>
+      <GroupBox x:Name="Actions"
+                Header="Actions">
+        <StackPanel>
+          <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="CreateButton"
+                    Content="Create"
+                    Command="{Binding CreateCommand}"
+                    CommandParameter="{Binding Model}"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="16,0,0,0" />
+            <Button x:Name="CopyButton"
+                    Content="Copy"
+                    Command="{Binding CopyCommand}"
+                    CommandParameter="{Binding Model}"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="16,0,0,0" />
+          </Grid>
+        </StackPanel>
+      </GroupBox>
     </StackPanel>
     <Image Grid.Column="1"
            x:Name="QrCodeImage"
