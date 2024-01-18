@@ -26,7 +26,7 @@ public sealed class EventViewModel(IQrCodeService qrCodeService, EventModel mode
   /// <summary>
   /// The event encoding types to select from.
   /// </summary>
-  public static Tuple<string, EventEncoding>[] GetEncodingTypes
+  public Tuple<string, EventEncoding>[] GetEncodingTypes
     => EventEncoding.Universal.GetValues().AsTuple();
 
   /// <inheritdoc />

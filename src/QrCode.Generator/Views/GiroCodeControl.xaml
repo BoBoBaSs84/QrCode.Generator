@@ -21,101 +21,112 @@
     <StackPanel Grid.Column="0"
                 Width="250"
                 HorizontalAlignment="Left">
-      <Label Content="IBAN:" />
-      <TextBox x:Name="IbanTextBox"
-               Text="{Binding Model.IBAN, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
-      <Label Content="BIC:" />
-      <TextBox x:Name="BicTextBox"
-               Text="{Binding Model.BIC, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
-      <Label Content="IBAN:" />
-      <TextBox x:Name="NameTextBox"
-               Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
-      <Label Content="Amount to transfer in Euro:" />
-      <pt:DecimalUpDown Name="AmountUpDown"
-                        Value="{Binding Model.Amount, UpdateSourceTrigger=PropertyChanged}"
-                        FormatString="C"
-                        Increment="0.01"
-                        Margin="16,0,0,0" />
-      <Label Content="Reference Information:" />
-      <TextBox x:Name="ReferenceInformationTextBox"
-               Text="{Binding Model.ReferenceInformation, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
-      <Label Content="Type of Reference:" />
-      <ComboBox x:Name="TypeOfRemittanceComboBox"
-                ItemsSource="{Binding ReferenceTypes}"
-                DisplayMemberPath="Item1"
-                SelectedValuePath="Item2"
-                SelectedValue="{Binding Model.TypeOfRemittance}"
-                Margin="16,0,0,0" />
-      <Label Content="Purpose of Transfer:" />
-      <TextBox x:Name="PurposeTextBox"
-               Text="{Binding Model.PurposeOfCreditTransfer, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
-      <Label Content="Beneficiary to originator information:" />
-      <TextBox x:Name="MessageTextBox"
-               Text="{Binding Model.MessageToGirocodeUser, UpdateSourceTrigger=PropertyChanged}"
-               Margin="16,0,0,0" />
-      <Label Content="Version:" />
-      <ComboBox x:Name="GiroVersionComboBox"
-                ItemsSource="{Binding VersionTypes}"
-                DisplayMemberPath="Item1"
-                SelectedValuePath="Item2"
-                SelectedValue="{Binding Model.Version}"
-                Margin="16,0,0,0" />
-      <Label Content="Encoding:" />
-      <ComboBox x:Name="GiroEncodingComboBox"
-                ItemsSource="{Binding EncodingTypes}"
-                DisplayMemberPath="Item1"
-                SelectedValuePath="Item2"
-                SelectedValue="{Binding Model.Encoding}"
-                Margin="16,0,0,0" />      
-      <Separator Margin="0,8,0,8" />
-      <Label Content="Error Correction:" />
-      <ComboBox x:Name="ErrorCorrectionCombo"
-                ItemsSource="{Binding ErrorCorrectionLevels}"
-                DisplayMemberPath="Item1"
-                SelectedValuePath="Item2"
-                SelectedValue="{Binding Model.ErrorCorrection}"
-                Margin="16,0,0,0" />
-      <Label x:Name="ForegroundColorLabel"
-             Content="Foreground Color:" />
-      <pt:ColorPicker x:Name="ForegroundColorPicker"
-                      SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="16,0,0,0" />
-      <Label x:Name="BackgroundColorLabel"
-             Content="Background Color:" />
-      <pt:ColorPicker x:Name="BackgroundColorPicker"
-                      SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="16,0,0,0" />
-      <Separator Margin="0,8,0,8" />
-      <Grid Grid.ColumnSpan="2">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Button x:Name="CreateButton"
-                Content="Create"
-                Command="{Binding CreateCommand}"
-                CommandParameter="{Binding Model}"
-                Grid.Column="0"
-                Grid.Row="0"
-                IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                Margin="16,0,0,0" />
-        <Button x:Name="CopyButton"
-                Content="Copy"
-                Command="{Binding CopyCommand}"
-                CommandParameter="{Binding Model}"
-                Grid.Column="1"
-                Grid.Row="0"
-                IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                Margin="16,0,0,0" />
-      </Grid>
+      <GroupBox x:Name="Girocode"
+                Header="Girocode payload">
+        <StackPanel>
+          <Label Content="Account number of the Beneficiary:" />
+          <TextBox x:Name="IbanTextBox"
+                   Text="{Binding Model.IBAN, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="16,0,0,0" />
+          <Label Content="BIC of the Beneficiary Bank:" />
+          <TextBox x:Name="BicTextBox"
+                   Text="{Binding Model.BIC, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="16,0,0,0" />
+          <Label Content="Name of the Beneficiary:" />
+          <TextBox x:Name="NameTextBox"
+                   Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="16,0,0,0" />
+          <Label Content="Amount to transfer in Euro:" />
+          <pt:DecimalUpDown Name="AmountUpDown"
+                            Value="{Binding Model.Amount, UpdateSourceTrigger=PropertyChanged}"
+                            FormatString="C"
+                            Increment="0.01"
+                            Margin="16,0,0,0" />
+          <Label Content="Reference Information:" />
+          <TextBox x:Name="ReferenceInformationTextBox"
+                   Text="{Binding Model.ReferenceInformation, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="16,0,0,0" />
+          <Label Content="Type of Reference:" />
+          <ComboBox x:Name="TypeOfRemittanceComboBox"
+                    ItemsSource="{Binding ReferenceTypes}"
+                    DisplayMemberPath="Item1"
+                    SelectedValuePath="Item2"
+                    SelectedValue="{Binding Model.TypeOfRemittance}"
+                    Margin="16,0,0,0" />
+          <Label Content="Purpose of Transfer:" />
+          <TextBox x:Name="PurposeTextBox"
+                   Text="{Binding Model.PurposeOfCreditTransfer, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="16,0,0,0" />
+          <Label Content="Beneficiary to originator information:" />
+          <TextBox x:Name="MessageTextBox"
+                   Text="{Binding Model.MessageToGirocodeUser, UpdateSourceTrigger=PropertyChanged}"
+                   Margin="16,0,0,0" />
+          <Label Content="Version:" />
+          <ComboBox x:Name="GiroVersionComboBox"
+                    ItemsSource="{Binding VersionTypes}"
+                    DisplayMemberPath="Item1"
+                    SelectedValuePath="Item2"
+                    SelectedValue="{Binding Model.Version}"
+                    Margin="16,0,0,0" />
+          <Label Content="Encoding:" />
+          <ComboBox x:Name="GiroEncodingComboBox"
+                    ItemsSource="{Binding EncodingTypes}"
+                    DisplayMemberPath="Item1"
+                    SelectedValuePath="Item2"
+                    SelectedValue="{Binding Model.Encoding}"
+                    Margin="16,0,0,0" />
+        </StackPanel>
+      </GroupBox>
+      <GroupBox x:Name="Settings"
+                Header="QR Code Settings">
+        <StackPanel>
+          <Label Content="Error Correction:" />
+          <ComboBox x:Name="ErrorCorrectionCombo"
+                    ItemsSource="{Binding ErrorCorrectionLevels}"
+                    DisplayMemberPath="Item1"
+                    SelectedValuePath="Item2"
+                    SelectedValue="{Binding Model.ErrorCorrection}"
+                    Margin="16,0,0,0" />
+          <Label x:Name="ForegroundColorLabel"
+                 Content="Foreground Color:" />
+          <pt:ColorPicker x:Name="ForegroundColorPicker"
+                          SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="16,0,0,0" />
+          <Label x:Name="BackgroundColorLabel"
+                 Content="Background Color:" />
+          <pt:ColorPicker x:Name="BackgroundColorPicker"
+                          SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="16,0,0,0" />
+        </StackPanel>
+      </GroupBox>
+      <GroupBox x:Name="Actions"
+                Header="Actions">
+        <Grid Grid.ColumnSpan="2">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Button x:Name="CreateButton"
+                  Content="Create"
+                  Command="{Binding CreateCommand}"
+                  CommandParameter="{Binding Model}"
+                  Grid.Column="0"
+                  Grid.Row="0"
+                  IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="16,0,0,0" />
+          <Button x:Name="CopyButton"
+                  Content="Copy"
+                  Command="{Binding CopyCommand}"
+                  CommandParameter="{Binding Model}"
+                  Grid.Column="1"
+                  Grid.Row="0"
+                  IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="16,0,0,0" />
+        </Grid>
+      </GroupBox>
     </StackPanel>
     <Image Grid.Column="1"
            x:Name="QrCodeImage"

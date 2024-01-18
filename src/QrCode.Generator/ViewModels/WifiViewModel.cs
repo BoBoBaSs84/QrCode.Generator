@@ -26,7 +26,7 @@ public sealed class WifiViewModel(IQrCodeService qrCodeService, WifiModel model)
   /// <summary>
   /// The authentication types to select from.
   /// </summary>
-  public static Tuple<string, Authentication>[] AuthenticationTypes
+  public Tuple<string, Authentication>[] AuthenticationTypes
     => Authentication.nopass.GetValues().AsTuple();
 
   /// <inheritdoc/>
