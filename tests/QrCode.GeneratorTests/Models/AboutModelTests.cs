@@ -3,14 +3,14 @@
 namespace QrCode.GeneratorTests.Models;
 
 [TestClass]
-public class AboutModelTests
+public class AboutModelTests : UnitTestBase
 {
   [TestMethod]
   public void AboutModelTest()
   {
     AboutModel? model;
 
-    model = new();
+    model = GetService<AboutModel>();
 
     Assert.IsNotNull(model);
     Assert.IsNotNull(model.Copyright);

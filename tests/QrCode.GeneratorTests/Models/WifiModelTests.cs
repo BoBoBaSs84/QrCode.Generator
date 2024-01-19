@@ -5,14 +5,14 @@ using static QRCoder.PayloadGenerator.WiFi;
 namespace QrCode.GeneratorTests.Models;
 
 [TestClass]
-public class WifiModelTests
+public class WifiModelTests : UnitTestBase
 {
   [TestMethod]
   public void WifiModelTest()
   {
     WifiModel? model;
 
-    model = new WifiModel();
+    model = GetService<WifiModel>();
 
     Assert.IsNotNull(model);
     Assert.AreEqual(Authentication.WPA, model.Authentication);
