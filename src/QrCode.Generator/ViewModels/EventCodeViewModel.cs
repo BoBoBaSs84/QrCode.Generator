@@ -16,12 +16,12 @@ namespace QrCode.Generator.ViewModels;
 /// </summary>
 /// <param name="qrCodeService">The qr code service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public sealed class EventViewModel(IQrCodeService qrCodeService, EventModel model) : QrCodeViewModel(qrCodeService)
+public sealed class EventCodeViewModel(IQrCodeService qrCodeService, EventCodeModel model) : QrCodeViewModel(qrCodeService)
 {
   /// <summary>
   /// The model instance to use.
   /// </summary>
-  public EventModel Model { get; } = model;
+  public EventCodeModel Model { get; } = model;
 
   /// <summary>
   /// The event encoding types to select from.

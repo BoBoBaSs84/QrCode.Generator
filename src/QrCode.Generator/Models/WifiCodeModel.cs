@@ -11,7 +11,7 @@ namespace QrCode.Generator.Models;
 /// <summary>
 /// The main model class.
 /// </summary>
-public sealed class WifiModel : QrCodeModel
+public sealed class WifiCodeModel : QrCodeModel
 {
   private Authentication _authentication;
   private string _sSID;
@@ -20,9 +20,9 @@ public sealed class WifiModel : QrCodeModel
   private bool _isValid;
 
   /// <summary>
-  /// Initializes an instance of <see cref="WifiModel"/> class.
+  /// Initializes an instance of <see cref="WifiCodeModel"/> class.
   /// </summary>
-  public WifiModel()
+  public WifiCodeModel()
   {
     _authentication = Authentication.WPA;
     _sSID = string.Empty;

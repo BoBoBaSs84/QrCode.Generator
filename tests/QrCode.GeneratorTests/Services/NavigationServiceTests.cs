@@ -11,10 +11,10 @@ public sealed class NavigationServiceTests : UnitTestBase
   {
     INavigationService? service = GetService<INavigationService>();
 
-    service.NavigateTo<WifiViewModel>();
+    service.NavigateTo<WifiCodeViewModel>();
 
     Assert.IsNotNull(service);
     Assert.IsInstanceOfType(service, typeof(INavigationService));
-    Assert.IsInstanceOfType(service.CurrentView, typeof(WifiViewModel));
+    Assert.IsInstanceOfType(service.CurrentView, typeof(WifiCodeViewModel));
   }
 }

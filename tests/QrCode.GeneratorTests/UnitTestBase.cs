@@ -39,13 +39,16 @@ public abstract class UnitTestBase
       : service;
   }
 
+  [SuppressMessage("Style", "IDE0058", Justification = "Not relevant here.")]
   private static ServiceProvider GetServiceProvider()
   {
     IServiceCollection services = new ServiceCollection();
 
-    _ = services.RegisterModels();
-    _ = services.RegisterServices();
-    _ = services.RegisterViewModels();
+    services.RegisterControls();
+    services.RegisterModels();
+    services.RegisterServices();
+    services.RegisterViewModels();
+    services.RegisterWindows();
 
     return services.BuildServiceProvider();
   }
@@ -59,7 +62,7 @@ public class WpfTestMethodAttribute : TestMethodAttribute
       return Invoke(testMethod);
 
     TestResult[] result = [];
-    var thread = new Thread(() => result = Invoke(testMethod));
+    Thread thread = new(() => result = Invoke(testMethod));
     thread.SetApartmentState(ApartmentState.STA);
     thread.Start();
     thread.Join();

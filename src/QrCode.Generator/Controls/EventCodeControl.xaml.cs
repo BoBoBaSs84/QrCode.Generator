@@ -11,7 +11,5 @@ public partial class EventCodeControl : UserControl
   /// Initializes an instance of <see cref="EventCodeControl"/> class.
   /// </summary>
   public EventCodeControl()
-  {
-    InitializeComponent();
-  }
+    => InitializeComponent();
 }

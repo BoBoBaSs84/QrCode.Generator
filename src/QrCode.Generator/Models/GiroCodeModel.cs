@@ -17,10 +17,10 @@ public sealed class GiroCodeModel : QrCodeModel
   private string _bic;
   private string _name;
   private decimal _amount;
-  private string _referenceInformation;
-  private TypeOfRemittance _typeOfRemittance;
-  private string _purposeOfCreditTransfer;
-  private string _messageToGirocodeUser;
+  private string _reference;
+  private TypeOfRemittance _type;
+  private string _purpose;
+  private string _message;
   private GirocodeVersion _version;
   private GirocodeEncoding _encoding;
   private bool _isValid;
@@ -33,9 +33,11 @@ public sealed class GiroCodeModel : QrCodeModel
     _iban = string.Empty;
     _bic = string.Empty;
     _name = string.Empty;
-    _referenceInformation = string.Empty;
-    _purposeOfCreditTransfer = string.Empty;
-    _messageToGirocodeUser = string.Empty;
+    _amount = 0.01M;
+    _reference = string.Empty;
+    _purpose = string.Empty;
+    _message = string.Empty;
+    _encoding = GirocodeEncoding.ISO_8859_1;
 
     PropertyChanged += (s, e) => IsValid = HasErrors.IsFalse();
   }
@@ -87,10 +89,10 @@ public sealed class GiroCodeModel : QrCodeModel
   /// Remittance Information (Purpose-/reference text).
   /// </summary>  
   [StringLength(140)]
-  public string ReferenceInformation
+  public string Reference
   {
-    get => _referenceInformation;
-    set => SetProperty(ref _referenceInformation, value);
+    get => _reference;
+    set => SetProperty(ref _reference, value);
   }
 
   /// <summary>
@@ -99,28 +101,28 @@ public sealed class GiroCodeModel : QrCodeModel
   /// <remarks>
   /// (e.g. ISO 11649 RF Creditor Reference)
   /// </remarks>
-  public TypeOfRemittance TypeOfRemittance
+  public TypeOfRemittance Type
   {
-    get => _typeOfRemittance;
-    set => SetProperty(ref _typeOfRemittance, value);
+    get => _type;
+    set => SetProperty(ref _type, value);
   }
 
   /// <summary>
   /// Purpose of the Credit Transfer (optional)
   /// </summary>
-  public string PurposeOfCreditTransfer
+  public string Purpose
   {
-    get => _purposeOfCreditTransfer;
-    set => SetProperty(ref _purposeOfCreditTransfer, value);
+    get => _purpose;
+    set => SetProperty(ref _purpose, value);
   }
 
   /// <summary>
   /// Beneficiary to originator information. (optional)
   /// </summary>
-  public string MessageToGirocodeUser
+  public string Message
   {
-    get => _messageToGirocodeUser;
-    set => SetProperty(ref _messageToGirocodeUser, value);
+    get => _message;
+    set => SetProperty(ref _message, value);
   }
 
   /// <summary>

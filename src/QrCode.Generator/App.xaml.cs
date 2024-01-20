@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,7 @@ namespace QrCode.Generator.Builder;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
+[ExcludeFromCodeCoverage(Justification = "Main entry point for application.")]
 public partial class App : Application
 {
   private readonly IHost _host;

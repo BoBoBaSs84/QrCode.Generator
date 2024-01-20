@@ -11,7 +11,5 @@ public partial class GiroCodeControl : UserControl
   /// Initializes an instance of <see cref="GiroCodeControl"/> class.
   /// </summary>
   public GiroCodeControl()
-  {
-    InitializeComponent();
-  }
+    => InitializeComponent();
 }

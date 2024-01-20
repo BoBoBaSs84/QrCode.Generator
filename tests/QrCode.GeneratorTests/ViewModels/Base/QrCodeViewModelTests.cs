@@ -1,35 +1,60 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using QrCode.Generator.Interfaces.Services;
+﻿using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Models.Base;
 using QrCode.Generator.ViewModels.Base;
-using QrCode.GeneratorTests;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QrCode.Generator.ViewModels.Base.Tests;
+namespace QrCode.GeneratorTests.ViewModels.Base;
 
 [TestClass]
 public sealed class QrCodeViewModelTests : UnitTestBase
 {
+  private const string UnitTest = "UnitTest";
+
   [WpfTestMethod]
-  public void QrCodeViewModelTest()
+  public void ConstructorTest()
   {
     IQrCodeService service = GetService<IQrCodeService>();
-    TestModel? model;
+    TestViewModel? viewModel;
 
-    model = new(service);
+    viewModel = new(service);
 
-    Assert.IsNotNull(model);
-    Assert.IsTrue(model.ErrorCorrectionLevels.Length != 0);    
-	}
+    Assert.IsNotNull(viewModel);
+    Assert.IsNotNull(viewModel.CreateCommand);
+    Assert.IsNotNull(viewModel.CopyCommand);
+    Assert.IsTrue(viewModel.ErrorCorrectionLevels.Length != 0);
+  }
 
-  private sealed class TestModel(IQrCodeService service) : QrCodeViewModel(service)
+  [WpfTestMethod]
+  public void CreateCommandTest()
   {
+    IQrCodeService service = GetService<IQrCodeService>();
+    TestViewModel viewModel = new(service);
+
+    viewModel.CreateCommand.Execute(viewModel.Model);
+
+    Assert.AreEqual(UnitTest, viewModel.Payload);
+  }
+
+  [WpfTestMethod]
+  public void CopyCommandTest()
+  {
+    IQrCodeService service = GetService<IQrCodeService>();
+    TestViewModel viewModel = new(service);
+
+    viewModel.CopyCommand.Execute(viewModel.Model);
+
+    Assert.AreEqual(UnitTest, viewModel.Payload);
+  }
+
+  private sealed class TestViewModel(IQrCodeService service) : QrCodeViewModel(service)
+  {
+    public TestModel Model { get; } = new();
+
     protected override void SetPayLoad()
-      => Payload = "UnitTest";
+      => Payload = UnitTest;
+  }
+
+  private sealed class TestModel : QrCodeModel
+  {
+    public override bool IsValid { get; protected set; } = true;
   }
 }

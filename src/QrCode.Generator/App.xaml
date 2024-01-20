@@ -6,10 +6,10 @@
              Startup="Application_Startup"
              Exit="Application_Exit">
   <Application.Resources>
-    <DataTemplate DataType="{x:Type TypeName=vm:EventViewModel}">
+    <DataTemplate DataType="{x:Type TypeName=vm:EventCodeViewModel}">
       <c:EventCodeControl />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type TypeName=vm:WifiViewModel}">
+    <DataTemplate DataType="{x:Type TypeName=vm:WifiCodeViewModel}">
       <c:WifiCodeControl />
     </DataTemplate>
     <DataTemplate DataType="{x:Type TypeName=vm:GiroCodeViewModel}">

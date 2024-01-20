@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
+using QrCode.Generator.Controls;
 using QrCode.Generator.Interfaces.Services;
 using QrCode.Generator.Models;
 using QrCode.Generator.Services;
@@ -21,6 +22,20 @@ internal static class ServiceCollectionExtensions
   private const string EventSourceName = "QrCode.Generator";
 
   /// <summary>
+  /// Registers the controls to the service collection.
+  /// </summary>
+	/// <param name="services">The service collection to enrich.</param>
+	/// <returns>The enriched service collection.</returns>
+  internal static IServiceCollection RegisterControls(this IServiceCollection services)
+  {
+    services.TryAddSingleton<EventCodeControl>();
+    services.TryAddSingleton<GiroCodeControl>();
+    services.TryAddSingleton<WifiCodeControl>();
+
+    return services;
+  }
+
+  /// <summary>
   /// Registers the models to the service collection.
   /// </summary>
 	/// <param name="services">The service collection to enrich.</param>
@@ -28,9 +43,9 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterModels(this IServiceCollection services)
   {
     services.TryAddSingleton<AboutModel>();
-    services.TryAddSingleton<EventModel>();
+    services.TryAddSingleton<EventCodeModel>();
     services.TryAddSingleton<GiroCodeModel>();
-    services.TryAddSingleton<WifiModel>();
+    services.TryAddSingleton<WifiCodeModel>();
 
     return services;
   }
@@ -67,9 +82,9 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterViewModels(this IServiceCollection services)
   {
     services.TryAddSingleton<MainViewModel>();
-    services.TryAddSingleton<EventViewModel>();
+    services.TryAddSingleton<EventCodeViewModel>();
     services.TryAddSingleton<GiroCodeViewModel>();
-    services.TryAddSingleton<WifiViewModel>();
+    services.TryAddSingleton<WifiCodeViewModel>();
 
     return services;
   }

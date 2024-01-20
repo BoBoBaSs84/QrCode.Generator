@@ -26,7 +26,7 @@ public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, GiroCodeMode
   /// The remittance types to select from.
   /// </summary>
   public Tuple<string, TypeOfRemittance>[] ReferenceTypes
-    => Model.TypeOfRemittance.GetValues().AsTuple();
+    => Model.Type.GetValues().AsTuple();
 
   /// <summary>
   /// The giro version types to select from.
@@ -43,8 +43,8 @@ public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, GiroCodeMode
   /// <inheritdoc/>
   protected override void SetPayLoad()
   {
-    Girocode generator = new(Model.IBAN, Model.BIC, Model.Name, Model.Amount, Model.ReferenceInformation,
-      Model.TypeOfRemittance, Model.PurposeOfCreditTransfer, Model.MessageToGirocodeUser, Model.Version,
+    Girocode generator = new(Model.IBAN, Model.BIC, Model.Name, Model.Amount, Model.Reference,
+      Model.Type, Model.Purpose, Model.Message, Model.Version,
       Model.Encoding
       );
 

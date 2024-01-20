@@ -7,16 +7,16 @@ using static QRCoder.PayloadGenerator.CalendarEvent;
 namespace QrCode.GeneratorTests.Models;
 
 [TestClass]
-public sealed class EventModelTests : UnitTestBase
+public sealed class EventCodeModelTests : UnitTestBase
 {
   private const string UnitTest = "UnitTest";
 
   [TestMethod]
   public void EventModelTest()
   {
-    EventModel? model;
+    EventCodeModel? model;
 
-    model = GetService<EventModel>();
+    model = GetService<EventCodeModel>();
 
     Assert.IsNotNull(model);
     Assert.AreEqual(string.Empty, model.Subject);
@@ -31,7 +31,7 @@ public sealed class EventModelTests : UnitTestBase
   [TestMethod]
   public void EventModelIsValidTest()
   {
-    EventModel? model;
+    EventCodeModel? model;
 
     model = new()
     {
