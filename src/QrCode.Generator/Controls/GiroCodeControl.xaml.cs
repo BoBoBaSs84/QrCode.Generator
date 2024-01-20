@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WIFI.QRCode.Builder.Views;
+namespace QrCode.Generator.Controls;
 
 /// <summary>
 /// Interaction logic for GiroCodeControl.xaml
@@ -11,7 +11,5 @@ public partial class GiroCodeControl : UserControl
   /// Initializes an instance of <see cref="GiroCodeControl"/> class.
   /// </summary>
   public GiroCodeControl()
-  {
-    InitializeComponent();
-  }
+    => InitializeComponent();
 }

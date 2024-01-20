@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WIFI.QRCode.Builder.Views;
+namespace QrCode.Generator.Controls;
 
 /// <summary>
 /// Interaction logic for EventCodeControl.xaml
@@ -11,7 +11,5 @@ public partial class EventCodeControl : UserControl
   /// Initializes an instance of <see cref="EventCodeControl"/> class.
   /// </summary>
   public EventCodeControl()
-  {
-    InitializeComponent();
-  }
+    => InitializeComponent();
 }

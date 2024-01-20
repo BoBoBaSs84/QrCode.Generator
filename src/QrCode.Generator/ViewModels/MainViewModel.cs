@@ -1,9 +1,9 @@
 ﻿using BB84.Notifications;
 using BB84.Notifications.Interfaces;
 
-using WIFI.QRCode.Builder.Interfaces.Services;
+using QrCode.Generator.Interfaces.Services;
 
-namespace WIFI.QRCode.Builder.ViewModels;
+namespace QrCode.Generator.ViewModels;
 
 /// <summary>
 /// The main view model class.
@@ -24,10 +24,7 @@ public sealed class MainViewModel(INavigationService navigationService) : Notifi
   /// The navigation service instance.
   /// </summary>
   public INavigationService NavigationService
-  {
-    get => navigationService;
-    private set => SetProperty(ref navigationService, value);
-  }
+    => navigationService;
 
   /// <summary>
   /// The command to show the about window.
@@ -45,7 +42,7 @@ public sealed class MainViewModel(INavigationService navigationService) : Notifi
   /// The command to show the event code control.
   /// </summary>
   public IRelayCommand EventCommand
-    => _eventCommand ??= new RelayCommand(x => NavigationService.NavigateTo<EventViewModel>());
+    => _eventCommand ??= new RelayCommand(x => NavigationService.NavigateTo<EventCodeViewModel>());
 
   /// <summary>
   /// The command to show the giro code control.
@@ -57,5 +54,5 @@ public sealed class MainViewModel(INavigationService navigationService) : Notifi
   /// The command to show the wifi code control.
   /// </summary>
   public IRelayCommand WifiCommand
-    => _wifiCommand ??= new RelayCommand(x => NavigationService.NavigateTo<WifiViewModel>());
+    => _wifiCommand ??= new RelayCommand(x => NavigationService.NavigateTo<WifiCodeViewModel>());
 }

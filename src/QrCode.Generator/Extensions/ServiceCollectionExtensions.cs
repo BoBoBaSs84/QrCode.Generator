@@ -4,14 +4,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
-using WIFI.QRCode.Builder.Interfaces.Services;
-using WIFI.QRCode.Builder.Models;
-using WIFI.QRCode.Builder.Services;
-using WIFI.QRCode.Builder.ViewModels;
-using WIFI.QRCode.Builder.ViewModels.Base;
-using WIFI.QRCode.Builder.Views;
+using QrCode.Generator.Controls;
+using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Models;
+using QrCode.Generator.Services;
+using QrCode.Generator.ViewModels;
+using QrCode.Generator.ViewModels.Base;
+using QrCode.Generator.Windows;
 
-namespace WIFI.QRCode.Builder.Extensions;
+namespace QrCode.Generator.Extensions;
 
 /// <summary>
 /// The service collection extensions class.
@@ -21,15 +22,30 @@ internal static class ServiceCollectionExtensions
   private const string EventSourceName = "QrCode.Generator";
 
   /// <summary>
+  /// Registers the controls to the service collection.
+  /// </summary>
+	/// <param name="services">The service collection to enrich.</param>
+	/// <returns>The enriched service collection.</returns>
+  internal static IServiceCollection RegisterControls(this IServiceCollection services)
+  {
+    services.TryAddSingleton<EventCodeControl>();
+    services.TryAddSingleton<GiroCodeControl>();
+    services.TryAddSingleton<WifiCodeControl>();
+
+    return services;
+  }
+
+  /// <summary>
   /// Registers the models to the service collection.
   /// </summary>
 	/// <param name="services">The service collection to enrich.</param>
 	/// <returns>The enriched service collection.</returns>
   internal static IServiceCollection RegisterModels(this IServiceCollection services)
   {
-    services.TryAddSingleton<EventModel>();
+    services.TryAddSingleton<AboutModel>();
+    services.TryAddSingleton<EventCodeModel>();
     services.TryAddSingleton<GiroCodeModel>();
-    services.TryAddSingleton<WifiModel>();
+    services.TryAddSingleton<WifiCodeModel>();
 
     return services;
   }
@@ -66,9 +82,9 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterViewModels(this IServiceCollection services)
   {
     services.TryAddSingleton<MainViewModel>();
-    services.TryAddSingleton<EventViewModel>();
+    services.TryAddSingleton<EventCodeViewModel>();
     services.TryAddSingleton<GiroCodeViewModel>();
-    services.TryAddSingleton<WifiViewModel>();
+    services.TryAddSingleton<WifiCodeViewModel>();
 
     return services;
   }
@@ -78,9 +94,9 @@ internal static class ServiceCollectionExtensions
   /// </summary>
 	/// <param name="services">The service collection to enrich.</param>
 	/// <returns>The enriched service collection.</returns>
-  internal static IServiceCollection RegisterViews(this IServiceCollection services)
+  internal static IServiceCollection RegisterWindows(this IServiceCollection services)
   {
-    services.TryAddSingleton<MainView>();
+    services.TryAddSingleton<MainWindow>();
 
     return services;
   }

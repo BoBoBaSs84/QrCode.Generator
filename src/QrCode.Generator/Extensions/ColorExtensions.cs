@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace WIFI.QRCode.Builder.Extensions;
+namespace QrCode.Generator.Extensions;
 
 /// <summary>
 /// The color extensions class.

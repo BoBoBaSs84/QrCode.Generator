@@ -1,18 +1,20 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using WIFI.QRCode.Builder.Extensions;
-using WIFI.QRCode.Builder.Interfaces.Services;
-using WIFI.QRCode.Builder.Views;
+using QrCode.Generator.Extensions;
+using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Windows;
 
-namespace WIFI.QRCode.Builder;
+namespace QrCode.Generator.Builder;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
+[ExcludeFromCodeCoverage(Justification = "Main entry point for application.")]
 public partial class App : Application
 {
   private readonly IHost _host;
@@ -42,8 +44,8 @@ public partial class App : Application
     _loggerService.Log(LogInformation, "Application starting...");
     await _host.StartAsync().ConfigureAwait(false);
 
-    MainView mainView = _serviceProvider.GetRequiredService<MainView>();
-    mainView.Show();
+    MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+    mainWindow.Show();
   }
 
   private async void Application_Exit(object sender, ExitEventArgs e)
@@ -63,6 +65,6 @@ public partial class App : Application
       _ = services.RegisterModels();
       _ = services.RegisterServices();
       _ = services.RegisterViewModels();
-      _ = services.RegisterViews();
+      _ = services.RegisterWindows();
     });
 }

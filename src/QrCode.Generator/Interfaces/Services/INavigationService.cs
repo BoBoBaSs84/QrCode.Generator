@@ -1,6 +1,6 @@
-﻿using WIFI.QRCode.Builder.ViewModels.Base;
+﻿using QrCode.Generator.ViewModels.Base;
 
-namespace WIFI.QRCode.Builder.Interfaces.Services;
+namespace QrCode.Generator.Interfaces.Services;
 
 /// <summary>
 /// The navgigation service interface.

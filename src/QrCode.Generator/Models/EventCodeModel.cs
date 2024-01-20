@@ -2,16 +2,16 @@
 
 using BB84.Extensions;
 
-using WIFI.QRCode.Builder.Models.Base;
+using QrCode.Generator.Models.Base;
 
 using static QRCoder.PayloadGenerator.CalendarEvent;
 
-namespace WIFI.QRCode.Builder.Models;
+namespace QrCode.Generator.Models;
 
 /// <summary>
 /// The event qr code model;
 /// </summary>
-public sealed class EventModel : QrCodeModel
+public sealed class EventCodeModel : QrCodeModel
 {
   private string _subject;
   private string _description;
@@ -23,9 +23,9 @@ public sealed class EventModel : QrCodeModel
   private bool _isValid;
 
   /// <summary>
-  /// Initializes an instance of <see cref="EventModel"/> class.
+  /// Initializes an instance of <see cref="EventCodeModel"/> class.
   /// </summary>
-  public EventModel()
+  public EventCodeModel()
   {
     _subject = string.Empty;
     _description = string.Empty;

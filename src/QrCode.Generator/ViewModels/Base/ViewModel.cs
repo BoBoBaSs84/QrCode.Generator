@@ -1,6 +1,6 @@
 ﻿using BB84.Notifications;
 
-namespace WIFI.QRCode.Builder.ViewModels.Base;
+namespace QrCode.Generator.ViewModels.Base;
 
 /// <summary>
 /// The view model base class.
