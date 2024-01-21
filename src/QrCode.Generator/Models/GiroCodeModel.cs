@@ -45,21 +45,21 @@ public sealed class GiroCodeModel : QrCodeModel
   /// <summary>
   /// Account number of the Beneficiary. Only IBAN is allowed.
   /// </summary>
-  [Required]
+  [Required, RegularExpression(@"^[a-zA-Z]{2}[0-9]{2}([a-zA-Z0-9]?){16,30}$")]
   public string IBAN
   {
     get => _iban;
-    set => SetProperty(ref _iban, value);
+    set => SetPropertyAndValidate(ref _iban, value);
   }
 
   /// <summary>
   /// BIC of the Beneficiary Bank.
   /// </summary>
-  [Required]
+  [Required, RegularExpression(@"^[A-Z0-9]{4}[A-Z]{2}[A-Z0-9]{2}(?:[A-Z0-9]{3})?$")]
   public string BIC
   {
     get => _bic;
-    set => SetProperty(ref _bic, value);
+    set => SetPropertyAndValidate(ref _bic, value);
   }
 
   /// <summary>
@@ -69,7 +69,7 @@ public sealed class GiroCodeModel : QrCodeModel
   public string Name
   {
     get => _name;
-    set => SetProperty(ref _name, value);
+    set => SetPropertyAndValidate(ref _name, value);
   }
 
   /// <summary>
@@ -82,7 +82,7 @@ public sealed class GiroCodeModel : QrCodeModel
   public decimal Amount
   {
     get => _amount;
-    set => SetProperty(ref _amount, value);
+    set => SetPropertyAndValidate(ref _amount, value);
   }
 
   /// <summary>
@@ -92,7 +92,7 @@ public sealed class GiroCodeModel : QrCodeModel
   public string Reference
   {
     get => _reference;
-    set => SetProperty(ref _reference, value);
+    set => SetPropertyAndValidate(ref _reference, value);
   }
 
   /// <summary>
@@ -101,10 +101,11 @@ public sealed class GiroCodeModel : QrCodeModel
   /// <remarks>
   /// (e.g. ISO 11649 RF Creditor Reference)
   /// </remarks>
+  [Required]
   public TypeOfRemittance Type
   {
     get => _type;
-    set => SetProperty(ref _type, value);
+    set => SetPropertyAndValidate(ref _type, value);
   }
 
   /// <summary>
@@ -132,7 +133,7 @@ public sealed class GiroCodeModel : QrCodeModel
   public GirocodeVersion Version
   {
     get => _version;
-    set => SetProperty(ref _version, value);
+    set => SetPropertyAndValidate(ref _version, value);
   }
 
   /// <summary>
@@ -142,7 +143,7 @@ public sealed class GiroCodeModel : QrCodeModel
   public GirocodeEncoding Encoding
   {
     get => _encoding;
-    set => SetProperty(ref _encoding, value);
+    set => SetPropertyAndValidate(ref _encoding, value);
   }
 
   /// <inheritdoc/>
