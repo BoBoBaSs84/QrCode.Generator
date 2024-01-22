@@ -37,10 +37,10 @@ public sealed class GiroCodeModelTests : UnitTestBase
 
     model = new()
     {
-      IBAN = UnitTest,
-      BIC = UnitTest,
-      Name = UnitTest,
-      Amount = 100,
+      IBAN = "DE33100205000001194700",
+      BIC = "BFSWDE33BER",
+      Name = "Wikimedia",
+      Amount = 14.99m,
       Reference = UnitTest,
       Type = TypeOfRemittance.Unstructured,
       Purpose = UnitTest,

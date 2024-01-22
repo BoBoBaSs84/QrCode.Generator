@@ -30,7 +30,7 @@ public sealed class GiroCodeViewModelTests : UnitTestBase
       IBAN = "DE33100205000001194700",
       BIC = "BFSWDE33BER",
       Name = "Wikimedia",
-      Amount = 1337.99m
+      Amount = 14.99m
     };
     GiroCodeViewModel viewModel = new(service, model);
 
