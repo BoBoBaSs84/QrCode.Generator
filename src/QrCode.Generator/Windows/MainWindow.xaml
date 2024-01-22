@@ -6,33 +6,43 @@
         xmlns:vm="clr-namespace:QrCode.Generator.ViewModels"
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
-        Title="WIFI.QR-Code.Builder"
+        Title="QrCode.Generator"
         Height="720"
         Width="1280">
-  <DockPanel LastChildFill="True">
-    <Menu DockPanel.Dock="Top">
-      <MenuItem Header="_File">
-        <MenuItem Header="_About"
-                  Command="{Binding AboutCommand}" />
-        <Separator />
-        <MenuItem Header="_Quit"
-                  Command="{Binding ExitCommand}" />
-      </MenuItem>
-      <MenuItem Header="QrCodes">
-        <MenuItem Header="_Event"
-                  Command="{Binding EventCommand}" />
-        <MenuItem Header="_Giro"
-                  Command="{Binding GiroCommand}" />
-        <MenuItem Header="_Wifi"
-                  Command="{Binding WifiCommand}" />
-      </MenuItem>
-    </Menu>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition />
-      </Grid.ColumnDefinitions>
-      <ContentControl Grid.Column="0"
-                      Content="{Binding NavigationService.CurrentView}" />
-    </Grid>
-  </DockPanel>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="200"/>
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <DockPanel Grid.Column="0">
+      <StackPanel DockPanel.Dock="Top"
+                  VerticalAlignment="Top">
+        <GroupBox Header="QR-Codes">
+          <StackPanel>
+            <Button Content="Event / Calendar"
+                  Command="{Binding EventCommand}"
+                  Margin="5,0,5,0" />
+            <Button Content="Giro / Payment"
+                  Command="{Binding GiroCommand}"
+                  Margin="5,0,5,0"/>
+            <Button Content="WIFI / WLAN"
+                  Command="{Binding WifiCommand}"
+                  Margin="5,0,5,0"/>
+            <Button Content="Contact Data"
+                  Margin="5,0,5,0"/>
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+      <StackPanel DockPanel.Dock="Bottom"
+                  VerticalAlignment="Bottom">
+        <GroupBox Header="Information">
+          <Button Content="About"
+                Command="{Binding AboutCommand}"
+                Margin="5,0,5,0"/>
+        </GroupBox>
+      </StackPanel>
+    </DockPanel>
+    <ContentControl Grid.Column="1"
+                    Content="{Binding NavigationService.CurrentView}" />
+  </Grid>
 </Window>

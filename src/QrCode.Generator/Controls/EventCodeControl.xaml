@@ -6,141 +6,119 @@
              xmlns:pt="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
              xmlns:vm="clr-namespace:QrCode.Generator.ViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=vm:EventViewModel}"
+             d:DataContext="{d:DesignInstance Type=vm:EventCodeViewModel}"
              d:Background="WhiteSmoke"
-             d:Height="600"
-             d:Width="900">
-  <UserControl.Resources>
-    <ControlTemplate x:Key="ValidationErrorTemplate">
-      <StackPanel>
-        <Border BorderBrush="Red"
-                BorderThickness="1">
-          <!-- Placeholder for the TextBox itself -->
-          <AdornedElementPlaceholder x:Name="AdornedElement" />
-        </Border>
-        <Border Background="White"
-                BorderBrush="Red"
-                Padding="4"
-                BorderThickness="1,0,1,1"
-                HorizontalAlignment="Left">
-          <ItemsControl ItemsSource="{Binding}"
-                        HorizontalAlignment="Left">
-            <ItemsControl.ItemTemplate>
-              <DataTemplate>
-                <TextBlock Text="{Binding ErrorContent}"
-                           Foreground="Red" />
-              </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
-        </Border>
-      </StackPanel>
-    </ControlTemplate>
-  </UserControl.Resources>
+             d:Height="550"
+             d:Width="800">
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="250" />
-      <ColumnDefinition Width="*" />
+      <ColumnDefinition />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
+      <RowDefinition />
     </Grid.RowDefinitions>
-    <StackPanel Grid.Column="0"
-                Width="250"
-                HorizontalAlignment="Left">
-      <GroupBox x:Name="EventInformation"
-                Header="Event Information">
-        <StackPanel>
-          <Label Content="Subject:" />
-          <TextBox x:Name="SubjectTextBox"
-                   Text="{Binding Model.Subject, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
-                   Margin="16,0,0,0"
-                   Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}" />
-          <Label Content="Description:" />
-          <TextBox x:Name="DescriptionTextBox"
-                   Text="{Binding Model.Description, UpdateSourceTrigger=PropertyChanged}"
-                   Margin="16,0,0,0" />
-          <Label Content="Location:" />
-          <TextBox x:Name="LocationTextBox"
-                   Text="{Binding Model.Location, UpdateSourceTrigger=PropertyChanged}"
-                   Margin="16,0,0,0" />
-          <Label Content="Start:" />
-          <pt:DateTimePicker x:Name="StartDateTimePicker"
-                             Value="{Binding Model.Start, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="16,0,0,0" />
-          <Label Content="End:" />
-          <pt:DateTimePicker x:Name="EndDateTimePicker"
-                             Value="{Binding Model.End, UpdateSourceTrigger=PropertyChanged}"
-                             Margin="16,0,0,0" />
-          <Label Content="All day event?" />
-          <CheckBox x:Name="AllDayCheckbox"
-                    IsChecked="{Binding Model.AllDay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="16,0,0,0" />
-          <Label Content="Event Endoding:" />
-          <ComboBox x:Name="EventEndodingCombo"
-                    ItemsSource="{Binding GetEncodingTypes}"
-                    DisplayMemberPath="Item1"
-                    SelectedValuePath="Item2"
-                    SelectedValue="{Binding Model.Encoding}"
-                    Margin="16,0,0,0" />
-        </StackPanel>
-      </GroupBox>
-      <GroupBox x:Name="Settings"
-                Header="Settings">
-        <StackPanel>
-          <Label Content="Error Correction:" />
-          <ComboBox x:Name="ErrorCorrectionCombo"
-                    ItemsSource="{Binding ErrorCorrectionLevels}"
-                    DisplayMemberPath="Item1"
-                    SelectedValuePath="Item2"
-                    SelectedValue="{Binding Model.ErrorCorrection}"
-                    Margin="16,0,0,0" />
-          <Label x:Name="ForegroundColorLabel"
-                 Content="Foreground Color:" />
-          <pt:ColorPicker x:Name="ForegroundColorPicker"
-                          SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="16,0,0,0" />
-          <Label x:Name="BackgroundColorLabel"
-                 Content="Background Color:" />
-          <pt:ColorPicker x:Name="BackgroundColorPicker"
-                          SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="16,0,0,0" />
-        </StackPanel>
-      </GroupBox>
-      <GroupBox x:Name="Actions"
-                Header="Actions">
-        <StackPanel>
-          <Grid Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Button x:Name="CreateButton"
-                    Content="Create"
-                    Command="{Binding CreateCommand}"
-                    CommandParameter="{Binding Model}"
-                    Grid.Column="0"
-                    Grid.Row="0"
-                    IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="16,0,0,0" />
-            <Button x:Name="CopyButton"
-                    Content="Copy"
-                    Command="{Binding CopyCommand}"
-                    CommandParameter="{Binding Model}"
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="16,0,0,0" />
-          </Grid>
-        </StackPanel>
-      </GroupBox>
-    </StackPanel>
-    <Image Grid.Column="1"
-           x:Name="QrCodeImage"
+    <DockPanel Grid.Column="0">
+      <StackPanel DockPanel.Dock="Top"
+                  VerticalAlignment="Top">
+        <GroupBox x:Name="EventInformation"
+                  Header="Event Information">
+          <StackPanel>
+            <Label Content="Subject:" />
+            <TextBox x:Name="SubjectTextBox"
+                     Text="{Binding Model.Subject, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="Description:" />
+            <TextBox x:Name="DescriptionTextBox"
+                     Text="{Binding Model.Description, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="Location:" />
+            <TextBox x:Name="LocationTextBox"
+                     Text="{Binding Model.Location, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="Start:" />
+            <pt:DateTimePicker x:Name="StartDateTimePicker"
+                               Value="{Binding Model.Start, UpdateSourceTrigger=PropertyChanged}"
+                               Margin="5,0,5,0" />
+            <Label Content="End:" />
+            <pt:DateTimePicker x:Name="EndDateTimePicker"
+                               Value="{Binding Model.End, UpdateSourceTrigger=PropertyChanged}"
+                               Margin="5,0,5,0" />
+            <CheckBox x:Name="AllDayCheckbox"
+                      Content="All day event?"
+                      IsChecked="{Binding Model.AllDay, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,5,5,5" />
+            <Label Content="Encoding:" />
+            <ComboBox x:Name="EventEncodingCombo"
+                      ItemsSource="{Binding GetEncodingTypes}"
+                      DisplayMemberPath="Item1"
+                      SelectedValuePath="Item2"
+                      SelectedValue="{Binding Model.Encoding}"
+                      Margin="5,0,5,0" />
+          </StackPanel>
+        </GroupBox>
+        <GroupBox x:Name="Settings"
+                  Header="QR-Code Settings">
+          <StackPanel>
+            <Label Content="Error Correction:" />
+            <ComboBox x:Name="ErrorCorrectionCombo"
+                      ItemsSource="{Binding ErrorCorrectionLevels}"
+                      DisplayMemberPath="Item1"
+                      SelectedValuePath="Item2"
+                      SelectedValue="{Binding Model.ErrorCorrection}"
+                      Margin="5,0,5,0" />
+            <Label x:Name="ForegroundColorLabel"
+                   Content="Foreground Color:" />
+            <pt:ColorPicker x:Name="ForegroundColorPicker"
+                            SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="5,0,5,0" />
+            <Label x:Name="BackgroundColorLabel"
+                   Content="Background Color:" />
+            <pt:ColorPicker x:Name="BackgroundColorPicker"
+                            SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="5,0,5,0" />
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+      <StackPanel x:Name="ActionStackPanel"
+                  DockPanel.Dock="Bottom"
+                  VerticalAlignment="Bottom">
+        <GroupBox x:Name="Actions"
+                  Header="Actions">
+          <StackPanel>
+            <Grid Grid.ColumnSpan="2">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <Button x:Name="CreateButton"
+                      Content="Create"
+                      Command="{Binding CreateCommand}"
+                      CommandParameter="{Binding Model}"
+                      Grid.Column="0"
+                      Grid.Row="0"
+                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+              <Button x:Name="CopyButton"
+                      Content="Copy"
+                      Command="{Binding CopyCommand}"
+                      CommandParameter="{Binding Model}"
+                      Grid.Column="1"
+                      Grid.Row="0"
+                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+            </Grid>
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+    </DockPanel>
+    <Image x:Name="QrCodeImage"
+           Grid.Column="1"
            Source="{Binding QrCodeImage.Source}"
-           Margin="16,0,16,16"
+           Margin="10,10,10,10"
            RenderOptions.BitmapScalingMode="NearestNeighbor"
            RenderOptions.EdgeMode="Aliased" />
   </Grid>

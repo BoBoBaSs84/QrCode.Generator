@@ -39,6 +39,17 @@ public partial class App : Application
     DispatcherUnhandledException += (s, e) => OnUnhandledException(e.Exception);
   }
 
+  /// <summary>
+  /// The <see cref="GetService{T}"/> method should the requested registered service.
+  /// </summary>
+  /// <typeparam name="T">The requested service.</typeparam>
+  /// <returns>The registered service.</returns>
+  /// <exception cref="ArgumentException">If a service is not registered.</exception>
+  public static T GetService<T>() where T : class =>
+    (Current as App)!._host.Services.GetService(typeof(T)) is not T service
+    ? throw new ArgumentException($"{typeof(T)} needs to be registered in ConfigureServices within App.xaml.cs.")
+    : service;
+
   private async void Application_Startup(object sender, StartupEventArgs e)
   {
     _loggerService.Log(LogInformation, "Application starting...");

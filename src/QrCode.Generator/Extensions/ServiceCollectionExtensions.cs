@@ -82,6 +82,7 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterViewModels(this IServiceCollection services)
   {
     services.TryAddSingleton<MainViewModel>();
+    services.TryAddSingleton<AboutViewModel>();
     services.TryAddSingleton<EventCodeViewModel>();
     services.TryAddSingleton<GiroCodeViewModel>();
     services.TryAddSingleton<WifiCodeViewModel>();
@@ -97,6 +98,7 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterWindows(this IServiceCollection services)
   {
     services.TryAddSingleton<MainWindow>();
+    services.TryAddSingleton<AboutWindow>();
 
     return services;
   }
