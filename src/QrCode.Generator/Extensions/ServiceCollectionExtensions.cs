@@ -43,6 +43,7 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterModels(this IServiceCollection services)
   {
     services.TryAddSingleton<AboutModel>();
+    services.TryAddSingleton<ContactDataModel>();
     services.TryAddSingleton<EventCodeModel>();
     services.TryAddSingleton<GiroCodeModel>();
     services.TryAddSingleton<WifiCodeModel>();
@@ -83,6 +84,7 @@ internal static class ServiceCollectionExtensions
   {
     services.TryAddSingleton<MainViewModel>();
     services.TryAddSingleton<AboutViewModel>();
+    services.TryAddSingleton<ContactDataViewModel>();
     services.TryAddSingleton<EventCodeViewModel>();
     services.TryAddSingleton<GiroCodeViewModel>();
     services.TryAddSingleton<WifiCodeViewModel>();
