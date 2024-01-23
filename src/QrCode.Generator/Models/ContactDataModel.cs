@@ -19,7 +19,7 @@ public sealed class ContactDataModel : QrCodeModel
   private string? _nickName;
   private string? _phone;
   private string? _mobilePhone;
-  private string? _workPhone;
+  private string? _officePhone;
   private string? _email;
   private DateTime? _dateOfBirth;
   private string? _webSite;
@@ -111,10 +111,10 @@ public sealed class ContactDataModel : QrCodeModel
   /// The office phone number.
   /// </summary>
   [Phone]
-  public string? WorkPhone
+  public string? OfficePhone
   {
-    get => _workPhone;
-    set => SetPropertyAndValidate(ref _workPhone, value);
+    get => _officePhone;
+    set => SetPropertyAndValidate(ref _officePhone, value);
   }
 
   /// <summary>

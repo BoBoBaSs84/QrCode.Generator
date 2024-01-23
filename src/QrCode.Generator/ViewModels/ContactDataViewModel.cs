@@ -40,7 +40,7 @@ public sealed class ContactDataViewModel(IQrCodeService qrCodeService, ContactDa
   {
     PayloadGenerator.ContactData generator = new(
       Model.OutputType, Model.FirstName, Model.LastName, Model.NickName, Model.Phone,
-      Model.MobilePhone, Model.WorkPhone, Model.Email, Model.Birthday, Model.WebSite,
+      Model.MobilePhone, Model.OfficePhone, Model.Email, Model.Birthday, Model.WebSite,
       Model.Street, Model.HouseNumber, Model.City, Model.ZipCode, Model.Country,
       Model.Note, Model.StateRegion, Model.AddressOrder, Model.Org, Model.OrgTitle
       );

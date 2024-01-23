@@ -17,6 +17,7 @@ namespace QrCode.Generator.ViewModels;
 public sealed class MainViewModel(INavigationService navigationService) : NotificationObject
 {
   private IRelayCommand? _aboutCommand;
+  private IRelayCommand? _contactDataCommand;
   private IRelayCommand? _exitCommand;
   private IRelayCommand? _eventCommand;
   private IRelayCommand? _giroCommand;
@@ -33,6 +34,12 @@ public sealed class MainViewModel(INavigationService navigationService) : Notifi
   /// </summary>
   public IRelayCommand AboutCommand
     => _aboutCommand ??= new RelayCommand(ShowAbout);
+
+  /// <summary>
+  /// The command to show the contact data control.
+  /// </summary>
+  public IRelayCommand ContactDataCommand
+    => _contactDataCommand ??= new RelayCommand(NavigationService.NavigateTo<ContactDataViewModel>);
 
   /// <summary>
   /// The command to exit the application.

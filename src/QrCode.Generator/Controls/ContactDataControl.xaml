@@ -8,8 +8,8 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vm:ContactDataViewModel}"
              d:Background="WhiteSmoke"
-             d:Height="550"
-             d:Width="800">
+             d:Height="700"
+             d:Width="900">
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="250" />
@@ -24,6 +24,51 @@
         <GroupBox x:Name="ContactDataInformation"
                   Header="Contact Data">
           <StackPanel>
+            <Label Content="Type:" />
+            <ComboBox x:Name="OutputTypeComboBox"
+                      ItemsSource="{Binding ContactOutputTypes}"
+                      DisplayMemberPath="Item1"
+                      SelectedValuePath="Item2"
+                      SelectedValue="{Binding Model.OutputType, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+            <Label Content="The first name:" />
+            <TextBox x:Name="FirstNameTextBox"
+                     Text="{Binding Model.FirstName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The last name:" />
+            <TextBox x:Name="LastNameTextBox"
+                     Text="{Binding Model.LastName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The display name:" />
+            <TextBox x:Name="NickNameTextBox"
+                     Text="{Binding Model.NickName, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The normal phone number:" />
+            <TextBox x:Name="PhoneTextBox"
+                     Text="{Binding Model.Phone, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The mobile phone number:" />
+            <TextBox x:Name="MobilePhoneTextBox"
+                     Text="{Binding Model.MobilePhone, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The office phone number:" />
+            <TextBox x:Name="OfficePhoneTextBox"
+                     Text="{Binding Model.OfficePhone, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The E-Mail address:" />
+            <TextBox x:Name="EmailTextBox"
+                     Text="{Binding Model.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The date of birth:" />
+            <pt:DateTimePicker x:Name="BirthdayDateTimePicker"
+                               Format="ShortDate"
+                               TimePickerVisibility="Hidden"
+                               Value="{Binding Model.Birthday, UpdateSourceTrigger=PropertyChanged}"
+                               Margin="5,0,5,0" />
+            <Label Content="Website / Homepage:" />
+            <TextBox x:Name="WebSiteTextBox"
+                     Text="{Binding Model.WebSite, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
           </StackPanel>
         </GroupBox>
         <GroupBox x:Name="Settings"

@@ -23,7 +23,7 @@ public sealed class ContactDataModelTests : UnitTestBase
     Assert.AreEqual(null, model.NickName);
     Assert.AreEqual(null, model.Phone);
     Assert.AreEqual(null, model.MobilePhone);
-    Assert.AreEqual(null, model.WorkPhone);
+    Assert.AreEqual(null, model.OfficePhone);
     Assert.AreEqual(null, model.Email);
     Assert.AreEqual(null, model.Birthday);
     Assert.AreEqual(null, model.WebSite);
@@ -52,7 +52,7 @@ public sealed class ContactDataModelTests : UnitTestBase
       NickName = UnitTest,
       Phone = "+1 505-644-9930",
       MobilePhone = "+1 203-337-9287",
-      WorkPhone = "+1 505-288-3106",
+      OfficePhone = "+1 505-288-3106",
       Email = "UnitTest@UnitTest.org",
       Birthday = DateTime.Today,
       WebSite = UnitTest,
