@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 using BB84.Extensions;
+using BB84.Notifications.Attributes;
 
 using QrCode.Generator.Models.Base;
 
@@ -20,7 +21,6 @@ public sealed class EventCodeModel : QrCodeModel
   private DateTime _end;
   private bool _allDay;
   private EventEncoding _encoding;
-  private bool _isValid;
 
   /// <summary>
   /// Initializes an instance of <see cref="EventCodeModel"/> class.
@@ -34,14 +34,13 @@ public sealed class EventCodeModel : QrCodeModel
     _end = DateTime.Today.EndOfWeek().AddHours(18);
     _allDay = false;
     _encoding = EventEncoding.iCalComplete;
-
-    PropertyChanged += (s, e) => IsValid = HasErrors.IsFalse();
   }
 
   /// <summary>
   /// The subject / title of the calender event.
   /// </summary>
   [Required(AllowEmptyStrings = false), StringLength(100, MinimumLength = 1)]
+  [NotifyChanged(nameof(IsValid))]
   public string Subject
   {
     get => _subject;
@@ -70,6 +69,7 @@ public sealed class EventCodeModel : QrCodeModel
   /// The start time of the event.
   /// </summary>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public DateTime Start
   {
     get => _start;
@@ -80,6 +80,7 @@ public sealed class EventCodeModel : QrCodeModel
   /// The end time of the event.
   /// </summary>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public DateTime End
   {
     get => _end;
@@ -102,16 +103,11 @@ public sealed class EventCodeModel : QrCodeModel
   /// Apple users you should use <see cref="EventEncoding.iCalComplete"/> instead
   /// of <see cref="EventEncoding.Universal"/> as encoding.
   /// </remarks>
+  [Required]
+  [NotifyChanged(nameof(IsValid))]
   public EventEncoding Encoding
   {
     get => _encoding;
     set => SetProperty(ref _encoding, value);
-  }
-
-  /// <inheritdoc/>
-  public override bool IsValid
-  {
-    get => _isValid;
-    protected set => SetProperty(ref _isValid, value);
   }
 }

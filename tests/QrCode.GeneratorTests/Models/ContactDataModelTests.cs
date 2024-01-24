@@ -37,6 +37,7 @@ public sealed class ContactDataModelTests : UnitTestBase
     Assert.AreEqual(AddressOrder.Default, model.AddressOrder);
     Assert.AreEqual(null, model.Org);
     Assert.AreEqual(null, model.OrgTitle);
+    Assert.IsTrue(model.IsValid);
   }
 
   [TestMethod]

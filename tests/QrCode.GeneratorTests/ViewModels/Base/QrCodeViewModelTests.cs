@@ -54,7 +54,5 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   }
 
   private sealed class TestModel : QrCodeModel
-  {
-    public override bool IsValid { get; protected set; } = true;
-  }
+  { }
 }

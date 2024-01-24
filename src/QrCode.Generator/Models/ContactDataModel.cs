@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using BB84.Extensions;
+using BB84.Notifications.Attributes;
 
 using QrCode.Generator.Models.Base;
 
@@ -33,8 +33,6 @@ public sealed class ContactDataModel : QrCodeModel
   private AddressOrder _addressOrder;
   private string? _org;
   private string? _orgTitle;
-  private bool _isValid;
-  
 
   /// <summary>
   /// Initializes an instance of <see cref="ContactDataModel"/> class.
@@ -45,8 +43,6 @@ public sealed class ContactDataModel : QrCodeModel
     _firstName = string.Empty;
     _lastName = string.Empty;
     _addressOrder = AddressOrder.Default;
-
-    PropertyChanged += (s, e) => IsValid = HasErrors.IsFalse();
   }
 
   /// <summary>
@@ -62,6 +58,7 @@ public sealed class ContactDataModel : QrCodeModel
   /// The first name.
   /// </summary>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public string FirstName
   {
     get => _firstName;
@@ -72,6 +69,7 @@ public sealed class ContactDataModel : QrCodeModel
   /// The last name.
   /// </summary>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public string LastName
   {
     get => _lastName;
@@ -91,6 +89,7 @@ public sealed class ContactDataModel : QrCodeModel
   /// The normal phone number.
   /// </summary>
   [Phone]
+  [NotifyChanged(nameof(IsValid))]
   public string? Phone
   {
     get => _phone;
@@ -101,6 +100,7 @@ public sealed class ContactDataModel : QrCodeModel
   /// The mobile phone number.
   /// </summary>
   [Phone]
+  [NotifyChanged(nameof(IsValid))]
   public string? MobilePhone
   {
     get => _mobilePhone;
@@ -111,6 +111,7 @@ public sealed class ContactDataModel : QrCodeModel
   /// The office phone number.
   /// </summary>
   [Phone]
+  [NotifyChanged(nameof(IsValid))]
   public string? OfficePhone
   {
     get => _officePhone;
@@ -121,6 +122,7 @@ public sealed class ContactDataModel : QrCodeModel
   /// The E-Mail address.
   /// </summary>
   [EmailAddress]
+  [NotifyChanged(nameof(IsValid))]
   public string? Email
   {
     get => _email;
@@ -139,6 +141,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// <summary>
   ///	Website / Homepage
   /// </summary>
+  [Url]
+  [NotifyChanged(nameof(IsValid))]
   public string? WebSite
   {
     get => _webSite;
@@ -236,12 +240,5 @@ public sealed class ContactDataModel : QrCodeModel
   {
     get => _orgTitle;
     set => SetProperty(ref _orgTitle, value);
-  }
-
-  /// <inheritdoc/>
-  public override bool IsValid
-  {
-    get => _isValid;
-    protected set => SetProperty(ref _isValid, value);
   }
 }

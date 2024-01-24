@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using BB84.Extensions;
+using BB84.Notifications.Attributes;
 
 using QrCode.Generator.Models.Base;
 
@@ -23,7 +23,6 @@ public sealed class GiroCodeModel : QrCodeModel
   private string _message;
   private GirocodeVersion _version;
   private GirocodeEncoding _encoding;
-  private bool _isValid;
 
   /// <summary>
   /// Initializes an instance of <see cref="GiroCodeModel"/> class.
@@ -38,14 +37,13 @@ public sealed class GiroCodeModel : QrCodeModel
     _purpose = string.Empty;
     _message = string.Empty;
     _encoding = GirocodeEncoding.ISO_8859_1;
-
-    PropertyChanged += (s, e) => IsValid = HasErrors.IsFalse();
   }
 
   /// <summary>
   /// Account number of the Beneficiary. Only IBAN is allowed.
   /// </summary>
   [Required, RegularExpression(@"^[a-zA-Z]{2}[0-9]{2}([a-zA-Z0-9]?){16,30}$")]
+  [NotifyChanged(nameof(IsValid))]
   public string IBAN
   {
     get => _iban;
@@ -56,6 +54,7 @@ public sealed class GiroCodeModel : QrCodeModel
   /// BIC of the Beneficiary Bank.
   /// </summary>
   [Required, RegularExpression(@"^[A-Z0-9]{4}[A-Z]{2}[A-Z0-9]{2}(?:[A-Z0-9]{3})?$")]
+  [NotifyChanged(nameof(IsValid))]
   public string BIC
   {
     get => _bic;
@@ -66,6 +65,7 @@ public sealed class GiroCodeModel : QrCodeModel
   /// Name of the Beneficiary.
   /// </summary>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public string Name
   {
     get => _name;
@@ -79,6 +79,7 @@ public sealed class GiroCodeModel : QrCodeModel
   /// Amount must be more than 0.01 and less than 999999999.99
   /// </remarks>
   [Range(0.01, 999999999.99)]
+  [NotifyChanged(nameof(IsValid))]
   public decimal Amount
   {
     get => _amount;
@@ -89,6 +90,7 @@ public sealed class GiroCodeModel : QrCodeModel
   /// Remittance Information (Purpose-/reference text).
   /// </summary>  
   [StringLength(140)]
+  [NotifyChanged(nameof(IsValid))]
   public string Reference
   {
     get => _reference;
@@ -102,6 +104,7 @@ public sealed class GiroCodeModel : QrCodeModel
   /// (e.g. ISO 11649 RF Creditor Reference)
   /// </remarks>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public TypeOfRemittance Type
   {
     get => _type;
@@ -130,6 +133,7 @@ public sealed class GiroCodeModel : QrCodeModel
   /// Girocode version.
   /// </summary>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public GirocodeVersion Version
   {
     get => _version;
@@ -140,16 +144,10 @@ public sealed class GiroCodeModel : QrCodeModel
   /// Encoding of the Girocode payload.
   /// </summary>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public GirocodeEncoding Encoding
   {
     get => _encoding;
     set => SetPropertyAndValidate(ref _encoding, value);
-  }
-
-  /// <inheritdoc/>
-  public override bool IsValid
-  {
-    get => _isValid;
-    protected set => SetProperty(ref _isValid, value);
   }
 }

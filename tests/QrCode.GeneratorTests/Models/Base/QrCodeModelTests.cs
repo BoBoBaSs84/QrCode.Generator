@@ -25,12 +25,9 @@ public class QrCodeModelTests
     Assert.AreEqual(ECCLevel.H, model.ErrorCorrection);
     Assert.AreEqual(Colors.Lime, model.ForegroundColor);
     Assert.AreEqual(Colors.Red, model.BackgroundColor);
-    Assert.IsFalse(model.IsValid);
+    Assert.IsTrue(model.IsValid);
   }
 
   private sealed class TestModel : QrCodeModel
-  {
-    /// <inheritdoc/>
-    public override bool IsValid { get; protected set; }
-  }
+  { }
 }

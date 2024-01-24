@@ -16,9 +16,11 @@
       <ColumnDefinition />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
+      <RowDefinition Height="250" />
       <RowDefinition />
     </Grid.RowDefinitions>
-    <DockPanel Grid.Column="0">
+    <DockPanel Grid.Column="0"
+               Grid.RowSpan="2">
       <StackPanel DockPanel.Dock="Top"
                   VerticalAlignment="Top">
         <GroupBox x:Name="ContactDataInformation"
@@ -129,8 +131,68 @@
         </GroupBox>
       </StackPanel>
     </DockPanel>
+    <DockPanel Grid.Column="1"
+               Grid.Row="0">
+      <GroupBox Header="Additional Data"
+                DockPanel.Dock="Top">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="250" />
+          </Grid.ColumnDefinitions>
+          <StackPanel Grid.Column="0">
+            <Label Content="The street:" />
+            <TextBox x:Name="StreetTextBox"
+                     Text="{Binding Model.Street, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The house number:" />
+            <TextBox x:Name="HouseNumberTextBox"
+                     Text="{Binding Model.HouseNumber, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The city:" />
+            <TextBox x:Name="CityTextBox"
+                     Text="{Binding Model.City, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The counrty:" />
+            <TextBox x:Name="CountryTextBox"
+                     Text="{Binding Model.Country, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The postal zip code:" />
+            <TextBox x:Name="ZipCodeTextBox"
+                     Text="{Binding Model.ZipCode, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+          </StackPanel>
+          <StackPanel Grid.Column="1">
+            <Label Content="State / Region:" />
+            <TextBox x:Name="StateRegionTextBox"
+                     Text="{Binding Model.StateRegion, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The organization / company:" />
+            <TextBox x:Name="OrgTextBox"
+                     Text="{Binding Model.Org, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The organization title:" />
+            <TextBox x:Name="OrgTitleTextBox"
+                     Text="{Binding Model.OrgTitle, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The counrty:" />
+            <ComboBox x:Name="AddressOrderCombo"
+                      ItemsSource="{Binding AddressOrderTypes}"
+                      DisplayMemberPath="Item1"
+                      SelectedValuePath="Item2"
+                      SelectedValue="{Binding Model.AddressOrder, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+            <Label Content="The postal zip code:" />
+            <TextBox x:Name="NoteTextBox"
+                     Text="{Binding Model.Note, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+          </StackPanel>
+        </Grid>
+      </GroupBox>
+    </DockPanel>
     <Image x:Name="QrCodeImage"
            Grid.Column="1"
+           Grid.Row="1"
            Source="{Binding QrCodeImage.Source}"
            Margin="10,10,10,10"
            RenderOptions.BitmapScalingMode="NearestNeighbor"
