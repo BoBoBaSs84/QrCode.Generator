@@ -11,7 +11,7 @@
         Width="1280">
   <Grid>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="200"/>
+      <ColumnDefinition Width="200" />
       <ColumnDefinition />
     </Grid.ColumnDefinitions>
     <DockPanel Grid.Column="0">
@@ -20,16 +20,17 @@
         <GroupBox Header="QR-Codes">
           <StackPanel>
             <Button Content="Event / Calendar"
-                  Command="{Binding EventCommand}"
-                  Margin="5,0,5,0" />
+                    Command="{Binding EventCommand}"
+                    Margin="5,0,5,0" />
             <Button Content="Giro / Payment"
-                  Command="{Binding GiroCommand}"
-                  Margin="5,0,5,0"/>
+                    Command="{Binding GiroCommand}"
+                    Margin="5,0,5,0" />
             <Button Content="WIFI / WLAN"
-                  Command="{Binding WifiCommand}"
-                  Margin="5,0,5,0"/>
+                    Command="{Binding WifiCommand}"
+                    Margin="5,0,5,0" />
             <Button Content="Contact Data"
-                  Margin="5,0,5,0"/>
+                    Command="{Binding ContactDataCommand}"
+                    Margin="5,0,5,0" />
           </StackPanel>
         </GroupBox>
       </StackPanel>
@@ -37,8 +38,8 @@
                   VerticalAlignment="Bottom">
         <GroupBox Header="Information">
           <Button Content="About"
-                Command="{Binding AboutCommand}"
-                Margin="5,0,5,0"/>
+                  Command="{Binding AboutCommand}"
+                  Margin="5,0,5,0" />
         </GroupBox>
       </StackPanel>
     </DockPanel>

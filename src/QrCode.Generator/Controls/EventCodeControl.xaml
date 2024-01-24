@@ -53,7 +53,7 @@
                       ItemsSource="{Binding GetEncodingTypes}"
                       DisplayMemberPath="Item1"
                       SelectedValuePath="Item2"
-                      SelectedValue="{Binding Model.Encoding}"
+                      SelectedValue="{Binding Model.Encoding, UpdateSourceTrigger=PropertyChanged}"
                       Margin="5,0,5,0" />
           </StackPanel>
         </GroupBox>

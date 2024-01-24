@@ -6,6 +6,9 @@
              Startup="Application_Startup"
              Exit="Application_Exit">
   <Application.Resources>
+    <DataTemplate DataType="{x:Type TypeName=vm:ContactDataViewModel}">
+      <c:ContactDataControl />
+    </DataTemplate>
     <DataTemplate DataType="{x:Type TypeName=vm:EventCodeViewModel}">
       <c:EventCodeControl />
     </DataTemplate>

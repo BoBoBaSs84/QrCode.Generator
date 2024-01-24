@@ -14,6 +14,7 @@ public sealed class MainViewModelTests : UnitTestBase
 
     Assert.IsNotNull(viewModel);
     Assert.IsNotNull(viewModel.AboutCommand);
+    Assert.IsNotNull(viewModel.ContactDataCommand);
     Assert.IsNotNull(viewModel.EventCommand);
     Assert.IsNotNull(viewModel.ExitCommand);
     Assert.IsNotNull(viewModel.GiroCommand);

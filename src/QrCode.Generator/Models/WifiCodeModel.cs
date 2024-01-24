@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using BB84.Extensions;
+using BB84.Notifications.Attributes;
 
 using QrCode.Generator.Models.Base;
 
@@ -17,7 +17,6 @@ public sealed class WifiCodeModel : QrCodeModel
   private string _sSID;
   private string _password;
   private bool _hidden;
-  private bool _isValid;
 
   /// <summary>
   /// Initializes an instance of <see cref="WifiCodeModel"/> class.
@@ -28,17 +27,13 @@ public sealed class WifiCodeModel : QrCodeModel
     _sSID = string.Empty;
     _password = string.Empty;
     _hidden = false;
-
-    PropertyChanged += (s, e) =>
-    {
-      if (e.PropertyName != nameof(IsValid))
-        IsValid = HasErrors.IsFalse();
-    };
   }
 
   /// <summary>
   /// The authentication mode to use.
   /// </summary>
+  [Required]
+  [NotifyChanged(nameof(IsValid))]
   public Authentication Authentication
   {
     get => _authentication;
@@ -49,6 +44,7 @@ public sealed class WifiCodeModel : QrCodeModel
   /// The service set identifier.
   /// </summary>
   [Required]
+  [NotifyChanged(nameof(IsValid))]
   public string SSID
   {
     get => _sSID;
@@ -71,12 +67,5 @@ public sealed class WifiCodeModel : QrCodeModel
   {
     get => _hidden;
     set => SetProperty(ref _hidden, value);
-  }
-
-  /// <inheritdoc/>
-  public override bool IsValid
-  {
-    get => _isValid;
-    protected set => SetProperty(ref _isValid, value);
   }
 }

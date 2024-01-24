@@ -12,7 +12,7 @@ using static QRCoder.PayloadGenerator.CalendarEvent;
 namespace QrCode.Generator.ViewModels;
 
 /// <summary>
-/// The calendar qr code view model;
+/// The event / calendar code view model;
 /// </summary>
 /// <param name="qrCodeService">The qr code service instance to use.</param>
 /// <param name="model">The model instance to use.</param>

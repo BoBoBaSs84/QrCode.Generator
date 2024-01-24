@@ -1,0 +1,201 @@
+﻿<UserControl x:Class="QrCode.Generator.Controls.ContactDataControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pt="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
+             xmlns:vm="clr-namespace:QrCode.Generator.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:ContactDataViewModel}"
+             d:Background="WhiteSmoke"
+             d:Height="700"
+             d:Width="900">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="250" />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="250" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <DockPanel Grid.Column="0"
+               Grid.RowSpan="2">
+      <StackPanel DockPanel.Dock="Top"
+                  VerticalAlignment="Top">
+        <GroupBox x:Name="ContactDataInformation"
+                  Header="Contact Data">
+          <StackPanel>
+            <Label Content="Type:" />
+            <ComboBox x:Name="OutputTypeComboBox"
+                      ItemsSource="{Binding ContactOutputTypes}"
+                      DisplayMemberPath="Item1"
+                      SelectedValuePath="Item2"
+                      SelectedValue="{Binding Model.OutputType, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+            <Label Content="The first name:" />
+            <TextBox x:Name="FirstNameTextBox"
+                     Text="{Binding Model.FirstName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The last name:" />
+            <TextBox x:Name="LastNameTextBox"
+                     Text="{Binding Model.LastName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The display name:" />
+            <TextBox x:Name="NickNameTextBox"
+                     Text="{Binding Model.NickName, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The normal phone number:" />
+            <TextBox x:Name="PhoneTextBox"
+                     Text="{Binding Model.Phone, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The mobile phone number:" />
+            <TextBox x:Name="MobilePhoneTextBox"
+                     Text="{Binding Model.MobilePhone, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The office phone number:" />
+            <TextBox x:Name="OfficePhoneTextBox"
+                     Text="{Binding Model.OfficePhone, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The E-Mail address:" />
+            <TextBox x:Name="EmailTextBox"
+                     Text="{Binding Model.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Margin="5,0,5,0" />
+            <Label Content="The date of birth:" />
+            <pt:DateTimePicker x:Name="BirthdayDateTimePicker"
+                               Format="ShortDate"
+                               TimePickerVisibility="Hidden"
+                               Value="{Binding Model.Birthday, UpdateSourceTrigger=PropertyChanged}"
+                               Margin="5,0,5,0" />
+            <Label Content="Website / Homepage:" />
+            <TextBox x:Name="WebSiteTextBox"
+                     Text="{Binding Model.WebSite, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+          </StackPanel>
+        </GroupBox>
+        <GroupBox x:Name="Settings"
+                  Header="QR-Code Settings">
+          <StackPanel>
+            <Label Content="Error Correction:" />
+            <ComboBox x:Name="ErrorCorrectionCombo"
+                      ItemsSource="{Binding ErrorCorrectionLevels}"
+                      DisplayMemberPath="Item1"
+                      SelectedValuePath="Item2"
+                      SelectedValue="{Binding Model.ErrorCorrection, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+            <Label x:Name="ForegroundColorLabel"
+                   Content="Foreground Color:" />
+            <pt:ColorPicker x:Name="ForegroundColorPicker"
+                            SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="5,0,5,0" />
+            <Label x:Name="BackgroundColorLabel"
+                   Content="Background Color:" />
+            <pt:ColorPicker x:Name="BackgroundColorPicker"
+                            SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="5,0,5,0" />
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+      <StackPanel x:Name="ActionStackPanel"
+                  DockPanel.Dock="Bottom"
+                  VerticalAlignment="Bottom">
+        <GroupBox x:Name="Actions"
+                  Header="Actions">
+          <StackPanel>
+            <Grid Grid.ColumnSpan="2">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <Button x:Name="CreateButton"
+                      Content="Create"
+                      Command="{Binding CreateCommand}"
+                      CommandParameter="{Binding Model}"
+                      Grid.Column="0"
+                      Grid.Row="0"
+                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+              <Button x:Name="CopyButton"
+                      Content="Copy"
+                      Command="{Binding CopyCommand}"
+                      CommandParameter="{Binding Model}"
+                      Grid.Column="1"
+                      Grid.Row="0"
+                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+            </Grid>
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+    </DockPanel>
+    <DockPanel Grid.Column="1"
+               Grid.Row="0">
+      <GroupBox Header="Additional Data"
+                DockPanel.Dock="Top">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="250" />
+          </Grid.ColumnDefinitions>
+          <StackPanel Grid.Column="0">
+            <Label Content="The street:" />
+            <TextBox x:Name="StreetTextBox"
+                     Text="{Binding Model.Street, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The house number:" />
+            <TextBox x:Name="HouseNumberTextBox"
+                     Text="{Binding Model.HouseNumber, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The city:" />
+            <TextBox x:Name="CityTextBox"
+                     Text="{Binding Model.City, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The counrty:" />
+            <TextBox x:Name="CountryTextBox"
+                     Text="{Binding Model.Country, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The postal zip code:" />
+            <TextBox x:Name="ZipCodeTextBox"
+                     Text="{Binding Model.ZipCode, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+          </StackPanel>
+          <StackPanel Grid.Column="1">
+            <Label Content="State / Region:" />
+            <TextBox x:Name="StateRegionTextBox"
+                     Text="{Binding Model.StateRegion, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The organization / company:" />
+            <TextBox x:Name="OrgTextBox"
+                     Text="{Binding Model.Org, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The organization title:" />
+            <TextBox x:Name="OrgTitleTextBox"
+                     Text="{Binding Model.OrgTitle, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+            <Label Content="The counrty:" />
+            <ComboBox x:Name="AddressOrderCombo"
+                      ItemsSource="{Binding AddressOrderTypes}"
+                      DisplayMemberPath="Item1"
+                      SelectedValuePath="Item2"
+                      SelectedValue="{Binding Model.AddressOrder, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="5,0,5,0" />
+            <Label Content="The postal zip code:" />
+            <TextBox x:Name="NoteTextBox"
+                     Text="{Binding Model.Note, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="5,0,5,0" />
+          </StackPanel>
+        </Grid>
+      </GroupBox>
+    </DockPanel>
+    <Image x:Name="QrCodeImage"
+           Grid.Column="1"
+           Grid.Row="1"
+           Source="{Binding QrCodeImage.Source}"
+           Margin="10,10,10,10"
+           RenderOptions.BitmapScalingMode="NearestNeighbor"
+           RenderOptions.EdgeMode="Aliased" />
+  </Grid>
+</UserControl>

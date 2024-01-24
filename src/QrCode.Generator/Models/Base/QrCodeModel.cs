@@ -1,5 +1,6 @@
 ﻿using System.Windows.Media;
 
+using BB84.Extensions;
 using BB84.Notifications;
 
 using static QRCoder.QRCodeGenerator;
@@ -55,5 +56,5 @@ public abstract class QrCodeModel : ValidatableObject
   /// <summary>
   /// Is the model valid for processing?
   /// </summary>
-  public abstract bool IsValid { get; protected set; }
+  public bool IsValid => HasErrors.IsFalse();
 }
