@@ -28,6 +28,7 @@ internal static class ServiceCollectionExtensions
 	/// <returns>The enriched service collection.</returns>
   internal static IServiceCollection RegisterControls(this IServiceCollection services)
   {
+    services.TryAddSingleton<AboutControl>();
     services.TryAddSingleton<ContactDataControl>();
     services.TryAddSingleton<EventCodeControl>();
     services.TryAddSingleton<GiroCodeControl>();
@@ -101,7 +102,6 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterWindows(this IServiceCollection services)
   {
     services.TryAddSingleton<MainWindow>();
-    services.TryAddSingleton<AboutWindow>();
 
     return services;
   }

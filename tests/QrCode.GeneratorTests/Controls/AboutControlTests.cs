@@ -3,14 +3,14 @@
 namespace QrCode.GeneratorTests.Controls;
 
 [TestClass]
-public sealed class EventCodeControlTests : UnitTestBase
+public sealed class AboutControlTests : UnitTestBase
 {
   [WpfTestMethod]
   public void ConstructorTest()
   {
-    EventCodeControl control;
+    AboutControl? control;
 
-    control = GetService<EventCodeControl>();
+    control = GetService<AboutControl>();
 
     Assert.IsNotNull(control);
   }

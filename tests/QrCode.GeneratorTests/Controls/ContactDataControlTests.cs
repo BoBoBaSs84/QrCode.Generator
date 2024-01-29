@@ -8,10 +8,10 @@ public sealed class ContactDataControlTests : UnitTestBase
   [WpfTestMethod]
   public void ConstructorTest()
   {
-    ContactDataControl? ctrl;
+    ContactDataControl? control;
 
-    ctrl = GetService<ContactDataControl>();
+    control = GetService<ContactDataControl>();
 
-    Assert.IsNotNull(ctrl);
+    Assert.IsNotNull(control);
   }
 }

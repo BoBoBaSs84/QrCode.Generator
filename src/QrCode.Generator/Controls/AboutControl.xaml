@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="QrCode.Generator.Controls.AboutControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:QrCode.Generator.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:AboutViewModel}"
+             d:Background="WhiteSmoke"
+             d:Height="400"
+             d:Width="700">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="10" />
+      <ColumnDefinition />
+      <ColumnDefinition Width="10" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="10" />
+      <RowDefinition />
+      <RowDefinition Height="10" />
+    </Grid.RowDefinitions>
+    <DockPanel LastChildFill="true"
+               Grid.Column="1"
+               Grid.Row="1">
+      <GroupBox Header="About">
+        <StackPanel>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+              <Label Content="Title:" />
+              <Label Content="{Binding Model.Title}"
+										 FontWeight="Bold" />
+              <Label Content="Version:" />
+              <Label Content="{Binding Model.Version}"
+										 FontWeight="Bold" />
+              <Label Content="Comments:" />
+              <Label Content="{Binding Model.Comments}"
+										 FontWeight="Bold" />
+              <Label Content="Company:" />
+              <Label Content="{Binding Model.Company}"
+										 FontWeight="Bold" />
+              <Label Content="Copyright:" />
+              <Label Content="{Binding Model.Copyright}"
+										 FontWeight="Bold" />
+            </StackPanel>
+            <Canvas Grid.Column="2">
+              <Rectangle Width="64"
+                         Height="64"
+                         Fill="{Binding Fill, UpdateSourceTrigger=PropertyChanged}"
+                         Canvas.Left="10"
+                         Canvas.Top="100" />
+            </Canvas>
+          </Grid>
+        </StackPanel>
+      </GroupBox>
+    </DockPanel>
+  </Grid>
+</UserControl>
