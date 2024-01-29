@@ -1,9 +1,7 @@
 ﻿using BB84.Notifications;
 using BB84.Notifications.Interfaces;
 
-using QrCode.Generator.Builder;
 using QrCode.Generator.Interfaces.Services;
-using QrCode.Generator.Windows;
 
 namespace QrCode.Generator.ViewModels;
 
@@ -30,10 +28,10 @@ public sealed class MainViewModel(INavigationService navigationService) : Notifi
     => navigationService;
 
   /// <summary>
-  /// The command to show the about window.
+  /// The command to show the about control.
   /// </summary>
   public IRelayCommand AboutCommand
-    => _aboutCommand ??= new RelayCommand(ShowAbout);
+    => _aboutCommand ??= new RelayCommand(NavigationService.NavigateTo<AboutViewModel>);
 
   /// <summary>
   /// The command to show the contact data control.
@@ -64,10 +62,4 @@ public sealed class MainViewModel(INavigationService navigationService) : Notifi
   /// </summary>
   public IRelayCommand WifiCommand
     => _wifiCommand ??= new RelayCommand(NavigationService.NavigateTo<WifiCodeViewModel>);
-
-  private void ShowAbout()
-  {
-    AboutWindow aboutWindow = App.GetService<AboutWindow>();
-    aboutWindow.Show();
-  }
 }

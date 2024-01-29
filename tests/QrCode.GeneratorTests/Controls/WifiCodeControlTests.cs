@@ -8,10 +8,10 @@ public sealed class WifiCodeControlTests : UnitTestBase
   [WpfTestMethod]
   public void ConstructorTest()
   {
-    WifiCodeControl ctrl;
+    WifiCodeControl control;
 
-    ctrl = GetService<WifiCodeControl>();
+    control = GetService<WifiCodeControl>();
 
-    Assert.IsNotNull(ctrl);
+    Assert.IsNotNull(control);
   }
 }

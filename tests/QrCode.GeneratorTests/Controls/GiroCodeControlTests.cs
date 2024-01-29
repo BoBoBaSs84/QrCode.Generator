@@ -8,10 +8,10 @@ public sealed class GiroCodeControlTests : UnitTestBase
   [WpfTestMethod]
   public void ConstructorTest()
   {
-    GiroCodeControl ctrl;
+    GiroCodeControl control;
 
-    ctrl = GetService<GiroCodeControl>();
+    control = GetService<GiroCodeControl>();
 
-    Assert.IsNotNull(ctrl);
+    Assert.IsNotNull(control);
   }
 }
