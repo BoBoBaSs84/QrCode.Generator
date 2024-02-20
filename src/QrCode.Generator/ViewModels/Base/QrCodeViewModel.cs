@@ -33,7 +33,7 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
   public string Payload
   {
     get => _payload;
-    protected set => SetProperty(ref _payload, value);
+    set => SetProperty(ref _payload, value);
   }
 
   /// <summary>

@@ -9,41 +9,30 @@
         Title="QrCode.Generator"
         Height="720"
         Width="1280">
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="200" />
-      <ColumnDefinition />
-    </Grid.ColumnDefinitions>
-    <DockPanel Grid.Column="0">
-      <StackPanel DockPanel.Dock="Top"
-                  VerticalAlignment="Top">
-        <GroupBox Header="QR-Codes">
-          <StackPanel>
-            <Button Content="Event / Calendar"
-                    Command="{Binding EventCommand}"
-                    Margin="5,0,5,0" />
-            <Button Content="Giro / Payment"
-                    Command="{Binding GiroCommand}"
-                    Margin="5,0,5,0" />
-            <Button Content="WIFI / WLAN"
-                    Command="{Binding WifiCommand}"
-                    Margin="5,0,5,0" />
-            <Button Content="Contact Data"
-                    Command="{Binding ContactDataCommand}"
-                    Margin="5,0,5,0" />
-          </StackPanel>
-        </GroupBox>
-      </StackPanel>
-      <StackPanel DockPanel.Dock="Bottom"
-                  VerticalAlignment="Bottom">
-        <GroupBox Header="Information">
-          <Button Content="About"
-                  Command="{Binding AboutCommand}"
-                  Margin="5,0,5,0" />
-        </GroupBox>
-      </StackPanel>
-    </DockPanel>
-    <ContentControl Grid.Column="1"
-                    Content="{Binding NavigationService.CurrentView}" />
-  </Grid>
+  <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="_File">
+        <MenuItem Header="_About"
+                  Command="{Binding AboutCommand}" />
+        <Separator />
+        <MenuItem Header="_Exit"
+                  Command="{Binding ExitCommand}" />
+      </MenuItem>
+      <MenuItem Header="_Codes">
+        <MenuItem Header="_Contact"
+                  Command="{Binding ContactCommand}" />
+        <MenuItem Header="_Event"
+                  Command="{Binding EventCommand}" />
+        <MenuItem Header="_Payment"
+                  Command="{Binding GiroCommand}" />
+        <MenuItem Header="_Wifi"
+                  Command="{Binding WifiCommand}" />
+      </MenuItem>
+    </Menu>
+    <Grid DockPanel.Dock="Bottom">
+      <ContentControl Grid.Column="0"
+                      Grid.Row="0"
+                      Content="{Binding NavigationService.CurrentView}" />
+    </Grid>
+  </DockPanel>
 </Window>
