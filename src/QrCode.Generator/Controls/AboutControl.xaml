@@ -29,35 +29,28 @@
             <Grid.ColumnDefinitions>
               <ColumnDefinition />
               <ColumnDefinition />
-              <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
               <RowDefinition />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel Grid.Column="0"
+                        Grid.ColumnSpan="2">
               <Label Content="Title:" />
               <Label Content="{Binding Model.Title}"
-										 FontWeight="Bold" />
+                     FontWeight="Bold" />
               <Label Content="Version:" />
               <Label Content="{Binding Model.Version}"
-										 FontWeight="Bold" />
+                     FontWeight="Bold" />
               <Label Content="Comments:" />
               <Label Content="{Binding Model.Comments}"
-										 FontWeight="Bold" />
+                     FontWeight="Bold" />
               <Label Content="Company:" />
               <Label Content="{Binding Model.Company}"
-										 FontWeight="Bold" />
+                     FontWeight="Bold" />
               <Label Content="Copyright:" />
               <Label Content="{Binding Model.Copyright}"
-										 FontWeight="Bold" />
+                     FontWeight="Bold" />
             </StackPanel>
-            <Canvas Grid.Column="2">
-              <Rectangle Width="64"
-                         Height="64"
-                         Fill="{Binding Fill, UpdateSourceTrigger=PropertyChanged}"
-                         Canvas.Left="10"
-                         Canvas.Top="100" />
-            </Canvas>
           </Grid>
         </StackPanel>
       </GroupBox>
