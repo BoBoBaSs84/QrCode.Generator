@@ -71,8 +71,8 @@ internal static class ServiceCollectionExtensions
       config.SetMinimumLevel(LogLevel.Warning);
     });
 
-    services.TryAddSingleton<Func<Type, ViewModel>>(serviceProvider
-      => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
+    services.TryAddSingleton<Func<Type, ViewModelBase>>(serviceProvider
+      => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
 
     return services;
   }

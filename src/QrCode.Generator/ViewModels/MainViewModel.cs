@@ -2,6 +2,7 @@
 using BB84.Notifications.Interfaces;
 
 using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.ViewModels.Base;
 
 namespace QrCode.Generator.ViewModels;
 
@@ -12,7 +13,7 @@ namespace QrCode.Generator.ViewModels;
 /// Initializes an instance of <see cref="MainViewModel"/> class.
 /// </remarks>
 /// <param name="navigationService">The navigation service instance to use.</param>
-public sealed class MainViewModel(INavigationService navigationService) : NotificationObject
+public sealed class MainViewModel(INavigationService navigationService) : ViewModelBase
 {
   private IRelayCommand? _aboutCommand;
   private IRelayCommand? _contactCommand;

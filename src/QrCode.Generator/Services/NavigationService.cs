@@ -12,16 +12,16 @@ namespace QrCode.Generator.Services;
 /// Initializes an instance of <see cref="NavigationService"/> class.
 /// </remarks>
 /// <param name="viewModelFactory"></param>
-internal sealed class NavigationService(Func<Type, ViewModel> viewModelFactory) : NotificationObject, INavigationService
+internal sealed class NavigationService(Func<Type, ViewModelBase> viewModelFactory) : NotifiableObject, INavigationService
 {
-  private ViewModel _currentView = default!;
+  private ViewModelBase _currentView = default!;
 
-  public ViewModel CurrentView
+  public ViewModelBase CurrentView
   {
     get => _currentView;
     private set => SetProperty(ref _currentView, value);
   }
 
-  public void NavigateTo<T>() where T : ViewModel
+  public void NavigateTo<T>() where T : ViewModelBase
     => CurrentView = viewModelFactory.Invoke(typeof(T));
 }

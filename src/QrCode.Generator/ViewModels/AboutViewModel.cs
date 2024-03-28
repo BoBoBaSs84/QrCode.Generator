@@ -7,7 +7,7 @@ namespace QrCode.Generator.ViewModels;
 /// The about view model
 /// </summary>
 /// <param name="model">The model instance to use.</param>
-public sealed class AboutViewModel(AboutModel model) : ViewModel
+public sealed class AboutViewModel(AboutModel model) : ViewModelBase
 {
   /// <summary>
   /// The model instance to use.
