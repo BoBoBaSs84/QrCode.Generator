@@ -20,7 +20,7 @@ namespace QrCode.Generator.ViewModels.Base;
 /// Initializes an instance of <see cref="QrCodeViewModel"/> class.
 /// </remarks>
 /// <param name="qrCodeService">The QR code service instance to use.</param>
-public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModel
+public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelBase
 {
   private IRelayCommand? _createCommand;
   private IRelayCommand? _copyCommand;
