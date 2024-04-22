@@ -3,8 +3,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-using BB84.Notifications;
-using BB84.Notifications.Interfaces;
+using BB84.Notifications.Commands;
+using BB84.Notifications.Interfaces.Commands;
 
 using QrCode.Generator.Interfaces.Services;
 using QrCode.Generator.Models.Base;
@@ -22,8 +22,8 @@ namespace QrCode.Generator.ViewModels.Base;
 /// <param name="qrCodeService">The QR code service instance to use.</param>
 public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelBase
 {
-  private IRelayCommand<QrCodeModel>? _createCommand;
-  private IRelayCommand<QrCodeModel>? _copyCommand;
+  private IActionCommand<QrCodeModel>? _createCommand;
+  private IActionCommand<QrCodeModel>? _copyCommand;
   private Image _qrCodeImage = new();
   private string _payload = string.Empty;
 
@@ -54,14 +54,14 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelB
   /// <summary>
   /// The command to create or update the QR code.
   /// </summary>
-  public IRelayCommand<QrCodeModel> CreateCommand
-    => _createCommand ??= new RelayCommand<QrCodeModel>(UpdateQrCode);
+  public IActionCommand<QrCodeModel> CreateCommand
+    => _createCommand ??= new ActionCommand<QrCodeModel>(UpdateQrCode);
 
   /// <summary>
   /// The command for copying the QR code.
   /// </summary>
-  public IRelayCommand<QrCodeModel> CopyCommand
-    => _copyCommand ??= new RelayCommand<QrCodeModel>(CopyQrCode);
+  public IActionCommand<QrCodeModel> CopyCommand
+    => _copyCommand ??= new ActionCommand<QrCodeModel>(CopyQrCode);
 
   /// <summary>
   /// Sets the payload to encode.
