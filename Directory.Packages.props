@@ -5,7 +5,7 @@
 
   <ItemGroup>
     <PackageVersion Include="BB84.Extensions" Version="2.3.421" />
-    <PackageVersion Include="BB84.Notifications" Version="3.2.421" />
+    <PackageVersion Include="BB84.Notifications" Version="3.2.520" />
     <PackageVersion Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.115" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.3.1" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.3.1" />
