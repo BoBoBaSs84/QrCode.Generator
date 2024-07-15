@@ -56,5 +56,5 @@ public abstract class QrCodeModel : ValidatableObject
   /// <summary>
   /// Is the model valid for processing?
   /// </summary>
-  public bool IsValid => HasErrors.IsFalse();
+  public new bool IsValid => HasErrors.IsFalse();
 }
