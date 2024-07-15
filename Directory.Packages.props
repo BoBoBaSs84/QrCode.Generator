@@ -2,10 +2,9 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageVersion Include="BB84.Extensions" Version="2.3.421" />
-    <PackageVersion Include="BB84.Notifications" Version="3.3.616" />
+    <PackageVersion Include="BB84.Notifications" Version="3.4.715" />
     <PackageVersion Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.115" />
     <PackageVersion Include="MSTest.TestAdapter" Version="3.4.3" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.4.3" />
@@ -14,5 +13,4 @@
     <PackageVersion Include="QRCoder.Xaml" Version="1.6.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
   </ItemGroup>
-
 </Project>
