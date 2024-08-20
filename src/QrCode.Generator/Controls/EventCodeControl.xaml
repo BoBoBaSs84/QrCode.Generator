@@ -30,11 +30,19 @@
                      Margin="5,0,5,0" />
             <Label Content="Description:" />
             <TextBox x:Name="DescriptionTextBox"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"
+                     Height="Auto"                     
                      Text="{Binding Model.Description, UpdateSourceTrigger=PropertyChanged}"
+                     TextWrapping="Wrap"
                      Margin="5,0,5,0" />
             <Label Content="Location:" />
             <TextBox x:Name="LocationTextBox"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"
+                     Height="Auto"
                      Text="{Binding Model.Location, UpdateSourceTrigger=PropertyChanged}"
+                     TextWrapping="Wrap"
                      Margin="5,0,5,0" />
             <Label Content="Start:" />
             <pt:DateTimePicker x:Name="StartDateTimePicker"
