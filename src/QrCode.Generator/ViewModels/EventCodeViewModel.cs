@@ -16,7 +16,7 @@ namespace QrCode.Generator.ViewModels;
 /// </summary>
 /// <param name="qrCodeService">The qr code service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public sealed class EventCodeViewModel(IQrCodeService qrCodeService, EventCodeModel model) : QrCodeViewModel(qrCodeService)
+public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, EventCodeModel model) : QrCodeViewModel(qrCodeService)
 {
   /// <summary>
   /// The model instance to use.
@@ -32,7 +32,16 @@ public sealed class EventCodeViewModel(IQrCodeService qrCodeService, EventCodeMo
   /// <inheritdoc />
   protected override void SetPayLoad()
   {
-    PayloadGenerator.CalendarEvent generator = new(Model.Subject, Model.Description, Model.Location, Model.Start, Model.End, Model.AllDay, Model.Encoding);
+    PayloadGenerator.CalendarEvent generator = new(
+      subject: Model.Subject,
+      description: Model.Description.Replace("\r\n", @"\n"),
+      location: Model.Location.Replace("\r\n", @"\n"),
+      start: Model.Start,
+      end: Model.End,
+      allDayEvent: Model.AllDay,
+      encoding: Model.Encoding
+      );
+
     Payload = generator.ToString();
   }
 }

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using BB84.Extensions;
 using BB84.Notifications.Attributes;
 
 using QrCode.Generator.Models.Base;
@@ -30,10 +29,12 @@ public sealed class EventCodeModel : QrCodeModel
     _subject = string.Empty;
     _description = string.Empty;
     _location = string.Empty;
-    _start = DateTime.Today.StartOfWeek().AddHours(6);
-    _end = DateTime.Today.EndOfWeek().AddHours(18);
+    _start = DateTime.Now.AddHours(1);
+    _end = DateTime.Now.AddHours(2);
     _allDay = false;
     _encoding = EventEncoding.iCalComplete;
+
+    PropertyChanged += (s, e) => OnPropertyChanged(e.PropertyName);
   }
 
   /// <summary>
@@ -69,7 +70,7 @@ public sealed class EventCodeModel : QrCodeModel
   /// The start time of the event.
   /// </summary>
   [Required]
-  [NotifyChanged(nameof(IsValid))]
+  [NotifyChanged(nameof(IsValid), nameof(End))]
   public DateTime Start
   {
     get => _start;
@@ -80,7 +81,7 @@ public sealed class EventCodeModel : QrCodeModel
   /// The end time of the event.
   /// </summary>
   [Required]
-  [NotifyChanged(nameof(IsValid))]
+  [NotifyChanged(nameof(IsValid), nameof(Start))]
   public DateTime End
   {
     get => _end;
@@ -109,5 +110,27 @@ public sealed class EventCodeModel : QrCodeModel
   {
     get => _encoding;
     set => SetProperty(ref _encoding, value);
+  }
+
+  private void OnPropertyChanged(string? propertyName)
+  {
+    if (propertyName is not null)
+    {
+      if (propertyName == nameof(End))
+      {
+        if (End < Start)
+          Start = End.AddHours(-1);
+
+        return;
+      }
+
+      if (propertyName == nameof(Start))
+      {
+        if (Start > End)
+          End = Start.AddHours(1);
+
+        return;
+      }
+    }
   }
 }
