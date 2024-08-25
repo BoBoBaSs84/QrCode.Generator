@@ -75,8 +75,8 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelB
   {
     SetPayLoad();
 
-    DrawingImage drawing =
-      qrCodeService.CreateDrawing(Payload, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
+    DrawingImage drawing = qrCodeService
+      .CreateDrawing(Payload, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
 
     QrCodeImage.Source = drawing;
   }
@@ -88,8 +88,8 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelB
   {
     SetPayLoad();
 
-    BitmapSource bitmap =
-      qrCodeService.CreateBitmap(Payload, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
+    BitmapSource bitmap = qrCodeService
+      .CreateBitmap(Payload, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
 
     DataObject dataObject = new();
     dataObject.SetData(DataFormats.Bitmap, bitmap);
