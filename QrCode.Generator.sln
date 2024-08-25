@@ -3,19 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12439B47-309E-4CB7-8FF8-EF559D5EAB56}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		.gitignore = .gitignore
-		Directory.Build.props = Directory.Build.props
-		Directory.Build.targets = Directory.Build.targets
-		Directory.Packages.props = Directory.Packages.props
-		global.json = global.json
-		LICENSE = LICENSE
-		PublicKey.snk = PublicKey.snk
-		README.md = README.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E780644-C4DD-4E17-B2F5-B3426803E8A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrCode.Generator", "src\QrCode.Generator\QrCode.Generator.csproj", "{596425AD-EF50-4C67-82EB-2391A0A6EF7D}"
@@ -23,6 +10,19 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D745F8D-9212-4CBC-8B84-1C6E762F8B3E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrCode.GeneratorTests", "tests\QrCode.GeneratorTests\QrCode.GeneratorTests.csproj", "{B87BFC39-D7D6-4A84-9448-B43B3372EE5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C62FFF5-586A-4424-B68A-ED285E5E1F5B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
+		PublicKey.snk = PublicKey.snk
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
