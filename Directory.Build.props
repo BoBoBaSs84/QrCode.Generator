@@ -1,15 +1,16 @@
 <Project>
 
-  <PropertyGroup>
+  <PropertyGroup Label="Versioning">
     <VersionMajor>$([System.DateTime]::UtcNow.Year)</VersionMajor>
     <VersionMinor>$([System.DateTime]::UtcNow.Month)</VersionMinor>
     <VersionPatch>$([System.DateTime]::UtcNow.Day)</VersionPatch>
     <VersionRevision>$([System.DateTime]::UtcNow.TimeOfDay.TotalMinutes.ToString("0"))</VersionRevision>
     <VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionRevision)</VersionPrefix>
     <VersionSuffix Condition="$(Configuration.Equals('Debug'))">Development</VersionSuffix>
+    <FileVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch)</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Label="Technical">
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <AnalysisLevel>latest</AnalysisLevel>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -23,6 +24,7 @@
     <GeneratedAssemblyInfoFile>Properties\AssemblyInfo.cs</GeneratedAssemblyInfoFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <Nullable>enable</Nullable>
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64</Platforms>
@@ -33,15 +35,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="!$(MSBuildProjectName.EndsWith('Tests'))">
-    <Authors>BoBoBaSs84</Authors>
-    <Company>https://github.com/BoBoBaSs84</Company>
-    <Copyright>Copyright © $(VersionMajor) BoBoBaSs84</Copyright>
+    <Author>BoBoBaSs84</Author>
+    <Authors>$(Author)</Authors>
+    <Company>https://github.com/$(Author)</Company>
+    <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) $(Author)</Copyright>
     <Description>As we all know: "Why did you change your password again? And why is it so long?"</Description>
-    <NeutralLanguage>en-US</NeutralLanguage>
     <Product>$(AssemblyName)</Product>
     <Title>$(AssemblyName)</Title>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/BoBoBaSs84/$(Product)</RepositoryUrl>
+    <RepositoryUrl>https://github.com/$(Author)/$(Product)</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(Configuration.Equals('Debug'))">
