@@ -8,52 +8,93 @@
              d:DataContext="{d:DesignInstance Type=vm:AboutViewModel}"
              d:Background="WhiteSmoke"
              d:Height="400"
-             d:Width="700">
+             d:Width="600">
   <Grid>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="10" />
-      <ColumnDefinition />
-      <ColumnDefinition Width="10" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="12*" />
+      <ColumnDefinition Width="1*" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-      <RowDefinition Height="10" />
-      <RowDefinition />
-      <RowDefinition Height="10" />
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="7*" />
+      <RowDefinition Height="1*" />
     </Grid.RowDefinitions>
-    <DockPanel LastChildFill="true"
-               Grid.Column="1"
-               Grid.Row="1">
-      <GroupBox Header="About">
-        <StackPanel>
-          <Grid>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition />
-              <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition />
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Column="0"
-                        Grid.ColumnSpan="2">
-              <Label Content="Title:" />
-              <Label Content="{Binding Model.Title}"
-                     FontWeight="Bold" />
-              <Label Content="Version:" />
-              <Label Content="{Binding Model.Version}"
-                     FontWeight="Bold" />
-              <Label Content="Comments:" />
-              <Label Content="{Binding Model.Comments}"
-                     FontWeight="Bold" />
-              <Label Content="Company:" />
-              <Label Content="{Binding Model.Company}"
-                     FontWeight="Bold" />
-              <Label Content="Copyright:" />
-              <Label Content="{Binding Model.Copyright}"
-                     FontWeight="Bold" />
-            </StackPanel>
-          </Grid>
-        </StackPanel>
-      </GroupBox>
-    </DockPanel>
+    <Grid x:Name="AboutGrid"
+          Grid.Column="1"
+          Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Label Content="Title:"
+             FontSize="14"
+             Grid.Column="0"
+             Grid.Row="0" />
+      <Label Content="{Binding Model.Title}"
+             FontSize="14"
+             Grid.Column="1"
+             Grid.Row="0" />
+      <Label Content="Version:"
+             FontSize="14"
+             Grid.Column="0"
+             Grid.Row="1" />
+      <Label Content="{Binding Model.Version}"
+             FontSize="14"
+             Grid.Column="1"
+             Grid.Row="1" />
+      <Label Content="Description:"
+             FontSize="14"
+             Grid.Column="0"
+             Grid.Row="2" />
+      <TextBlock Text="{Binding Model.Comments}"
+                 TextWrapping="WrapWithOverflow"
+                 FontSize="14"
+                 Grid.Column="1"
+                 Grid.Row="2"
+                 Margin="5" />
+      <Label Content="Company:"
+             FontSize="14"
+             Grid.Column="0"
+             Grid.Row="3" />
+      <Label Content="{Binding Model.Company}"
+             FontSize="14"
+             Grid.Column="1"
+             Grid.Row="3" />
+      <Label Content="Copyright:"
+             FontSize="14"
+             Grid.Column="0"
+             Grid.Row="4" />
+      <Label Content="{Binding Model.Copyright}"
+             FontSize="14"
+             Grid.Column="1"
+             Grid.Row="4" />
+      <Label Content="Framework:"
+             FontSize="14"
+             Grid.Column="0"
+             Grid.Row="5" />
+      <Label Content="{Binding Model.FrameworkName}"
+             FontSize="14"
+             Grid.Column="1"
+             Grid.Row="5" />
+      <Label Content="Repository:"
+             FontSize="14"
+             Grid.Column="0"
+             Grid.Row="6" />
+      <Label Content="{Binding Model.Repository}"
+             FontSize="14"
+             Grid.Column="1"
+             Grid.Row="6" />
+    </Grid>
   </Grid>
 </UserControl>
