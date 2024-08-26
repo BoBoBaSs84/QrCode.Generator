@@ -18,5 +18,7 @@ public class AboutModelTests : UnitTestBase
     Assert.IsNotNull(model.Comments);
     Assert.IsNotNull(model.Title);
     Assert.IsNotNull(model.Version);
+    Assert.IsNotNull(model.FrameworkName);
+    Assert.IsNotNull(model.Repository);
   }
 }
