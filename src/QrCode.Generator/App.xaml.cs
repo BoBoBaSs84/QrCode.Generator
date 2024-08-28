@@ -70,12 +70,14 @@ public partial class App : Application
   private void OnUnhandledException(Exception exception)
     => _loggerService.Log(LogCritical, exception);
 
+  [SuppressMessage("Style", "IDE0058", Justification = "Not relevant here.")]
   private static IHostBuilder CreateHostBuilder()
     => Host.CreateDefaultBuilder().ConfigureServices(services =>
     {
-      _ = services.RegisterModels();
-      _ = services.RegisterServices();
-      _ = services.RegisterViewModels();
-      _ = services.RegisterWindows();
+      services.RegisterModels();
+      services.RegisterServices();
+      services.RegisterProviders();
+      services.RegisterViewModels();
+      services.RegisterWindows();
     });
 }

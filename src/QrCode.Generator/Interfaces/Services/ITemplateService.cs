@@ -19,4 +19,18 @@ public interface ITemplateService<T> where T : class
   /// <param name="template">The template information to transform.</param>
   /// <returns>The transformed template information.</returns>
   string To(T template);
+
+  /// <summary>
+  /// Loads the template from the provided <paramref name="filePath"/>.
+  /// </summary>
+  /// <param name="filePath">The location of the template to load.</param>
+  /// <returns>The content of the teamplate file.</returns>
+  string Load(string filePath);
+
+  /// <summary>
+  /// Saves the template to the provided <paramref name="filePath"/>.
+  /// </summary>
+  /// <param name="filePath">The location of the template to save.</param>
+  /// <param name="fileContent">The template file content to save.</param>
+  void Save(string filePath, string fileContent);
 }

@@ -22,8 +22,6 @@ namespace QrCode.Generator.ViewModels.Base;
 /// <param name="qrCodeService">The QR code service instance to use.</param>
 public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelBase
 {
-  private IActionCommand<QrCodeModel>? _createCommand;
-  private IActionCommand<QrCodeModel>? _copyCommand;
   private Image _qrCodeImage = new();
   private string _payload = string.Empty;
 
@@ -55,13 +53,13 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelB
   /// The command to create or update the QR code.
   /// </summary>
   public IActionCommand<QrCodeModel> CreateCommand
-    => _createCommand ??= new ActionCommand<QrCodeModel>(UpdateQrCode);
+    => new ActionCommand<QrCodeModel>(UpdateQrCode);
 
   /// <summary>
   /// The command for copying the QR code.
   /// </summary>
   public IActionCommand<QrCodeModel> CopyCommand
-    => _copyCommand ??= new ActionCommand<QrCodeModel>(CopyQrCode);
+    => new ActionCommand<QrCodeModel>(CopyQrCode);
 
   /// <summary>
   /// Sets the payload to encode.

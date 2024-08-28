@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-using BB84.Extensions;
+﻿using BB84.Extensions;
 using BB84.Notifications.Commands;
 using BB84.Notifications.Interfaces.Commands;
 
@@ -23,7 +21,7 @@ namespace QrCode.Generator.ViewModels;
 /// <param name="qrCodeService">The qr code service instance to use.</param>
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateService<EventCodeModel> templateService, EventCodeModel model) : QrCodeViewModel(qrCodeService)
+public sealed class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateService<EventCodeModel> templateService, EventCodeModel model) : QrCodeViewModel(qrCodeService)
 {
   /// <summary>
   /// The model instance to use.
@@ -53,8 +51,8 @@ public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, ITe
   {
     PayloadGenerator.CalendarEvent generator = new(
       subject: Model.Subject,
-      description: Model.Description.Replace("\r\n", @"\n"),
-      location: Model.Location.Replace("\r\n", @"\n"),
+      description: Model.Description?.Replace("\r\n", @"\n"),
+      location: Model.Location?.Replace("\r\n", @"\n"),
       start: Model.Start,
       end: Model.End,
       allDayEvent: Model.AllDay,
@@ -78,7 +76,7 @@ public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, ITe
     bool? result = fileDialog.ShowDialog();
 
     if (result.HasValue && result.Value.IsTrue())
-      File.WriteAllText(fileDialog.FileName, jsonContent);
+      templateService.Save(fileDialog.FileName, jsonContent);
   }
 
   private void LoadTemplate(EventCodeModel model)
@@ -94,7 +92,7 @@ public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, ITe
 
     if (result.HasValue && result.Value.IsTrue())
     {
-      string fileContent = File.ReadAllText(fileDialog.FileName);
+      string fileContent = templateService.Load(fileDialog.FileName);
       EventCodeModel template = templateService.From(fileContent);
 
       model.Subject = template.Subject;
@@ -107,8 +105,6 @@ public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, ITe
       model.ErrorCorrection = template.ErrorCorrection;
       model.BackgroundColor = template.BackgroundColor;
       model.ForegroundColor = template.ForegroundColor;
-
-      model.Validate();
     }
   }
 }

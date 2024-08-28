@@ -51,7 +51,4 @@ public abstract class QrCodeModel : ValidatableObject
     get => _backgroundColor;
     set => SetProperty(ref _backgroundColor, value);
   }
-
-  /// <inheritdoc cref="ValidatableObject.Validate"/>
-  public new bool Validate() => base.Validate();
 }

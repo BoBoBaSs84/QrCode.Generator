@@ -44,9 +44,7 @@ public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, GiroCodeMode
   protected override void SetPayLoad()
   {
     Girocode generator = new(Model.IBAN, Model.BIC, Model.Name, Model.Amount, Model.Reference,
-      Model.Type, Model.Purpose, Model.Message, Model.Version,
-      Model.Encoding
-      );
+      Model.Type, Model.Purpose, Model.Message, Model.Version, Model.Encoding);
 
     Payload = generator.ToString();
   }
