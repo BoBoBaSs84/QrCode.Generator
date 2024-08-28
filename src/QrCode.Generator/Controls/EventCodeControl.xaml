@@ -124,6 +124,7 @@
               <Button x:Name="LoadButton"
                       Content="Load"
                       Command="{Binding LoadTemplateCommand}"
+                      CommandParameter="{Binding Model}"
                       Grid.Column="3"
                       Margin="5,0,5,0" />
             </Grid>
