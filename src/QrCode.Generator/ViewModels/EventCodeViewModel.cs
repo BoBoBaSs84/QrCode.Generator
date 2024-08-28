@@ -39,8 +39,8 @@ public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, ITe
   /// <summary>
   /// The command the load a template into the current model.
   /// </summary>
-  public IActionCommand LoadTemplateCommand
-    => new ActionCommand(LoadTemplate);
+  public IActionCommand<EventCodeModel> LoadTemplateCommand
+    => new ActionCommand<EventCodeModel>(LoadTemplate);
 
   /// <summary>
   /// The command the create a template from the current model.
@@ -81,7 +81,7 @@ public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, ITe
       File.WriteAllText(fileDialog.FileName, jsonContent);
   }
 
-  private void LoadTemplate()
+  private void LoadTemplate(EventCodeModel model)
   {
     OpenFileDialog fileDialog = new()
     {
@@ -97,18 +97,18 @@ public sealed partial class EventCodeViewModel(IQrCodeService qrCodeService, ITe
       string fileContent = File.ReadAllText(fileDialog.FileName);
       EventCodeModel template = templateService.From(fileContent);
 
-      Model.Subject = template.Subject;
-      Model.Description = template.Description;
-      Model.Location = template.Location;
-      Model.Start = template.Start;
-      Model.End = template.End;
-      Model.AllDay = template.AllDay;
-      Model.Encoding = template.Encoding;
-      Model.ErrorCorrection = template.ErrorCorrection;
-      Model.BackgroundColor = template.BackgroundColor;
-      Model.ForegroundColor = template.ForegroundColor;
+      model.Subject = template.Subject;
+      model.Description = template.Description;
+      model.Location = template.Location;
+      model.Start = template.Start;
+      model.End = template.End;
+      model.AllDay = template.AllDay;
+      model.Encoding = template.Encoding;
+      model.ErrorCorrection = template.ErrorCorrection;
+      model.BackgroundColor = template.BackgroundColor;
+      model.ForegroundColor = template.ForegroundColor;
 
-      Model.Validate();
+      model.Validate();
     }
   }
 }
