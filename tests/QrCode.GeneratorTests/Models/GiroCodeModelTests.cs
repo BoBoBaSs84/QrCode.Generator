@@ -27,7 +27,7 @@ public sealed class GiroCodeModelTests : UnitTestBase
     Assert.AreEqual(string.Empty, model.Message);
     Assert.AreEqual(GirocodeVersion.Version1, model.Version);
     Assert.AreEqual(GirocodeEncoding.ISO_8859_1, model.Encoding);
-    Assert.IsTrue(model.IsValid);
+    Assert.IsFalse(model.IsValid);
   }
 
   [TestMethod]

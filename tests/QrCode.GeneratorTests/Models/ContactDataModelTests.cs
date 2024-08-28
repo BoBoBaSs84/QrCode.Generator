@@ -37,7 +37,7 @@ public sealed class ContactDataModelTests : UnitTestBase
     Assert.AreEqual(AddressOrder.Default, model.AddressOrder);
     Assert.AreEqual(null, model.Org);
     Assert.AreEqual(null, model.OrgTitle);
-    Assert.IsTrue(model.IsValid);
+    Assert.IsFalse(model.IsValid);
   }
 
   [TestMethod]
@@ -56,7 +56,7 @@ public sealed class ContactDataModelTests : UnitTestBase
       OfficePhone = "+1 505-288-3106",
       Email = "UnitTest@UnitTest.org",
       Birthday = DateTime.Today,
-      WebSite = UnitTest,
+      WebSite = "http://www.UnitTest.org",
       Street = UnitTest,
       HouseNumber = UnitTest,
       City = UnitTest,
