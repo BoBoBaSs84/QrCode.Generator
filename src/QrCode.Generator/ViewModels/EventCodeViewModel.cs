@@ -6,6 +6,7 @@ using Microsoft.Win32;
 
 using QrCode.Generator.Extensions;
 using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Interfaces.ViewModels;
 using QrCode.Generator.Models;
 using QrCode.Generator.ViewModels.Base;
 
@@ -21,7 +22,8 @@ namespace QrCode.Generator.ViewModels;
 /// <param name="qrCodeService">The qr code service instance to use.</param>
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public sealed class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateService<EventCodeModel> templateService, EventCodeModel model) : QrCodeViewModel(qrCodeService)
+public sealed class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateService<EventCodeModel> templateService, EventCodeModel model)
+  : QrCodeViewModel(qrCodeService), ITemplate<EventCodeModel>
 {
   /// <summary>
   /// The model instance to use.
@@ -34,15 +36,11 @@ public sealed class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateSe
   public Tuple<string, EventEncoding>[] GetEncodingTypes
     => Model.Encoding.GetValues().AsTuple();
 
-  /// <summary>
-  /// The command the load a template into the current model.
-  /// </summary>
+  /// <inheritdoc/>
   public IActionCommand<EventCodeModel> LoadTemplateCommand
     => new ActionCommand<EventCodeModel>(LoadTemplate);
 
-  /// <summary>
-  /// The command the create a template from the current model.
-  /// </summary>
+  /// <inheritdoc/>
   public IActionCommand<EventCodeModel> SaveTemplateCommand
     => new ActionCommand<EventCodeModel>(SaveTemplate);
 
@@ -60,23 +58,6 @@ public sealed class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateSe
       );
 
     Payload = generator.ToString();
-  }
-
-  private void SaveTemplate(EventCodeModel model)
-  {
-    string jsonContent = templateService.To(model);
-
-    SaveFileDialog fileDialog = new()
-    {
-      Title = "Save template ...",
-      Filter = "template files (*.json)|*.json",
-      InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-    };
-
-    bool? result = fileDialog.ShowDialog();
-
-    if (result.HasValue && result.Value.IsTrue())
-      templateService.Save(fileDialog.FileName, jsonContent);
   }
 
   private void LoadTemplate(EventCodeModel model)
@@ -106,5 +87,22 @@ public sealed class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateSe
       model.BackgroundColor = template.BackgroundColor;
       model.ForegroundColor = template.ForegroundColor;
     }
+  }
+
+  private void SaveTemplate(EventCodeModel model)
+  {
+    string jsonContent = templateService.To(model);
+
+    SaveFileDialog fileDialog = new()
+    {
+      Title = "Save template ...",
+      Filter = "template files (*.json)|*.json",
+      InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+    };
+
+    bool? result = fileDialog.ShowDialog();
+
+    if (result.HasValue && result.Value.IsTrue())
+      templateService.Save(fileDialog.FileName, jsonContent);
   }
 }
