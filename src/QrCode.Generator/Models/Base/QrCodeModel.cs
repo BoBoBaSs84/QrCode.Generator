@@ -1,6 +1,5 @@
 ﻿using System.Windows.Media;
 
-using BB84.Extensions;
 using BB84.Notifications;
 
 using static QRCoder.QRCodeGenerator;
@@ -52,9 +51,4 @@ public abstract class QrCodeModel : ValidatableObject
     get => _backgroundColor;
     set => SetProperty(ref _backgroundColor, value);
   }
-
-  /// <summary>
-  /// Is the model valid for processing?
-  /// </summary>
-  public new bool IsValid => HasErrors.IsFalse();
 }

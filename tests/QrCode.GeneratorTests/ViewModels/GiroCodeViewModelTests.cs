@@ -24,7 +24,9 @@ public sealed class GiroCodeViewModelTests : UnitTestBase
   [WpfTestMethod]
   public void SetPayLoadTest()
   {
-    IQrCodeService service = GetService<IQrCodeService>();
+    IQrCodeService qrCodeService = GetService<IQrCodeService>();
+    ITemplateService<GiroCodeModel> templateService =
+      GetService<ITemplateService<GiroCodeModel>>();
     GiroCodeModel model = new()
     {
       IBAN = "DE33100205000001194700",
@@ -32,7 +34,7 @@ public sealed class GiroCodeViewModelTests : UnitTestBase
       Name = "Wikimedia",
       Amount = 14.99m
     };
-    GiroCodeViewModel viewModel = new(service, model);
+    GiroCodeViewModel viewModel = new(qrCodeService, templateService, model);
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

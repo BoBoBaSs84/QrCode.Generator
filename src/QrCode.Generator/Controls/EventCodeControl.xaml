@@ -26,14 +26,14 @@
           <StackPanel>
             <Label Content="Subject:" />
             <TextBox x:Name="SubjectTextBox"
-                     Text="{Binding Model.Subject, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                     Text="{Binding Model.Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                      Margin="5,0,5,0" />
             <Label Content="Description:" />
             <TextBox x:Name="DescriptionTextBox"
                      AcceptsReturn="True"
                      AcceptsTab="True"
-                     Height="Auto"                     
-                     Text="{Binding Model.Description, UpdateSourceTrigger=PropertyChanged}"
+                     Height="Auto"
+                     Text="{Binding Model.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      TextWrapping="Wrap"
                      Margin="5,0,5,0" />
             <Label Content="Location:" />
@@ -41,27 +41,27 @@
                      AcceptsReturn="True"
                      AcceptsTab="True"
                      Height="Auto"
-                     Text="{Binding Model.Location, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Model.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      TextWrapping="Wrap"
                      Margin="5,0,5,0" />
             <Label Content="Start:" />
             <pt:DateTimePicker x:Name="StartDateTimePicker"
-                               Value="{Binding Model.Start, UpdateSourceTrigger=PropertyChanged}"
+                               Value="{Binding Model.Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                Margin="5,0,5,0" />
             <Label Content="End:" />
             <pt:DateTimePicker x:Name="EndDateTimePicker"
-                               Value="{Binding Model.End, UpdateSourceTrigger=PropertyChanged}"
+                               Value="{Binding Model.End, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                Margin="5,0,5,0" />
             <CheckBox x:Name="AllDayCheckbox"
                       Content="All day event?"
-                      IsChecked="{Binding Model.AllDay, UpdateSourceTrigger=PropertyChanged}"
+                      IsChecked="{Binding Model.AllDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="5,5,5,5" />
             <Label Content="Encoding:" />
             <ComboBox x:Name="EventEncodingCombo"
                       ItemsSource="{Binding GetEncodingTypes}"
                       DisplayMemberPath="Item1"
                       SelectedValuePath="Item2"
-                      SelectedValue="{Binding Model.Encoding, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValue="{Binding Model.Encoding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="5,0,5,0" />
           </StackPanel>
         </GroupBox>
@@ -73,17 +73,17 @@
                       ItemsSource="{Binding ErrorCorrectionLevels}"
                       DisplayMemberPath="Item1"
                       SelectedValuePath="Item2"
-                      SelectedValue="{Binding Model.ErrorCorrection}"
+                      SelectedValue="{Binding Model.ErrorCorrection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="5,0,5,0" />
             <Label x:Name="ForegroundColorLabel"
                    Content="Foreground Color:" />
             <pt:ColorPicker x:Name="ForegroundColorPicker"
-                            SelectedColor="{Binding Model.ForegroundColor, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedColor="{Binding Model.ForegroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Margin="5,0,5,0" />
             <Label x:Name="BackgroundColorLabel"
                    Content="Background Color:" />
             <pt:ColorPicker x:Name="BackgroundColorPicker"
-                            SelectedColor="{Binding Model.BackgroundColor, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedColor="{Binding Model.BackgroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Margin="5,0,5,0" />
           </StackPanel>
         </GroupBox>
@@ -98,26 +98,35 @@
               <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
               </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition />
-              </Grid.RowDefinitions>
               <Button x:Name="CreateButton"
                       Content="Create"
                       Command="{Binding CreateCommand}"
                       CommandParameter="{Binding Model}"
                       Grid.Column="0"
-                      Grid.Row="0"
                       IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="5,0,5,0" />
+                      Margin="1" />
               <Button x:Name="CopyButton"
                       Content="Copy"
                       Command="{Binding CopyCommand}"
                       CommandParameter="{Binding Model}"
                       Grid.Column="1"
-                      Grid.Row="0"
                       IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="5,0,5,0" />
+                      Margin="1" />
+              <Button x:Name="SaveButton"
+                      Content="Save"
+                      Command="{Binding SaveTemplateCommand}"
+                      CommandParameter="{Binding Model}"
+                      Grid.Column="2"
+                      Margin="1" />
+              <Button x:Name="LoadButton"
+                      Content="Load"
+                      Command="{Binding LoadTemplateCommand}"
+                      CommandParameter="{Binding Model}"
+                      Grid.Column="3"
+                      Margin="1" />
             </Grid>
           </StackPanel>
         </GroupBox>

@@ -26,54 +26,54 @@
           <StackPanel>
             <Label Content="Account number of the Beneficiary:" />
             <TextBox x:Name="IbanTextBox"
-                     Text="{Binding Model.IBAN, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Model.IBAN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             <Label Content="BIC of the Beneficiary Bank:" />
             <TextBox x:Name="BicTextBox"
-                     Text="{Binding Model.BIC, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Model.BIC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             <Label Content="Name of the Beneficiary:" />
             <TextBox x:Name="NameTextBox"
-                     Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             <Label Content="Amount to transfer in Euro:" />
             <pt:DecimalUpDown Name="AmountUpDown"
-                              Value="{Binding Model.Amount, UpdateSourceTrigger=PropertyChanged}"
+                              Value="{Binding Model.Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               FormatString="C"
                               Increment="0.01"
                               Margin="5,0,5,0" />
             <Label Content="Reference Information:" />
             <TextBox x:Name="ReferenceInformationTextBox"
-                     Text="{Binding Model.Reference, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Model.Reference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             <Label Content="Type of Reference:" />
             <ComboBox x:Name="TypeOfRemittanceComboBox"
                       ItemsSource="{Binding ReferenceTypes}"
                       DisplayMemberPath="Item1"
                       SelectedValuePath="Item2"
-                      SelectedValue="{Binding Model.Type, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValue="{Binding Model.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="5,0,5,0" />
             <Label Content="Purpose of Transfer:" />
             <TextBox x:Name="PurposeTextBox"
-                     Text="{Binding Model.Purpose, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Model.Purpose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             <Label Content="Beneficiary to originator information:" />
             <TextBox x:Name="MessageTextBox"
-                     Text="{Binding Model.Message, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding Model.Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Margin="5,0,5,0" />
             <Label Content="Version:" />
             <ComboBox x:Name="GiroVersionComboBox"
                       ItemsSource="{Binding VersionTypes}"
                       DisplayMemberPath="Item1"
                       SelectedValuePath="Item2"
-                      SelectedValue="{Binding Model.Version, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValue="{Binding Model.Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="5,0,5,0" />
             <Label Content="Encoding:" />
             <ComboBox x:Name="GiroEncodingComboBox"
                       ItemsSource="{Binding EncodingTypes}"
                       DisplayMemberPath="Item1"
                       SelectedValuePath="Item2"
-                      SelectedValue="{Binding Model.Encoding, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValue="{Binding Model.Encoding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="5,0,5,0" />
           </StackPanel>
         </GroupBox>
@@ -110,26 +110,35 @@
               <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
               </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition />
-              </Grid.RowDefinitions>
               <Button x:Name="CreateButton"
                       Content="Create"
                       Command="{Binding CreateCommand}"
                       CommandParameter="{Binding Model}"
                       Grid.Column="0"
-                      Grid.Row="0"
-                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="5,0,5,0" />
+                      IsEnabled="{Binding Model.IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="1" />
               <Button x:Name="CopyButton"
                       Content="Copy"
                       Command="{Binding CopyCommand}"
                       CommandParameter="{Binding Model}"
                       Grid.Column="1"
-                      Grid.Row="0"
-                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="5,0,5,0" />
+                      IsEnabled="{Binding Model.IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="1" />
+              <Button x:Name="SaveButton"
+                      Content="Save"
+                      Command="{Binding SaveTemplateCommand}"
+                      CommandParameter="{Binding Model}"
+                      Grid.Column="2"
+                      Margin="1" />
+              <Button x:Name="LoadButton"
+                      Content="Load"
+                      Command="{Binding LoadTemplateCommand}"
+                      CommandParameter="{Binding Model}"
+                      Grid.Column="3"
+                      Margin="1" />
             </Grid>
           </StackPanel>
         </GroupBox>

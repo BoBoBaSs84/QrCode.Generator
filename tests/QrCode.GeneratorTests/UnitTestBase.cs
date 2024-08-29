@@ -47,6 +47,7 @@ public abstract class UnitTestBase
     services.RegisterControls();
     services.RegisterModels();
     services.RegisterServices();
+    services.RegisterProviders();
     services.RegisterViewModels();
     services.RegisterWindows();
 

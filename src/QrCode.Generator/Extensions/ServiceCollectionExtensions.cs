@@ -5,8 +5,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 using QrCode.Generator.Controls;
+using QrCode.Generator.Interfaces.Provider;
 using QrCode.Generator.Interfaces.Services;
 using QrCode.Generator.Models;
+using QrCode.Generator.Provider;
 using QrCode.Generator.Services;
 using QrCode.Generator.ViewModels;
 using QrCode.Generator.ViewModels.Base;
@@ -17,6 +19,7 @@ namespace QrCode.Generator.Extensions;
 /// <summary>
 /// The service collection extensions class.
 /// </summary>
+[SuppressMessage("Style", "IDE0058", Justification = "Not relevant here.")]
 internal static class ServiceCollectionExtensions
 {
   private const string EventSourceName = "QrCode.Generator";
@@ -57,11 +60,11 @@ internal static class ServiceCollectionExtensions
   /// Registers the application services to the service collection.
   /// </summary>
 	/// <param name="services">The service collection to enrich.</param>
-	/// <returns>The enriched service collection.</returns>
-  [SuppressMessage("Style", "IDE0058", Justification = "Not relevant here.")]
+	/// <returns>The enriched service collection.</returns>  
   internal static IServiceCollection RegisterServices(this IServiceCollection services)
   {
     services.TryAddSingleton(typeof(ILoggerService<>), typeof(LoggerService<>));
+    services.TryAddSingleton(typeof(ITemplateService<>), typeof(TemplateService<>));
     services.TryAddSingleton<IQrCodeService, QrCodeService>();
     services.TryAddSingleton<INavigationService, NavigationService>();
 
@@ -76,6 +79,19 @@ internal static class ServiceCollectionExtensions
 
     return services;
   }
+
+  /// <summary>
+  /// Registers the application providers to the service collection.
+  /// </summary>
+	/// <param name="services">The service collection to enrich.</param>
+	/// <returns>The enriched service collection.</returns>  
+  internal static IServiceCollection RegisterProviders(this IServiceCollection services)
+  {
+    services.TryAddSingleton<IFileProvider, FileProvider>();
+
+    return services;
+  }
+
 
   /// <summary>
   /// Registers the view models to the service collection.

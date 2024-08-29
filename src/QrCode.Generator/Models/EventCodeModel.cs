@@ -14,8 +14,8 @@ namespace QrCode.Generator.Models;
 public sealed class EventCodeModel : QrCodeModel
 {
   private string _subject;
-  private string _description;
-  private string _location;
+  private string? _description;
+  private string? _location;
   private DateTime _start;
   private DateTime _end;
   private bool _allDay;
@@ -51,7 +51,7 @@ public sealed class EventCodeModel : QrCodeModel
   /// <summary>
   /// The description of the event.
   /// </summary>
-  public string Description
+  public string? Description
   {
     get => _description;
     set => SetProperty(ref _description, value);
@@ -60,7 +60,7 @@ public sealed class EventCodeModel : QrCodeModel
   /// <summary>
   /// The location (lat:long or address) of the event.
   /// </summary>
-  public string Location
+  public string? Location
   {
     get => _location;
     set => SetProperty(ref _location, value);
