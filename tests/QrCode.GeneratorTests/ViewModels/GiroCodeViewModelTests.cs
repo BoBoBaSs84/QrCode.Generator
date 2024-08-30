@@ -1,4 +1,6 @@
-﻿using QrCode.Generator.Interfaces.Services;
+﻿using Moq;
+
+using QrCode.Generator.Interfaces.Services;
 using QrCode.Generator.Models;
 using QrCode.Generator.ViewModels;
 
@@ -24,9 +26,8 @@ public sealed class GiroCodeViewModelTests : UnitTestBase
   [WpfTestMethod]
   public void SetPayLoadTest()
   {
-    IQrCodeService qrCodeService = GetService<IQrCodeService>();
-    ITemplateService<GiroCodeModel> templateService =
-      GetService<ITemplateService<GiroCodeModel>>();
+    Mock<IQrCodeService> qrCodeServiceMock = new();
+    Mock<ITemplateService<GiroCodeModel>> templateServiceMock = new();
     GiroCodeModel model = new()
     {
       IBAN = "DE33100205000001194700",
@@ -34,7 +35,7 @@ public sealed class GiroCodeViewModelTests : UnitTestBase
       Name = "Wikimedia",
       Amount = 14.99m
     };
-    GiroCodeViewModel viewModel = new(qrCodeService, templateService, model);
+    GiroCodeViewModel viewModel = new(qrCodeServiceMock.Object, templateServiceMock.Object, model);
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

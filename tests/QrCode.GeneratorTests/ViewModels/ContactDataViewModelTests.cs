@@ -1,4 +1,7 @@
-﻿using QrCode.Generator.Interfaces.Services;
+﻿using Moq;
+
+using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Models;
 using QrCode.Generator.ViewModels;
 
 namespace QrCode.GeneratorTests.ViewModels;
@@ -22,8 +25,9 @@ public sealed class ContactDataViewModelTests : UnitTestBase
   [WpfTestMethod]
   public void SetPayLoadTest()
   {
-    IQrCodeService service = GetService<IQrCodeService>();
-    ContactDataViewModel viewModel = new(service, new());
+    Mock<IQrCodeService> qrCodeServiceMock = new();
+    Mock<ITemplateService<ContactDataModel>> templateServiceMock = new();
+    ContactDataViewModel viewModel = new(qrCodeServiceMock.Object, templateServiceMock.Object, new());
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

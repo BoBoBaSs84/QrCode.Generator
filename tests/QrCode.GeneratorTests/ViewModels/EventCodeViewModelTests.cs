@@ -1,4 +1,6 @@
-﻿using QrCode.Generator.Interfaces.Services;
+﻿using Moq;
+
+using QrCode.Generator.Interfaces.Services;
 using QrCode.Generator.Models;
 using QrCode.Generator.ViewModels;
 
@@ -22,9 +24,9 @@ public sealed class EventViewModelTests : UnitTestBase
   [WpfTestMethod]
   public void SetPayLoadTest()
   {
-    IQrCodeService qrCodeService = GetService<IQrCodeService>();
-    ITemplateService<EventCodeModel> templateService = GetService<ITemplateService<EventCodeModel>>();
-    EventCodeViewModel viewModel = new(qrCodeService, templateService, new());
+    Mock<IQrCodeService> qrCodeServiceMock = new();
+    Mock<ITemplateService<EventCodeModel>> templateServiceMock = new();
+    EventCodeViewModel viewModel = new(qrCodeServiceMock.Object, templateServiceMock.Object, new());
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

@@ -1,4 +1,7 @@
-﻿using QrCode.Generator.Interfaces.Services;
+﻿using Moq;
+
+using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Models;
 using QrCode.Generator.ViewModels;
 
 namespace QrCode.GeneratorTests.ViewModels;
@@ -21,8 +24,9 @@ public sealed class WifiCodeViewModelTests : UnitTestBase
   [WpfTestMethod]
   public void SetPayLoadTest()
   {
-    IQrCodeService service = GetService<IQrCodeService>();
-    WifiCodeViewModel viewModel = new(service, new());
+    Mock<IQrCodeService> qrCodeServiceMock = new();
+    Mock<ITemplateService<WifiCodeModel>> templateServiceMock = new();
+    WifiCodeViewModel viewModel = new(qrCodeServiceMock.Object, templateServiceMock.Object, new());
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

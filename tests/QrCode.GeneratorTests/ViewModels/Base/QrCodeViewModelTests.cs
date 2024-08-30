@@ -45,9 +45,37 @@ public sealed class QrCodeViewModelTests : UnitTestBase
     Assert.AreEqual(UnitTest, viewModel.Payload);
   }
 
-  private sealed class TestViewModel(IQrCodeService service) : QrCodeViewModel(service)
+  [WpfTestMethod]
+  public void LoadTemplateCommandTest()
+  {
+    IQrCodeService service = GetService<IQrCodeService>();
+    TestViewModel viewModel = new(service);
+
+    viewModel.LoadTemplateCommand.Execute(viewModel.Model);
+
+    Assert.AreEqual(UnitTest, viewModel.LoadPath);
+  }
+
+  [WpfTestMethod]
+  public void SaveTemplateCommandTest()
+  {
+    IQrCodeService service = GetService<IQrCodeService>();
+    TestViewModel viewModel = new(service);
+
+    viewModel.SaveTemplateCommand.Execute(viewModel.Model);
+
+    Assert.AreEqual(UnitTest, viewModel.SavePath);
+  }
+
+  private sealed class TestViewModel(IQrCodeService service) : QrCodeViewModel<TestModel>(service)
   {
     public TestModel Model { get; } = new();
+
+    public override void LoadTemplate(TestModel model)
+      => LoadPath = UnitTest;
+
+    public override void SaveTemplate(TestModel model)
+      => SavePath = UnitTest;
 
     protected override void SetPayLoad()
       => Payload = UnitTest;
