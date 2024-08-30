@@ -6,7 +6,7 @@ namespace QrCode.Generator.Interfaces.Provider;
 /// The file provider interface.
 /// Serves for the abstraction of <see cref="File"/> methods.
 /// </summary>
-internal interface IFileProvider
+public interface IFileProvider
 {
   /// <inheritdoc cref="File.ReadAllText(string)"/>
   string ReadAllText(string path);
