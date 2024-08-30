@@ -6,7 +6,9 @@ using System.Windows.Media.Imaging;
 using BB84.Notifications.Commands;
 using BB84.Notifications.Interfaces.Commands;
 
+using QrCode.Generator.Common;
 using QrCode.Generator.Interfaces.Services;
+using QrCode.Generator.Interfaces.ViewModels;
 using QrCode.Generator.Models.Base;
 
 using static QRCoder.QRCodeGenerator;
@@ -17,10 +19,10 @@ namespace QrCode.Generator.ViewModels.Base;
 /// The qr code view model base class.
 /// </summary>
 /// <remarks>
-/// Initializes an instance of <see cref="QrCodeViewModel"/> class.
+/// Initializes an instance of <see cref="QrCodeViewModel{T}"/> class.
 /// </remarks>
 /// <param name="qrCodeService">The QR code service instance to use.</param>
-public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelBase
+public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService) : ViewModelBase, ITemplate<T> where T : class
 {
   private Image _qrCodeImage = new();
   private string _payload = string.Empty;
@@ -49,6 +51,12 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelB
   public Tuple<string, ECCLevel>[] ErrorCorrectionLevels
     => [new("Low", ECCLevel.L), new("Medium", ECCLevel.M), new("Quartile", ECCLevel.Q), new("High", ECCLevel.H)];
 
+  /// <inheritdoc/>
+  public string LoadPath { get; set; } = Statics.DefaultTemplatePath;
+
+  /// <inheritdoc/>
+  public string SavePath { get; set; } = Statics.DefaultTemplatePath;
+
   /// <summary>
   /// The command to create or update the QR code.
   /// </summary>
@@ -60,6 +68,20 @@ public abstract class QrCodeViewModel(IQrCodeService qrCodeService) : ViewModelB
   /// </summary>
   public IActionCommand<QrCodeModel> CopyCommand
     => new ActionCommand<QrCodeModel>(CopyQrCode);
+
+  /// <inheritdoc/>
+  public IActionCommand<T> LoadTemplateCommand
+    => new ActionCommand<T>(LoadTemplate);
+
+  /// <inheritdoc/>
+  public IActionCommand<T> SaveTemplateCommand
+    => new ActionCommand<T>(SaveTemplate);
+
+  /// <inheritdoc/>
+  public abstract void LoadTemplate(T model);
+
+  /// <inheritdoc/>
+  public abstract void SaveTemplate(T model);
 
   /// <summary>
   /// Sets the payload to encode.
