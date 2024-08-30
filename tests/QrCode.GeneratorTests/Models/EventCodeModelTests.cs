@@ -51,7 +51,7 @@ public sealed class EventCodeModelTests : UnitTestBase
   [TestMethod]
   public void EventModelFromTemplateTest()
   {
-    EventCodeModel model = GetService<EventCodeModel>();
+    EventCodeModel model = new();
     EventCodeModel template = new()
     {
       Subject = UnitTest,
@@ -63,7 +63,7 @@ public sealed class EventCodeModelTests : UnitTestBase
       Encoding = EventEncoding.Universal,
       ErrorCorrection = ECCLevel.M,
       ForegroundColor = Colors.Black,
-      BackgroundColor = Colors.White,
+      BackgroundColor = Colors.White
     };
 
     model.FromTemplate(template);

@@ -44,8 +44,7 @@ public class WifiCodeModelTests : UnitTestBase
   [TestMethod]
   public void WifiModelFromTemplateTest()
   {
-    WifiCodeModel model = GetService<WifiCodeModel>();
-
+    WifiCodeModel model = new();
     WifiCodeModel template = new()
     {
       SSID = "Hallo",
