@@ -68,4 +68,19 @@ public sealed class WifiCodeModel : QrCodeModel
     get => _hidden;
     set => SetProperty(ref _hidden, value);
   }
+
+  /// <summary>
+  /// Uses the tempalte information to fill the model.
+  /// </summary>
+  /// <param name="template">The template to use.</param>
+  public void FromTemplate(WifiCodeModel template)
+  {
+    Authentication = template.Authentication;
+    SSID = template.SSID;
+    Password = template.Password;
+    Hidden = template.Hidden;
+    ErrorCorrection = template.ErrorCorrection;
+    ForegroundColor = template.ForegroundColor;
+    BackgroundColor = template.BackgroundColor;
+  }
 }

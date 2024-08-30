@@ -112,6 +112,24 @@ public sealed class EventCodeModel : QrCodeModel
     set => SetProperty(ref _encoding, value);
   }
 
+  /// <summary>
+  /// Uses the tempalte information to fill the model.
+  /// </summary>
+  /// <param name="template">The template to use.</param>
+  public void FromTemplate(EventCodeModel template)
+  {
+    Subject = template.Subject;
+    Description = template.Description;
+    Location = template.Location;
+    Start = template.Start;
+    End = template.End;
+    AllDay = template.AllDay;
+    Encoding = template.Encoding;
+    ErrorCorrection = template.ErrorCorrection;
+    BackgroundColor = template.BackgroundColor;
+    ForegroundColor = template.ForegroundColor;
+  }
+
   private void OnPropertyChanged(string? propertyName)
   {
     if (propertyName is not null)

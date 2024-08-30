@@ -150,4 +150,25 @@ public sealed class GiroCodeModel : QrCodeModel
     get => _encoding;
     set => SetPropertyAndValidate(ref _encoding, value);
   }
+
+  /// <summary>
+  /// Uses the tempalte information to fill the model.
+  /// </summary>
+  /// <param name="template">The template to use.</param>
+  public void FromTemplate(GiroCodeModel template)
+  {
+    IBAN = template.IBAN;
+    BIC = template.BIC;
+    Name = template.Name;
+    Amount = template.Amount;
+    Reference = template.Reference;
+    Type = template.Type;
+    Purpose = template.Purpose;
+    Message = template.Message;
+    Version = template.Version;
+    Encoding = template.Encoding;
+    ErrorCorrection = template.ErrorCorrection;
+    ForegroundColor = template.ForegroundColor;
+    BackgroundColor = template.BackgroundColor;
+  }
 }

@@ -241,4 +241,35 @@ public sealed class ContactDataModel : QrCodeModel
     get => _orgTitle;
     set => SetProperty(ref _orgTitle, value);
   }
+
+  /// <summary>
+  /// Uses the tempalte information to fill the model.
+  /// </summary>
+  /// <param name="template">The template to use.</param>
+  public void FromTemplate(ContactDataModel template)
+  {
+    OutputType = template.OutputType;
+    FirstName = template.FirstName;
+    LastName = template.LastName;
+    NickName = template.NickName;
+    Phone = template.Phone;
+    MobilePhone = template.MobilePhone;
+    OfficePhone = template.OfficePhone;
+    Email = template.Email;
+    Birthday = template.Birthday;
+    WebSite = template.WebSite;
+    Street = template.Street;
+    HouseNumber = template.HouseNumber;
+    City = template.City;
+    Country = template.Country;
+    ZipCode = template.ZipCode;
+    Note = template.Note;
+    StateRegion = template.StateRegion;
+    AddressOrder = template.AddressOrder;
+    Org = template.Org;
+    OrgTitle = template.OrgTitle;
+    ErrorCorrection = template.ErrorCorrection;
+    ForegroundColor = template.ForegroundColor;
+    BackgroundColor = template.BackgroundColor;
+  }
 }
