@@ -129,14 +129,12 @@
                       Margin="1" />
               <Button x:Name="SaveButton"
                       Content="Save"
-                      Command="{Binding SaveTemplateCommand}"
-                      CommandParameter="{Binding Model}"
+                      Click="OnSaveButtonClick"
                       Grid.Column="2"
                       Margin="1" />
               <Button x:Name="LoadButton"
                       Content="Load"
-                      Command="{Binding LoadTemplateCommand}"
-                      CommandParameter="{Binding Model}"
+                      Click="OnLoadButtonClick"
                       Grid.Column="3"
                       Margin="1" />
             </Grid>
