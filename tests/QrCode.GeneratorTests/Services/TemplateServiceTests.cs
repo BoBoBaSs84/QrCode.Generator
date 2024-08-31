@@ -38,18 +38,58 @@ public sealed class TemplateServiceTests : UnitTestBase
 
     testClass.Should().NotBeNull();
     testClass.Name.Should().Be(UnitTest);
+    _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Never);
   }
 
-  [TestMethod()]
-  public void LoadTest()
+  [TestMethod]
+  public void LoadExceptionTest()
   {
-    Assert.Fail();
+    TemplateService<TestClass> sut = CreateMockedInstance();
+    _fileProviderMock.Setup(x => x.ReadAllText(UnitTest))
+      .Throws<Exception>();
+
+    Assert.ThrowsException<Exception>(() => sut.Load(UnitTest));
+
+    _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Once);
   }
 
-  [TestMethod()]
-  public void SaveTest()
+  [TestMethod]
+  public void LoadSuccessTest()
   {
-    Assert.Fail();
+    TemplateService<TestClass> sut = CreateMockedInstance();
+    string jsonContent = "{\r\n\"name\":\"UnitTest\"\r\n}";
+    _fileProviderMock.Setup(x => x.ReadAllText(UnitTest))
+      .Returns(jsonContent);
+
+    string result = sut.Load(UnitTest);
+
+    result.Should().Be(jsonContent);
+    _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Never);
+  }
+
+  [TestMethod]
+  public void SaveExceptionTest()
+  {
+    TemplateService<TestClass> sut = CreateMockedInstance();
+    string jsonContent = "{\r\n\"name\":\"UnitTest\"\r\n}";
+    _fileProviderMock.Setup(x => x.WriteAllText(UnitTest, jsonContent))
+      .Throws<Exception>();
+
+    Assert.ThrowsException<Exception>(() => sut.Save(UnitTest, jsonContent));
+
+    _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Once);
+  }
+
+  [TestMethod]
+  public void SaveSuccessTest()
+  {
+    TemplateService<TestClass> sut = CreateMockedInstance();
+    string jsonContent = "{\r\n\"name\":\"UnitTest\"\r\n}";
+    _fileProviderMock.Setup(x => x.WriteAllText(UnitTest, jsonContent));
+
+    sut.Save(UnitTest, jsonContent);
+
+    _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Never);
   }
 
   [TestMethod]
