@@ -5,13 +5,9 @@ namespace QrCode.Generator.Interfaces.ViewModels;
 /// <summary>
 /// The generic view model template interface.
 /// </summary>
-public interface ITemplatable<T> where T : class
+/// <typeparam name="T">The model type to work with.</typeparam>
+public interface ITemplatable<T> : IModel<T> where T : class
 {
-  /// <summary>
-  /// The model instance to use.
-  /// </summary>
-  T Model { get; }
-
   /// <summary>
   /// The path to load the templates from.
   /// </summary>
