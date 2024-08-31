@@ -69,10 +69,10 @@ public sealed class QrCodeViewModelTests : UnitTestBase
 
   private sealed class TestViewModel(IQrCodeService service, TestModel model) : QrCodeViewModel<TestModel>(service, model)
   {
-    public override void LoadTemplate(TestModel model)
+    protected override void LoadTemplate(TestModel model)
       => LoadPath = UnitTest;
 
-    public override void SaveTemplate(TestModel model)
+    protected override void SaveTemplate(TestModel model)
       => SavePath = UnitTest;
 
     protected override void SetPayLoad()

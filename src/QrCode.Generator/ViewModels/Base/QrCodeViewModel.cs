@@ -22,7 +22,8 @@ namespace QrCode.Generator.ViewModels.Base;
 /// Initializes an instance of <see cref="QrCodeViewModel{T}"/> class.
 /// </remarks>
 /// <param name="qrCodeService">The QR code service instance to use.</param>
-public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) : ViewModelBase, ITemplate<T> where T : class
+/// <param name="model">The model instance to use.</param>
+public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) : ViewModelBase, ITemplatable<T> where T : class
 {
   private Image _qrCodeImage = new();
   private string _payload = string.Empty;
@@ -82,11 +83,17 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) 
   public IActionCommand<T> SaveTemplateCommand
     => new ActionCommand<T>(SaveTemplate);
 
-  /// <inheritdoc/>
-  public abstract void LoadTemplate(T model);
+  /// <summary>
+  /// Loads the template into the current model.
+  /// </summary>
+  /// <param name="model">The model to load into.</param>
+  protected abstract void LoadTemplate(T model);
 
-  /// <inheritdoc/>
-  public abstract void SaveTemplate(T model);
+  /// <summary>
+  /// Saves the template from the current model.
+  /// </summary>
+  /// <param name="model">The model to save from.</param>
+  protected abstract void SaveTemplate(T model);
 
   /// <summary>
   /// Sets the payload to encode.

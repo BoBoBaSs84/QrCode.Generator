@@ -37,7 +37,7 @@ public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, ITemplateSer
     => Model.Encoding.GetValues().AsTuple();
 
   /// <inheritdoc/>
-  public override void LoadTemplate(GiroCodeModel model)
+  protected override void LoadTemplate(GiroCodeModel model)
   {
     string fileContent = templateService.Load(LoadPath);
     GiroCodeModel template = templateService.From(fileContent);
@@ -45,7 +45,7 @@ public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, ITemplateSer
   }
 
   /// <inheritdoc/>
-  public override void SaveTemplate(GiroCodeModel model)
+  protected override void SaveTemplate(GiroCodeModel model)
   {
     string jsonContent = templateService.To(model);
     templateService.Save(SavePath, jsonContent);

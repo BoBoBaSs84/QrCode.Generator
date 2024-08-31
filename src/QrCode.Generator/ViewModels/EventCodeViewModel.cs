@@ -27,7 +27,7 @@ public sealed class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateSe
     => Model.Encoding.GetValues().AsTuple();
 
   /// <inheritdoc />
-  public override void LoadTemplate(EventCodeModel model)
+  protected override void LoadTemplate(EventCodeModel model)
   {
     string fileContent = templateService.Load(LoadPath);
     EventCodeModel template = templateService.From(fileContent);
@@ -35,7 +35,7 @@ public sealed class EventCodeViewModel(IQrCodeService qrCodeService, ITemplateSe
   }
 
   /// <inheritdoc />
-  public override void SaveTemplate(EventCodeModel model)
+  protected override void SaveTemplate(EventCodeModel model)
   {
     string jsonContent = templateService.To(model);
     templateService.Save(SavePath, jsonContent);

@@ -26,7 +26,7 @@ public sealed class WifiCodeViewModel(IQrCodeService qrCodeService, ITemplateSer
     => Model.Authentication.GetValues().AsTuple();
 
   /// <inheritdoc/>
-  public override void LoadTemplate(WifiCodeModel model)
+  protected override void LoadTemplate(WifiCodeModel model)
   {
     string fileContent = templateService.Load(LoadPath);
     WifiCodeModel template = templateService.From(fileContent);
@@ -34,7 +34,7 @@ public sealed class WifiCodeViewModel(IQrCodeService qrCodeService, ITemplateSer
   }
 
   /// <inheritdoc/>
-  public override void SaveTemplate(WifiCodeModel model)
+  protected override void SaveTemplate(WifiCodeModel model)
   {
     string jsonContent = templateService.To(model);
     templateService.Save(SavePath, jsonContent);

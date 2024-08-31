@@ -32,7 +32,7 @@ public sealed class ContactDataViewModel(IQrCodeService qrCodeService, ITemplate
     => Model.OutputType.GetValues().AsTuple();
 
   /// <inheritdoc/>
-  public override void LoadTemplate(ContactDataModel model)
+  protected override void LoadTemplate(ContactDataModel model)
   {
     string fileContent = templateService.Load(LoadPath);
     ContactDataModel template = templateService.From(fileContent);
@@ -40,7 +40,7 @@ public sealed class ContactDataViewModel(IQrCodeService qrCodeService, ITemplate
   }
 
   /// <inheritdoc/>
-  public override void SaveTemplate(ContactDataModel model)
+  protected override void SaveTemplate(ContactDataModel model)
   {
     string jsonContent = templateService.To(model);
     templateService.Save(SavePath, jsonContent);
