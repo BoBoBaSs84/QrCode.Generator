@@ -64,6 +64,7 @@ internal static class ServiceCollectionExtensions
   internal static IServiceCollection RegisterServices(this IServiceCollection services)
   {
     services.TryAddSingleton(typeof(ILoggerService<>), typeof(LoggerService<>));
+    services.TryAddSingleton(typeof(IExportService<>), typeof(ExportService<>));
     services.TryAddSingleton(typeof(ITemplateService<>), typeof(TemplateService<>));
     services.TryAddSingleton<IQrCodeService, QrCodeService>();
     services.TryAddSingleton<INavigationService, NavigationService>();

@@ -11,6 +11,9 @@ public interface IFileProvider
   /// <inheritdoc cref="File.ReadAllText(string)"/>
   string ReadAllText(string path);
 
+  /// <inheritdoc cref="File.WriteAllBytes(string, byte[])"/>
+  void WriteAllBytes(string path, byte[] bytes);
+
   /// <inheritdoc cref="File.WriteAllText(string, string?)"/>
   void WriteAllText(string path, string? contents);
 }
