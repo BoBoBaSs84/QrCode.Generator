@@ -8,6 +8,11 @@ namespace QrCode.Generator.Enumerators;
 public enum ExportType
 {
   /// <summary>
+  /// Windows Bitmap Graphics
+  /// </summary>
+  [Description("Windows Bitmap Graphics")]
+  BMP = 0,
+  /// <summary>
   /// Portable Network Graphics
   /// </summary>
   [Description("Portable Network Graphics")]
@@ -22,4 +27,9 @@ public enum ExportType
   /// </summary>
   [Description("Scalable Vector Graphics")]
   SVG = 3,
+  /// <summary>
+  /// Portable Document Format
+  /// </summary>
+  [Description("Portable Document Format")]
+  PDF = 4
 }

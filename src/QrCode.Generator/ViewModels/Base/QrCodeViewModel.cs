@@ -1,12 +1,16 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+using BB84.Extensions;
 using BB84.Notifications.Commands;
 using BB84.Notifications.Interfaces.Commands;
 
 using QrCode.Generator.Common;
+using QrCode.Generator.Enumerators;
+using QrCode.Generator.Extensions;
 using QrCode.Generator.Interfaces.Services;
 using QrCode.Generator.Interfaces.ViewModels;
 using QrCode.Generator.Models.Base;
@@ -23,7 +27,7 @@ namespace QrCode.Generator.ViewModels.Base;
 /// </remarks>
 /// <param name="qrCodeService">The QR code service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) : ViewModelBase, ITemplatable<T> where T : class
+public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) : ViewModelBase, ITemplatable<T>, IExportable<T> where T : QrCodeModel
 {
   private Image _qrCodeImage = new();
   private string _payload = string.Empty;
@@ -63,6 +67,16 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) 
   /// <inheritdoc/>
   public string SavePath { get; set; } = Statics.DefaultTemplatePath;
 
+  /// <inheritdoc/>
+  public string ExportPath { get; set; } = Statics.DefaultTemplatePath;
+
+  /// <inheritdoc/>
+  public ExportType ExportType { get; set; }
+
+  /// <inheritdoc/>
+  public Tuple<string, ExportType>[] ExportTypes
+    => ExportType.GetValues().AsTuple();
+
   /// <summary>
   /// The command to create or update the QR code.
   /// </summary>
@@ -82,6 +96,10 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) 
   /// <inheritdoc/>
   public IActionCommand<T> SaveTemplateCommand
     => new ActionCommand<T>(SaveTemplate);
+
+  /// <inheritdoc/>
+  public IActionCommand ExportCommand
+    => new ActionCommand(Export);
 
   /// <summary>
   /// Loads the template into the current model.
@@ -126,5 +144,24 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) 
     DataObject dataObject = new();
     dataObject.SetData(DataFormats.Bitmap, bitmap);
     Clipboard.SetDataObject(dataObject);
+  }
+
+  private void Export()
+  {
+    byte[] fileContent = GetFileContent(ExportType);
+    File.WriteAllBytes(ExportPath, fileContent);
+  }
+
+  private byte[] GetFileContent(ExportType type)
+  {
+    return type switch
+    {
+      ExportType.BMP => qrCodeService.CreateBmp(Payload, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection),
+      ExportType.PNG => qrCodeService.CreatePng(Payload, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection),
+      ExportType.JPEG => throw new NotImplementedException(),
+      ExportType.SVG => qrCodeService.CreateSvg(Payload, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection),
+      ExportType.PDF => qrCodeService.CreatePdf(Payload, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection),
+      _ => throw new ArgumentOutOfRangeException(nameof(type))
+    };
   }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Imaging;
+using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -18,13 +19,42 @@ internal sealed class QrCodeService : IQrCodeService
   public BitmapSource CreateBitmap(string payload, int moduleSize, Color foreground, Color background, QRCodeGenerator.ECCLevel level)
   {
     QRCodeData codeData = CreateQrCodeData(payload, level);
-    return CreateBitmap(codeData, moduleSize, foreground.GetHexString(), background.GetHexString());
+    return CreateBitmap(codeData, moduleSize, foreground.AsHexString(), background.AsHexString());
   }
 
   public DrawingImage CreateDrawing(string payload, int moduleSize, Color foreground, Color background, QRCodeGenerator.ECCLevel level)
   {
     QRCodeData codeData = CreateQrCodeData(payload, level);
-    return CreateDrawing(codeData, moduleSize, foreground.GetHexString(), background.GetHexString());
+    return CreateDrawing(codeData, moduleSize, foreground.AsHexString(), background.AsHexString());
+  }
+
+  public byte[] CreateBmp(string payload, int moduleSize, Color foreground, Color background, QRCodeGenerator.ECCLevel level)
+  {
+    QRCodeData codeData = CreateQrCodeData(payload, level);
+    BitmapByteQRCode bitmapCoder = new(codeData);
+    return bitmapCoder.GetGraphic(moduleSize, foreground.AsHexString(), background.AsHexString());
+  }
+
+  public byte[] CreatePdf(string payload, int moduleSize, Color foreground, Color background, QRCodeGenerator.ECCLevel level)
+  {
+    QRCodeData codeData = CreateQrCodeData(payload, level);
+    PdfByteQRCode pdfCoder = new(codeData);
+    return pdfCoder.GetGraphic(moduleSize, foreground.AsHexString(), background.AsHexString());
+  }
+
+  public byte[] CreatePng(string payload, int moduleSize, Color foreground, Color background, QRCodeGenerator.ECCLevel level)
+  {
+    QRCodeData codeData = CreateQrCodeData(payload, level);
+    PngByteQRCode pngCoder = new(codeData);
+    return pngCoder.GetGraphic(moduleSize, foreground.AsByteArray(), background.AsByteArray());
+  }
+
+  public byte[] CreateSvg(string payload, int moduleSize, Color foreground, Color background, QRCodeGenerator.ECCLevel level)
+  {
+    QRCodeData codeData = CreateQrCodeData(payload, level);
+    SvgQRCode svgCoder = new(codeData);
+    string stringContent = svgCoder.GetGraphic(moduleSize, foreground.AsHexString(), background.AsHexString());
+    return Encoding.UTF8.GetBytes(stringContent);
   }
 
   private static QRCodeData CreateQrCodeData(string payload, QRCodeGenerator.ECCLevel level)

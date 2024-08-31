@@ -21,6 +21,11 @@ public interface IExportable<T> : IModel<T> where T : class
   ExportType ExportType { get; set; }
 
   /// <summary>
+  /// The possible types to export into.
+  /// </summary>
+  public Tuple<string, ExportType>[] ExportTypes { get; }
+
+  /// <summary>
   /// The command to export the QR code.
   /// </summary>
   IActionCommand ExportCommand { get; }
