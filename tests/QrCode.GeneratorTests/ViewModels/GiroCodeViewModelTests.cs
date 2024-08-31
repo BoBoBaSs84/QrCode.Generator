@@ -27,6 +27,7 @@ public sealed class GiroCodeViewModelTests : UnitTestBase
   public void SetPayLoadTest()
   {
     Mock<IQrCodeService> qrCodeServiceMock = new();
+    Mock<IExportService<GiroCodeModel>> exportServiceMock = new();
     Mock<ITemplateService<GiroCodeModel>> templateServiceMock = new();
     GiroCodeModel model = new()
     {
@@ -35,7 +36,7 @@ public sealed class GiroCodeViewModelTests : UnitTestBase
       Name = "Wikimedia",
       Amount = 14.99m
     };
-    GiroCodeViewModel viewModel = new(qrCodeServiceMock.Object, templateServiceMock.Object, model);
+    GiroCodeViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, model);
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

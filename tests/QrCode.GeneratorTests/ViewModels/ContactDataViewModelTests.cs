@@ -26,8 +26,9 @@ public sealed class ContactDataViewModelTests : UnitTestBase
   public void SetPayLoadTest()
   {
     Mock<IQrCodeService> qrCodeServiceMock = new();
+    Mock<IExportService<ContactDataModel>> exportServiceMock = new();
     Mock<ITemplateService<ContactDataModel>> templateServiceMock = new();
-    ContactDataViewModel viewModel = new(qrCodeServiceMock.Object, templateServiceMock.Object, new());
+    ContactDataViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, new());
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

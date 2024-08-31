@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -26,8 +25,10 @@ namespace QrCode.Generator.ViewModels.Base;
 /// Initializes an instance of <see cref="QrCodeViewModel{T}"/> class.
 /// </remarks>
 /// <param name="qrCodeService">The QR code service instance to use.</param>
+/// <param name="exportService">The export service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) : ViewModelBase, ITemplatable<T>, IExportable<T> where T : QrCodeModel
+public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportService<T> exportService, T model)
+  : ViewModelBase, ITemplatable<T>, IExportable<T> where T : QrCodeModel
 {
   private Image _qrCodeImage = new();
   private string _payload = string.Empty;
@@ -102,6 +103,12 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) 
     => new ActionCommand(Export);
 
   /// <summary>
+  /// Exports the qr code.
+  /// </summary>
+  protected virtual void Export()
+    => exportService.Export(ExportPath, ExportType, Payload, Model);
+
+  /// <summary>
   /// Loads the template into the current model.
   /// </summary>
   /// <param name="model">The model to load into.</param>
@@ -144,24 +151,5 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) 
     DataObject dataObject = new();
     dataObject.SetData(DataFormats.Bitmap, bitmap);
     Clipboard.SetDataObject(dataObject);
-  }
-
-  private void Export()
-  {
-    byte[] fileContent = GetFileContent(ExportType);
-    File.WriteAllBytes(ExportPath, fileContent);
-  }
-
-  private byte[] GetFileContent(ExportType type)
-  {
-    return type switch
-    {
-      ExportType.BMP => qrCodeService.CreateBmp(Payload, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection),
-      ExportType.PNG => qrCodeService.CreatePng(Payload, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection),
-      ExportType.JPEG => throw new NotImplementedException(),
-      ExportType.SVG => qrCodeService.CreateSvg(Payload, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection),
-      ExportType.PDF => qrCodeService.CreatePdf(Payload, 20, Model.ForegroundColor, Model.BackgroundColor, Model.ErrorCorrection),
-      _ => throw new ArgumentOutOfRangeException(nameof(type))
-    };
   }
 }

@@ -15,9 +15,11 @@ namespace QrCode.Generator.ViewModels;
 /// The wifi qr code view model class.
 /// </summary>
 /// <param name="qrCodeService">The qr code service instance to use.</param>
+/// <param name="exportService">The export service instance to use.</param>
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public sealed class WifiCodeViewModel(IQrCodeService qrCodeService, ITemplateService<WifiCodeModel> templateService, WifiCodeModel model) : QrCodeViewModel<WifiCodeModel>(qrCodeService, model)
+public sealed class WifiCodeViewModel(IQrCodeService qrCodeService, IExportService<WifiCodeModel> exportService, ITemplateService<WifiCodeModel> templateService, WifiCodeModel model)
+  : QrCodeViewModel<WifiCodeModel>(qrCodeService, exportService, model)
 {
   /// <summary>
   /// The authentication types to select from.

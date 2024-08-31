@@ -14,9 +14,11 @@ namespace QrCode.Generator.ViewModels;
 /// The giro code view model class.
 /// </summary>
 /// <param name="qrCodeService">The qr code service instance to use.</param>
+/// <param name="exportService">The export service instance to use.</param>
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, ITemplateService<GiroCodeModel> templateService, GiroCodeModel model) : QrCodeViewModel<GiroCodeModel>(qrCodeService, model)
+public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, IExportService<GiroCodeModel> exportService, ITemplateService<GiroCodeModel> templateService, GiroCodeModel model)
+  : QrCodeViewModel<GiroCodeModel>(qrCodeService, exportService, model)
 {
   /// <summary>
   /// The remittance types to select from.

@@ -25,8 +25,9 @@ public sealed class WifiCodeViewModelTests : UnitTestBase
   public void SetPayLoadTest()
   {
     Mock<IQrCodeService> qrCodeServiceMock = new();
+    Mock<IExportService<WifiCodeModel>> exportServiceMock = new();
     Mock<ITemplateService<WifiCodeModel>> templateServiceMock = new();
-    WifiCodeViewModel viewModel = new(qrCodeServiceMock.Object, templateServiceMock.Object, new());
+    WifiCodeViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, new());
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 
