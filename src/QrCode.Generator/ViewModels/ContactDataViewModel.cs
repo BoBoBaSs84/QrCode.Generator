@@ -17,14 +17,8 @@ namespace QrCode.Generator.ViewModels;
 /// <param name="qrCodeService"></param>
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public sealed class ContactDataViewModel(IQrCodeService qrCodeService, ITemplateService<ContactDataModel> templateService, ContactDataModel model)
-  : QrCodeViewModel<ContactDataModel>(qrCodeService)
+public sealed class ContactDataViewModel(IQrCodeService qrCodeService, ITemplateService<ContactDataModel> templateService, ContactDataModel model) : QrCodeViewModel<ContactDataModel>(qrCodeService, model)
 {
-  /// <summary>
-  /// The model instance to use.
-  /// </summary>
-  public ContactDataModel Model { get; } = model;
-
   /// <summary>
   /// The address order types to select from.
   /// </summary>

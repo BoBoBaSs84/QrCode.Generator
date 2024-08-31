@@ -8,6 +8,11 @@ namespace QrCode.Generator.Interfaces.ViewModels;
 public interface ITemplate<T> where T : class
 {
   /// <summary>
+  /// 
+  /// </summary>
+  T Model { get; }
+
+  /// <summary>
   /// The path to load the templates from.
   /// </summary>
   string LoadPath { get; set; }

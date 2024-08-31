@@ -15,7 +15,7 @@ public sealed class QrCodeViewModelTests : UnitTestBase
     IQrCodeService service = GetService<IQrCodeService>();
     TestViewModel? viewModel;
 
-    viewModel = new(service);
+    viewModel = new(service, new());
 
     Assert.IsNotNull(viewModel);
     Assert.IsNotNull(viewModel.CreateCommand);
@@ -27,7 +27,7 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   public void CreateCommandTest()
   {
     IQrCodeService service = GetService<IQrCodeService>();
-    TestViewModel viewModel = new(service);
+    TestViewModel viewModel = new(service, new());
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 
@@ -38,7 +38,7 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   public void CopyCommandTest()
   {
     IQrCodeService service = GetService<IQrCodeService>();
-    TestViewModel viewModel = new(service);
+    TestViewModel viewModel = new(service, new());
 
     viewModel.CopyCommand.Execute(viewModel.Model);
 
@@ -49,7 +49,7 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   public void LoadTemplateCommandTest()
   {
     IQrCodeService service = GetService<IQrCodeService>();
-    TestViewModel viewModel = new(service);
+    TestViewModel viewModel = new(service, new());
 
     viewModel.LoadTemplateCommand.Execute(viewModel.Model);
 
@@ -60,17 +60,15 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   public void SaveTemplateCommandTest()
   {
     IQrCodeService service = GetService<IQrCodeService>();
-    TestViewModel viewModel = new(service);
+    TestViewModel viewModel = new(service, new());
 
     viewModel.SaveTemplateCommand.Execute(viewModel.Model);
 
     Assert.AreEqual(UnitTest, viewModel.SavePath);
   }
 
-  private sealed class TestViewModel(IQrCodeService service) : QrCodeViewModel<TestModel>(service)
+  private sealed class TestViewModel(IQrCodeService service, TestModel model) : QrCodeViewModel<TestModel>(service, model)
   {
-    public TestModel Model { get; } = new();
-
     public override void LoadTemplate(TestModel model)
       => LoadPath = UnitTest;
 

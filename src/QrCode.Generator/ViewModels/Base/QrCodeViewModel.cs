@@ -22,10 +22,15 @@ namespace QrCode.Generator.ViewModels.Base;
 /// Initializes an instance of <see cref="QrCodeViewModel{T}"/> class.
 /// </remarks>
 /// <param name="qrCodeService">The QR code service instance to use.</param>
-public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService) : ViewModelBase, ITemplate<T> where T : class
+public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, T model) : ViewModelBase, ITemplate<T> where T : class
 {
   private Image _qrCodeImage = new();
   private string _payload = string.Empty;
+
+  /// <summary>
+  /// The model instance to use.
+  /// </summary>
+  public T Model { get; } = model;
 
   /// <summary>
   /// The actual qr code payload to encode.

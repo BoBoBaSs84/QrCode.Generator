@@ -16,13 +16,8 @@ namespace QrCode.Generator.ViewModels;
 /// <param name="qrCodeService">The qr code service instance to use.</param>
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, ITemplateService<GiroCodeModel> templateService, GiroCodeModel model) : QrCodeViewModel<GiroCodeModel>(qrCodeService)
+public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, ITemplateService<GiroCodeModel> templateService, GiroCodeModel model) : QrCodeViewModel<GiroCodeModel>(qrCodeService, model)
 {
-  /// <summary>
-  /// The model instance to use.
-  /// </summary>
-  public GiroCodeModel Model { get; } = model;
-
   /// <summary>
   /// The remittance types to select from.
   /// </summary>

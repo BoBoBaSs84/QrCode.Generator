@@ -88,6 +88,7 @@
           </StackPanel>
         </GroupBox>
       </StackPanel>
+      <!-- Actions -->
       <StackPanel x:Name="ActionStackPanel"
                   DockPanel.Dock="Bottom"
                   VerticalAlignment="Bottom">

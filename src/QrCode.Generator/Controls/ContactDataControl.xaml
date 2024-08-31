@@ -96,6 +96,7 @@
           </StackPanel>
         </GroupBox>
       </StackPanel>
+      <!-- Actions -->
       <StackPanel x:Name="ActionStackPanel"
                   DockPanel.Dock="Bottom"
                   VerticalAlignment="Bottom">
@@ -106,26 +107,33 @@
               <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
               </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition />
-              </Grid.RowDefinitions>
               <Button x:Name="CreateButton"
                       Content="Create"
                       Command="{Binding CreateCommand}"
                       CommandParameter="{Binding Model}"
                       Grid.Column="0"
-                      Grid.Row="0"
                       IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="5,0,5,0" />
+                      Margin="1" />
               <Button x:Name="CopyButton"
                       Content="Copy"
                       Command="{Binding CopyCommand}"
                       CommandParameter="{Binding Model}"
                       Grid.Column="1"
-                      Grid.Row="0"
                       IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="5,0,5,0" />
+                      Margin="1" />
+              <Button x:Name="SaveButton"
+                      Content="Save"
+                      Click="OnSaveButtonClick"
+                      Grid.Column="2"
+                      Margin="1" />
+              <Button x:Name="LoadButton"
+                      Content="Load"
+                      Click="OnLoadButtonClick"
+                      Grid.Column="3"
+                      Margin="1" />
             </Grid>
           </StackPanel>
         </GroupBox>
