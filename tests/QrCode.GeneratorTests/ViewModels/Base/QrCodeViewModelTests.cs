@@ -88,7 +88,7 @@ public sealed class QrCodeViewModelTests : UnitTestBase
     return new(_qrCodeServiceMock.Object, _exportServiceMock.Object, new());
   }
 
-  private sealed class TestViewModel(IQrCodeService service, IExportService<TestModel> exportService, TestModel model) : QrCodeViewModel<TestModel>(service, exportService, model)
+  internal sealed class TestViewModel(IQrCodeService service, IExportService<TestModel> exportService, TestModel model) : QrCodeViewModel<TestModel>(service, exportService, model)
   {
     protected override void Export()
       => ExportPath = UnitTest;
@@ -103,6 +103,6 @@ public sealed class QrCodeViewModelTests : UnitTestBase
       => Payload = UnitTest;
   }
 
-  private sealed class TestModel : QrCodeModel
+  internal sealed class TestModel : QrCodeModel
   { }
 }
