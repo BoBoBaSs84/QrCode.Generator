@@ -1,12 +1,18 @@
-﻿using Moq;
+﻿using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+using Moq;
 
 using QrCode.Generator.Interfaces.Services;
 using QrCode.Generator.Models.Base;
 using QrCode.Generator.ViewModels.Base;
 
+using static QRCoder.QRCodeGenerator;
+
 namespace QrCode.GeneratorTests.ViewModels.Base;
 
 [TestClass]
+[SuppressMessage("Style", "IDE0058", Justification = "Not relevant here, unit testing.")]
 public sealed class QrCodeViewModelTests : UnitTestBase
 {
   private const string UnitTest = "UnitTest";
@@ -45,6 +51,8 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   public void CopyCommandTest()
   {
     TestViewModel viewModel = CreateMockedInstance();
+    _qrCodeServiceMock.Setup(x => x.CreateBitmap(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<ECCLevel>()))
+      .Returns(BitmapSource.Create(1, 1, 1, 1, PixelFormats.Gray8, null, new byte[4], 1));
 
     viewModel.CopyCommand.Execute(viewModel.Model);
 
@@ -64,7 +72,10 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   [WpfTestMethod]
   public void LoadTemplateCommandTest()
   {
+    TestModel testModel = new();
     TestViewModel viewModel = CreateMockedInstance();
+    _templateServiceMock.Setup(x => x.From(It.IsAny<string>()))
+      .Returns(testModel);
 
     viewModel.LoadTemplateCommand.Execute(viewModel.Model);
 
@@ -81,26 +92,35 @@ public sealed class QrCodeViewModelTests : UnitTestBase
     Assert.AreEqual(UnitTest, viewModel.SavePath);
   }
 
-  private TestViewModel CreateMockedInstance()
+  private TestViewModel CreateMockedInstance(TestModel? model = null)
   {
     _qrCodeServiceMock = new();
     _exportServiceMock = new();
     _templateServiceMock = new();
 
-    return new(_qrCodeServiceMock.Object, _exportServiceMock.Object, _templateServiceMock.Object, new());
+    return new(_qrCodeServiceMock.Object, _exportServiceMock.Object, _templateServiceMock.Object, model ?? new());
   }
 
   internal sealed class TestViewModel(IQrCodeService service, IExportService<TestModel> exportService, ITemplateService<TestModel> templateService, TestModel model)
     : QrCodeViewModel<TestModel>(service, exportService, templateService, model)
   {
     protected override void Export()
-      => ExportPath = UnitTest;
+    {
+      ExportPath = UnitTest;
+      base.Export();
+    }
 
     protected override void LoadTemplate(TestModel model)
-      => LoadPath = UnitTest;
+    {
+      LoadPath = UnitTest;
+      base.LoadTemplate(model);
+    }
 
     protected override void SaveTemplate(TestModel model)
-      => SavePath = UnitTest;
+    {
+      SavePath = UnitTest;
+      base.SaveTemplate(model);
+    }
 
     protected override void SetPayLoad()
       => Payload = UnitTest;
