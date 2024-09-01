@@ -18,7 +18,7 @@ namespace QrCode.Generator.ViewModels;
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
 public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, IExportService<GiroCodeModel> exportService, ITemplateService<GiroCodeModel> templateService, GiroCodeModel model)
-  : QrCodeViewModel<GiroCodeModel>(qrCodeService, exportService, model)
+  : QrCodeViewModel<GiroCodeModel>(qrCodeService, exportService, templateService, model)
 {
   /// <summary>
   /// The remittance types to select from.
@@ -37,21 +37,6 @@ public sealed class GiroCodeViewModel(IQrCodeService qrCodeService, IExportServi
   /// </summary>
   public Tuple<string, GirocodeEncoding>[] EncodingTypes
     => Model.Encoding.GetValues().AsTuple();
-
-  /// <inheritdoc/>
-  protected override void LoadTemplate(GiroCodeModel model)
-  {
-    string fileContent = templateService.Load(LoadPath);
-    GiroCodeModel template = templateService.From(fileContent);
-    model.FromTemplate(template);
-  }
-
-  /// <inheritdoc/>
-  protected override void SaveTemplate(GiroCodeModel model)
-  {
-    string jsonContent = templateService.To(model);
-    templateService.Save(SavePath, jsonContent);
-  }
 
   /// <inheritdoc/>
   protected override void SetPayLoad()

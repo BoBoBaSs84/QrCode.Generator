@@ -19,7 +19,7 @@ namespace QrCode.Generator.ViewModels;
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
 public sealed class ContactDataViewModel(IQrCodeService qrCodeService, IExportService<ContactDataModel> exportService, ITemplateService<ContactDataModel> templateService, ContactDataModel model)
-  : QrCodeViewModel<ContactDataModel>(qrCodeService, exportService, model)
+  : QrCodeViewModel<ContactDataModel>(qrCodeService, exportService, templateService, model)
 {
   /// <summary>
   /// The address order types to select from.
@@ -32,21 +32,6 @@ public sealed class ContactDataViewModel(IQrCodeService qrCodeService, IExportSe
   /// </summary>
   public Tuple<string, ContactOutputType>[] ContactOutputTypes
     => Model.OutputType.GetValues().AsTuple();
-
-  /// <inheritdoc/>
-  protected override void LoadTemplate(ContactDataModel model)
-  {
-    string fileContent = templateService.Load(LoadPath);
-    ContactDataModel template = templateService.From(fileContent);
-    model.FromTemplate(template);
-  }
-
-  /// <inheritdoc/>
-  protected override void SaveTemplate(ContactDataModel model)
-  {
-    string jsonContent = templateService.To(model);
-    templateService.Save(SavePath, jsonContent);
-  }
 
   /// <inheritdoc/>
   protected override void SetPayLoad()

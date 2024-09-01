@@ -19,28 +19,13 @@ namespace QrCode.Generator.ViewModels;
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
 public sealed class WifiCodeViewModel(IQrCodeService qrCodeService, IExportService<WifiCodeModel> exportService, ITemplateService<WifiCodeModel> templateService, WifiCodeModel model)
-  : QrCodeViewModel<WifiCodeModel>(qrCodeService, exportService, model)
+  : QrCodeViewModel<WifiCodeModel>(qrCodeService, exportService, templateService, model)
 {
   /// <summary>
   /// The authentication types to select from.
   /// </summary>
   public Tuple<string, Authentication>[] AuthenticationTypes
     => Model.Authentication.GetValues().AsTuple();
-
-  /// <inheritdoc/>
-  protected override void LoadTemplate(WifiCodeModel model)
-  {
-    string fileContent = templateService.Load(LoadPath);
-    WifiCodeModel template = templateService.From(fileContent);
-    model.FromTemplate(template);
-  }
-
-  /// <inheritdoc/>
-  protected override void SaveTemplate(WifiCodeModel model)
-  {
-    string jsonContent = templateService.To(model);
-    templateService.Save(SavePath, jsonContent);
-  }
 
   /// <inheritdoc/>
   protected override void SetPayLoad()

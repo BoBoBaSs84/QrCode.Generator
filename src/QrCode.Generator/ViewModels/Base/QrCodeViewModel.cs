@@ -26,8 +26,9 @@ namespace QrCode.Generator.ViewModels.Base;
 /// </remarks>
 /// <param name="qrCodeService">The QR code service instance to use.</param>
 /// <param name="exportService">The export service instance to use.</param>
+/// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
-public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportService<T> exportService, T model)
+public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportService<T> exportService, ITemplateService<T> templateService, T model)
   : ViewModelBase, ITemplatable<T>, IExportable<T> where T : QrCodeModel
 {
   private Image _qrCodeImage = new();
@@ -112,13 +113,22 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportSe
   /// Loads the template into the current model.
   /// </summary>
   /// <param name="model">The model to load into.</param>
-  protected abstract void LoadTemplate(T model);
+  protected virtual void LoadTemplate(T model)
+  {
+    string fileContent = templateService.Load(LoadPath);
+    T template = templateService.From(fileContent);
+    model.FromTemplate(template);
+  }
 
   /// <summary>
   /// Saves the template from the current model.
   /// </summary>
   /// <param name="model">The model to save from.</param>
-  protected abstract void SaveTemplate(T model);
+  protected virtual void SaveTemplate(T model)
+  {
+    string jsonContent = templateService.To(model);
+    templateService.Save(SavePath, jsonContent);
+  }
 
   /// <summary>
   /// Sets the payload to encode.

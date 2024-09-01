@@ -19,28 +19,13 @@ namespace QrCode.Generator.ViewModels;
 /// <param name="templateService">The template service instance to use.</param>
 /// <param name="model">The model instance to use.</param>
 public sealed class EventCodeViewModel(IQrCodeService qrCodeService, IExportService<EventCodeModel> exportService, ITemplateService<EventCodeModel> templateService, EventCodeModel model)
-  : QrCodeViewModel<EventCodeModel>(qrCodeService, exportService, model)
+  : QrCodeViewModel<EventCodeModel>(qrCodeService, exportService, templateService, model)
 {
   /// <summary>
   /// The event encoding types to select from.
   /// </summary>
   public Tuple<string, EventEncoding>[] GetEncodingTypes
     => Model.Encoding.GetValues().AsTuple();
-
-  /// <inheritdoc />
-  protected override void LoadTemplate(EventCodeModel model)
-  {
-    string fileContent = templateService.Load(LoadPath);
-    EventCodeModel template = templateService.From(fileContent);
-    model.FromTemplate(template);
-  }
-
-  /// <inheritdoc />
-  protected override void SaveTemplate(EventCodeModel model)
-  {
-    string jsonContent = templateService.To(model);
-    templateService.Save(SavePath, jsonContent);
-  }
 
   /// <inheritdoc />
   protected override void SetPayLoad()

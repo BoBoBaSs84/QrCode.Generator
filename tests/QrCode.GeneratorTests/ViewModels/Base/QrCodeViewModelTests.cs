@@ -12,6 +12,7 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   private const string UnitTest = "UnitTest";
   private Mock<IQrCodeService> _qrCodeServiceMock = default!;
   private Mock<IExportService<TestModel>> _exportServiceMock = default!;
+  private Mock<ITemplateService<TestModel>> _templateServiceMock = default!;
 
   [WpfTestMethod]
   public void ConstructorTest()
@@ -84,11 +85,13 @@ public sealed class QrCodeViewModelTests : UnitTestBase
   {
     _qrCodeServiceMock = new();
     _exportServiceMock = new();
+    _templateServiceMock = new();
 
-    return new(_qrCodeServiceMock.Object, _exportServiceMock.Object, new());
+    return new(_qrCodeServiceMock.Object, _exportServiceMock.Object, _templateServiceMock.Object, new());
   }
 
-  internal sealed class TestViewModel(IQrCodeService service, IExportService<TestModel> exportService, TestModel model) : QrCodeViewModel<TestModel>(service, exportService, model)
+  internal sealed class TestViewModel(IQrCodeService service, IExportService<TestModel> exportService, ITemplateService<TestModel> templateService, TestModel model)
+    : QrCodeViewModel<TestModel>(service, exportService, templateService, model)
   {
     protected override void Export()
       => ExportPath = UnitTest;
