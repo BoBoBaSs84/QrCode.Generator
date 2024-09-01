@@ -118,14 +118,14 @@
                       Command="{Binding CreateCommand}"
                       CommandParameter="{Binding Model}"
                       Grid.Column="0"
-                      IsEnabled="{Binding Model.IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
                       Margin="1" />
               <Button x:Name="CopyButton"
                       Content="Copy"
                       Command="{Binding CopyCommand}"
                       CommandParameter="{Binding Model}"
                       Grid.Column="1"
-                      IsEnabled="{Binding Model.IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
                       Margin="1" />
               <Button x:Name="SaveButton"
                       Content="Save"
