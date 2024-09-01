@@ -14,7 +14,7 @@ namespace QrCode.GeneratorTests.Services;
 [SuppressMessage("Style", "IDE0058", Justification = "Not relevant here, unit testing.")]
 public sealed class QrCodeServiceTests : UnitTestBase
 {
-  private readonly string _payload = "";
+  private readonly string _payload = "UnitTestPayLoad";
   private readonly int _moduleSize = 10;
   private readonly Color _foreground = Colors.Black;
   private readonly Color _background = Colors.White;
