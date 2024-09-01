@@ -1,4 +1,6 @@
-﻿namespace QrCode.Generator.Extensions;
+﻿using QrCode.Generator.Caches;
+
+namespace QrCode.Generator.Extensions;
 
 /// <summary>
 /// The enumerator extensions class.
@@ -15,7 +17,16 @@ internal static class EnumeratorExtensions
   {
     List<Tuple<string, T>> tuples = [];
     foreach (T value in values)
-      tuples.Add(new($"{value}", value));
+      tuples.Add(new(value.GetDescription(), value));
     return [.. tuples];
   }
+
+  /// <summary>
+  /// Returns the description of the <typeparamref name="T"/> enumerator.
+  /// </summary>
+  /// <typeparam name="T">The enmuerator type.</typeparam>
+  /// <param name="value">The enumerator value.</param>
+  /// <returns>The description or the enum name.</returns>
+  public static string GetDescription<T>(this T value) where T : struct, IComparable, IFormattable, IConvertible
+    => DescriptionAttributeCache<T>.GetDescription(value);
 }

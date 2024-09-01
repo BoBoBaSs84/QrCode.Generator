@@ -112,6 +112,23 @@ public sealed class EventCodeModel : QrCodeModel
     set => SetProperty(ref _encoding, value);
   }
 
+  /// <inheritdoc/>
+  public override void FromTemplate(QrCodeModel template)
+  {
+    if (template is EventCodeModel eventCodeModel)
+    {
+      Subject = eventCodeModel.Subject;
+      Description = eventCodeModel.Description;
+      Location = eventCodeModel.Location;
+      Start = eventCodeModel.Start;
+      End = eventCodeModel.End;
+      AllDay = eventCodeModel.AllDay;
+      Encoding = eventCodeModel.Encoding;
+    }
+
+    base.FromTemplate(template);
+  }
+
   private void OnPropertyChanged(string? propertyName)
   {
     if (propertyName is not null)

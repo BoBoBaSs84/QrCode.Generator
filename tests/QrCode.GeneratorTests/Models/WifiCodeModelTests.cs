@@ -1,6 +1,9 @@
-﻿using QrCode.Generator.Models;
+﻿using System.Windows.Media;
+
+using QrCode.Generator.Models;
 
 using static QRCoder.PayloadGenerator.WiFi;
+using static QRCoder.QRCodeGenerator;
 
 namespace QrCode.GeneratorTests.Models;
 
@@ -36,5 +39,32 @@ public class WifiCodeModelTests : UnitTestBase
     };
 
     Assert.IsTrue(model.IsValid);
+  }
+
+  [TestMethod]
+  public void WifiModelFromTemplateTest()
+  {
+    WifiCodeModel model = new();
+    WifiCodeModel template = new()
+    {
+      SSID = "Hallo",
+      Password = "Test123",
+      Authentication = Authentication.WPA2,
+      Hidden = true,
+      ErrorCorrection = ECCLevel.M,
+      ForegroundColor = Colors.Black,
+      BackgroundColor = Colors.White
+    };
+
+    model.FromTemplate(template);
+
+    Assert.IsTrue(model.IsValid);
+    Assert.AreEqual(template.SSID, model.SSID);
+    Assert.AreEqual(template.Password, model.Password);
+    Assert.AreEqual(template.Authentication, model.Authentication);
+    Assert.AreEqual(template.Hidden, model.Hidden);
+    Assert.AreEqual(template.ErrorCorrection, model.ErrorCorrection);
+    Assert.AreEqual(template.ForegroundColor, model.ForegroundColor);
+    Assert.AreEqual(template.BackgroundColor, model.BackgroundColor);
   }
 }

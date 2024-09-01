@@ -1,15 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Application.ico</ApplicationIcon>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Include="Application.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="BB84.Extensions" />
     <PackageReference Include="BB84.Notifications" />
@@ -17,5 +14,4 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="QRCoder.Xaml" />
   </ItemGroup>
-
 </Project>

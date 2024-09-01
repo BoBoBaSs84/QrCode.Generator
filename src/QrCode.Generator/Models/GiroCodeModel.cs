@@ -150,4 +150,24 @@ public sealed class GiroCodeModel : QrCodeModel
     get => _encoding;
     set => SetPropertyAndValidate(ref _encoding, value);
   }
+
+  /// <inheritdoc/>
+  public override void FromTemplate(QrCodeModel template)
+  {
+    if (template is GiroCodeModel giroCodeModel)
+    {
+      IBAN = giroCodeModel.IBAN;
+      BIC = giroCodeModel.BIC;
+      Name = giroCodeModel.Name;
+      Amount = giroCodeModel.Amount;
+      Reference = giroCodeModel.Reference;
+      Type = giroCodeModel.Type;
+      Purpose = giroCodeModel.Purpose;
+      Message = giroCodeModel.Message;
+      Version = giroCodeModel.Version;
+      Encoding = giroCodeModel.Encoding;
+    }
+
+    base.FromTemplate(template);
+  }
 }

@@ -1,6 +1,9 @@
-﻿using QrCode.Generator.Models;
+﻿using System.Windows.Media;
+
+using QrCode.Generator.Models;
 
 using static QRCoder.PayloadGenerator.CalendarEvent;
+using static QRCoder.QRCodeGenerator;
 
 namespace QrCode.GeneratorTests.Models;
 
@@ -43,5 +46,38 @@ public sealed class EventCodeModelTests : UnitTestBase
     };
 
     Assert.IsTrue(model.IsValid);
+  }
+
+  [TestMethod]
+  public void EventModelFromTemplateTest()
+  {
+    EventCodeModel model = new();
+    EventCodeModel template = new()
+    {
+      Subject = UnitTest,
+      Description = UnitTest,
+      Location = UnitTest,
+      Start = DateTime.Today,
+      End = DateTime.Today,
+      AllDay = true,
+      Encoding = EventEncoding.Universal,
+      ErrorCorrection = ECCLevel.M,
+      ForegroundColor = Colors.Black,
+      BackgroundColor = Colors.White
+    };
+
+    model.FromTemplate(template);
+
+    Assert.IsTrue(model.IsValid);
+    Assert.AreEqual(template.Subject, model.Subject);
+    Assert.AreEqual(template.Description, model.Description);
+    Assert.AreEqual(template.Location, model.Location);
+    Assert.AreEqual(template.Start, model.Start);
+    Assert.AreEqual(template.End, model.End);
+    Assert.AreEqual(template.AllDay, model.AllDay);
+    Assert.AreEqual(template.Encoding, model.Encoding);
+    Assert.AreEqual(template.ErrorCorrection, model.ErrorCorrection);
+    Assert.AreEqual(template.ForegroundColor, model.ForegroundColor);
+    Assert.AreEqual(template.BackgroundColor, model.BackgroundColor);
   }
 }

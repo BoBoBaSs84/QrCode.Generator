@@ -12,6 +12,14 @@ internal static class ColorExtensions
   /// </summary>
   /// <param name="value">The color to convert.</param>
   /// <returns>The hex string.</returns>
-  public static string GetHexString(this Color value)
+  public static string AsHexString(this Color value)
     => $"#{value.R:X2}{value.G:X2}{value.B:X2}";
+
+  /// <summary>
+  /// Returns the byte array representation of the provided <see cref="Color"/>.
+  /// </summary>
+  /// <param name="value">The color to convert.</param>
+  /// <returns>The byte array.</returns>
+  public static byte[] AsByteArray(this Color value)
+    => [value.R, value.G, value.B, value.A];
 }

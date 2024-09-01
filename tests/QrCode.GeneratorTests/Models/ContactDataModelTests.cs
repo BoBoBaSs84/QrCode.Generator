@@ -1,6 +1,9 @@
-﻿using QrCode.Generator.Models;
+﻿using System.Windows.Media;
+
+using QrCode.Generator.Models;
 
 using static QRCoder.PayloadGenerator.ContactData;
+using static QRCoder.QRCodeGenerator;
 
 namespace QrCode.GeneratorTests.Models;
 
@@ -70,5 +73,64 @@ public sealed class ContactDataModelTests : UnitTestBase
     };
 
     Assert.IsTrue(model.IsValid);
+  }
+
+  [TestMethod]
+  public void EventModelFromTemplateTest()
+  {
+    ContactDataModel model = new();
+    ContactDataModel template = new()
+    {
+      OutputType = ContactOutputType.MeCard,
+      FirstName = UnitTest,
+      LastName = UnitTest,
+      NickName = UnitTest,
+      Phone = "+1 505-644-9930",
+      MobilePhone = "+1 203-337-9287",
+      OfficePhone = "+1 505-288-3106",
+      Email = "UnitTest@UnitTest.org",
+      Birthday = DateTime.Today,
+      WebSite = "http://www.UnitTest.org",
+      Street = UnitTest,
+      HouseNumber = UnitTest,
+      City = UnitTest,
+      Country = UnitTest,
+      ZipCode = UnitTest,
+      Note = UnitTest,
+      StateRegion = UnitTest,
+      AddressOrder = AddressOrder.Reversed,
+      Org = UnitTest,
+      OrgTitle = UnitTest,
+      ErrorCorrection = ECCLevel.M,
+      ForegroundColor = Colors.Black,
+      BackgroundColor = Colors.White
+    };
+
+    model.FromTemplate(template);
+
+    Assert.IsTrue(model.IsValid);
+    Assert.AreEqual(template.OutputType, model.OutputType);
+    Assert.AreEqual(template.FirstName, model.FirstName);
+    Assert.AreEqual(template.LastName, model.LastName);
+    Assert.AreEqual(template.NickName, model.NickName);
+    Assert.AreEqual(template.Phone, model.Phone);
+    Assert.AreEqual(template.MobilePhone, model.MobilePhone);
+    Assert.AreEqual(template.OfficePhone, model.OfficePhone);
+    Assert.AreEqual(template.Email, model.Email);
+    Assert.AreEqual(template.Birthday, model.Birthday);
+    Assert.AreEqual(template.WebSite, model.WebSite);
+    Assert.AreEqual(template.Street, model.Street);
+    Assert.AreEqual(template.HouseNumber, model.HouseNumber);
+    Assert.AreEqual(template.City, model.City);
+    Assert.AreEqual(template.Country, model.Country);
+    Assert.AreEqual(template.ZipCode, model.ZipCode);
+    Assert.AreEqual(template.Note, model.Note);
+    Assert.AreEqual(template.StateRegion, model.StateRegion);
+    Assert.AreEqual(template.AddressOrder, model.AddressOrder);
+    Assert.AreEqual(template.Org, model.Org);
+    Assert.AreEqual(template.OrgTitle, model.OrgTitle);
+    Assert.AreEqual(template.ErrorCorrection, model.ErrorCorrection);
+    Assert.AreEqual(template.ForegroundColor, model.ForegroundColor);
+    Assert.AreEqual(template.BackgroundColor, model.BackgroundColor);
   }
 }

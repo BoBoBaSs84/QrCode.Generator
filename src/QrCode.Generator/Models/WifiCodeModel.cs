@@ -68,4 +68,18 @@ public sealed class WifiCodeModel : QrCodeModel
     get => _hidden;
     set => SetProperty(ref _hidden, value);
   }
+
+  /// <inheritdoc/>
+  public override void FromTemplate(QrCodeModel template)
+  {
+    if (template is WifiCodeModel wifiCodeModel)
+    {
+      Authentication = wifiCodeModel.Authentication;
+      SSID = wifiCodeModel.SSID;
+      Password = wifiCodeModel.Password;
+      Hidden = wifiCodeModel.Hidden;
+    }
+
+    base.FromTemplate(template);
+  }
 }

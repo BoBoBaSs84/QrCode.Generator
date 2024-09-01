@@ -1,9 +1,8 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using BB84.Extensions.Serialization;
 
-using BB84.Extensions.Serialization;
+using Microsoft.Extensions.Logging;
 
-using QrCode.Generator.Converters;
+using QrCode.Generator.Common;
 using QrCode.Generator.Interfaces.Provider;
 using QrCode.Generator.Interfaces.Services;
 
@@ -13,30 +12,65 @@ namespace QrCode.Generator.Services;
 /// The generic template service implementation.
 /// </summary>
 /// <typeparam name="T">The class to work with.</typeparam>
+/// <param name="loggerService">The logger service instance to use.</param>
 /// <param name="fileProvider">The file provider instance to use.</param>
-internal sealed class TemplateService<T>(IFileProvider fileProvider) : ITemplateService<T> where T : class
+internal sealed class TemplateService<T>(ILoggerService<TemplateService<T>> loggerService, IFileProvider fileProvider) : ITemplateService<T> where T : class
 {
-  private readonly JsonSerializerOptions _serializerOptions = new(JsonSerializerDefaults.General)
-  {
-    Converters = { new ColorJsonConverter() },
-    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-    IgnoreReadOnlyFields = true,
-    IgnoreReadOnlyProperties = true,
-    NumberHandling = JsonNumberHandling.WriteAsString,
-    PropertyNameCaseInsensitive = true,
-    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-    WriteIndented = true
-  };
+  private static Action<ILogger, Exception?> LogException
+    => LoggerMessage.Define(LogLevel.Critical, 0, string.Empty);
 
   public T From(string template)
-    => template.FromJson<T>(_serializerOptions);
+  {
+    try
+    {
+      return template.FromJson<T>(Statics.SerializerOptions);
+    }
+    catch (Exception ex)
+    {
+      loggerService.Log(LogException, ex);
+      throw;
+    }
+  }
 
   public string Load(string filePath)
-    => fileProvider.ReadAllText(filePath);
+  {
+    try
+    {
+      return fileProvider.ReadAllText(filePath);
+    }
+    catch (Exception ex)
+    {
+      loggerService.Log(LogException, ex);
+      throw;
+    }
+  }
 
   public void Save(string filePath, string fileContent)
-    => fileProvider.WriteAllText(filePath, fileContent);
+  {
+    try
+    {
+      fileProvider.WriteAllText(filePath, fileContent);
+    }
+    catch (Exception ex)
+    {
+      loggerService.Log(LogException, ex);
+      throw;
+    }
+  }
 
   public string To(T template)
-    => template.ToJson(_serializerOptions);
+  {
+    try
+    {
+      if (template is null)
+        throw new ArgumentNullException(nameof(template));
+
+      return template.ToJson(Statics.SerializerOptions);
+    }
+    catch (Exception ex)
+    {
+      loggerService.Log(LogException, ex);
+      throw;
+    }
+  }
 }

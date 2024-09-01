@@ -241,4 +241,34 @@ public sealed class ContactDataModel : QrCodeModel
     get => _orgTitle;
     set => SetProperty(ref _orgTitle, value);
   }
+
+  /// <inheritdoc/>
+  public override void FromTemplate(QrCodeModel template)
+  {
+    if (template is ContactDataModel contactDataModel)
+    {
+      OutputType = contactDataModel.OutputType;
+      FirstName = contactDataModel.FirstName;
+      LastName = contactDataModel.LastName;
+      NickName = contactDataModel.NickName;
+      Phone = contactDataModel.Phone;
+      MobilePhone = contactDataModel.MobilePhone;
+      OfficePhone = contactDataModel.OfficePhone;
+      Email = contactDataModel.Email;
+      Birthday = contactDataModel.Birthday;
+      WebSite = contactDataModel.WebSite;
+      Street = contactDataModel.Street;
+      HouseNumber = contactDataModel.HouseNumber;
+      City = contactDataModel.City;
+      Country = contactDataModel.Country;
+      ZipCode = contactDataModel.ZipCode;
+      Note = contactDataModel.Note;
+      StateRegion = contactDataModel.StateRegion;
+      AddressOrder = contactDataModel.AddressOrder;
+      Org = contactDataModel.Org;
+      OrgTitle = contactDataModel.OrgTitle;
+    }
+
+    base.FromTemplate(template);
+  }
 }

@@ -14,7 +14,6 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <AnalysisLevel>latest</AnalysisLevel>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AssemblyOriginatorKeyFile>..\..\PublicKey.snk</AssemblyOriginatorKeyFile>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DebugType>none</DebugType>
     <Deterministic>True</Deterministic>
@@ -30,7 +29,6 @@
     <Platforms>x64</Platforms>
     <RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
-    <SignAssembly>true</SignAssembly>
     <TargetFramework>net8.0-windows</TargetFramework>
   </PropertyGroup>
 
@@ -58,7 +56,8 @@
   </PropertyGroup>
 
   <ItemGroup Condition="!$(MSBuildProjectName.EndsWith('Tests'))">
-    <InternalsVisibleTo Include="$(AssemblyName)Tests" Key="00240000048000009400000006020000002400005253413100040000010001003d151960c65927941af507e3d642c85ad27908548b7c3b254993ba149e4a956d63912f939808d541b2ff09c7dc03a9989b6e45f3e1e64d94e5008419b3c98c40cd39b8a12f5e53bfd2bb36c3fbcd7a165bd8d1b70a833113264544f1879f0359cec455060956f955aaefdc56fb1a95f50b13af6d5d2897dfc3a7dada204d9dd7"/>
+    <InternalsVisibleTo Include="$(AssemblyName)Tests"/>
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
   </ItemGroup>
 
   <ItemGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">

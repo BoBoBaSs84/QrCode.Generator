@@ -88,47 +88,67 @@
           </StackPanel>
         </GroupBox>
       </StackPanel>
+      <!-- Actions -->
       <StackPanel x:Name="ActionStackPanel"
                   DockPanel.Dock="Bottom"
                   VerticalAlignment="Bottom">
         <GroupBox x:Name="Actions"
                   Header="Actions">
-          <StackPanel>
-            <Grid Grid.ColumnSpan="2">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-              </Grid.ColumnDefinitions>
-              <Button x:Name="CreateButton"
-                      Content="Create"
-                      Command="{Binding CreateCommand}"
-                      CommandParameter="{Binding Model}"
+          <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition />
+              <ColumnDefinition />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Button x:Name="CreateButton"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Content="Create"
+                    Command="{Binding CreateCommand}"
+                    CommandParameter="{Binding Model}"
+                    IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="1" />
+            <Button x:Name="CopyButton"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Content="Copy"
+                    Command="{Binding CopyCommand}"
+                    CommandParameter="{Binding Model}"
+                    IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="1" />
+            <Button x:Name="SaveButton"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Content="Save"
+                    Click="OnSaveButtonClick"
+                    Margin="1" />
+            <Button x:Name="LoadButton"
+                    Grid.Column="3"
+                    Grid.Row="0"
+                    Content="Load"
+                    Click="OnLoadButtonClick"
+                    Margin="1" />
+            <ComboBox x:Name="ExportTypeCombo"
                       Grid.Column="0"
-                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
+                      Grid.ColumnSpan="3"
+                      Grid.Row="1"
+                      ItemsSource="{Binding ExportTypes}"
+                      DisplayMemberPath="Item1"
+                      SelectedValuePath="Item2"
+                      SelectedValue="{Binding ExportType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="1" />
-              <Button x:Name="CopyButton"
-                      Content="Copy"
-                      Command="{Binding CopyCommand}"
-                      CommandParameter="{Binding Model}"
-                      Grid.Column="1"
-                      IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="1" />
-              <Button x:Name="SaveButton"
-                      Content="Save"
-                      Command="{Binding SaveTemplateCommand}"
-                      CommandParameter="{Binding Model}"
-                      Grid.Column="2"
-                      Margin="1" />
-              <Button x:Name="LoadButton"
-                      Content="Load"
-                      Command="{Binding LoadTemplateCommand}"
-                      CommandParameter="{Binding Model}"
-                      Grid.Column="3"
-                      Margin="1" />
-            </Grid>
-          </StackPanel>
+            <Button x:Name="ExportButton"
+                    Grid.Column="3"
+                    Grid.Row="1"
+                    Content="Export"
+                    Margin="1"
+                    Click="OnExportButtonClick" />
+          </Grid>
         </GroupBox>
       </StackPanel>
     </DockPanel>
