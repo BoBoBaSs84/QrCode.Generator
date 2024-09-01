@@ -51,4 +51,15 @@ public abstract class QrCodeModel : ValidatableObject
     get => _backgroundColor;
     set => SetProperty(ref _backgroundColor, value);
   }
+
+  /// <summary>
+  /// Uses the tempalte information to fill the model.
+  /// </summary>
+  /// <param name="template">The template to use.</param>
+  public virtual void FromTemplate(QrCodeModel template)
+  {
+    ErrorCorrection = template.ErrorCorrection;
+    ForegroundColor = template.ForegroundColor;
+    BackgroundColor = template.BackgroundColor;
+  }
 }
