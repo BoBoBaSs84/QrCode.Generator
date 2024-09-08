@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <UseWPF>true</UseWPF>
     <ApplicationIcon>Application.ico</ApplicationIcon>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <OutputType>WinExe</OutputType>
+    <PublishSingleFile>True</PublishSingleFile>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Application.ico" />
