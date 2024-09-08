@@ -15,6 +15,7 @@ namespace QrCode.Generator.Builder;
 /// Interaction logic for App.xaml
 /// </summary>
 [ExcludeFromCodeCoverage(Justification = "Main entry point for application.")]
+[SuppressMessage("Style", "IDE0058", Justification = "Not relevant here.")]
 public partial class App : Application
 {
   private readonly IHost _host;
@@ -68,9 +69,11 @@ public partial class App : Application
   }
 
   private void OnUnhandledException(Exception exception)
-    => _loggerService.Log(LogCritical, exception);
+  {
+    _loggerService.Log(LogCritical, exception);
+    MessageBox.Show(exception.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+  }
 
-  [SuppressMessage("Style", "IDE0058", Justification = "Not relevant here.")]
   private static IHostBuilder CreateHostBuilder()
     => Host.CreateDefaultBuilder().ConfigureServices(services =>
     {
