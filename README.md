@@ -1,5 +1,4 @@
 [![CI](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/codeql.yml)
 
 [![.NET](https://img.shields.io/badge/net8.0-5C2D91?logo=.NET&labelColor=gray)](https://github.com/BoBoBaSs84/QrCode.Generator)
 [![C#](https://img.shields.io/badge/C%23-13.0-239120)](https://github.com/BoBoBaSs84/QrCode.Generator)
