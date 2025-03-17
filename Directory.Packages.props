@@ -8,7 +8,7 @@
     <PackageVersion Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.124" />
     <PackageVersion Include="FluentAssertions" Version="8.1.1" />
     <PackageVersion Include="MSTest" Version="3.8.2" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
     <PackageVersion Include="Moq" Version="4.20.72" />
     <PackageVersion Include="QRCoder.Xaml" Version="1.6.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
