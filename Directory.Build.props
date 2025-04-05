@@ -15,12 +15,11 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <Deterministic>True</Deterministic>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <GeneratedAssemblyInfoFile>Properties\AssemblyInfo.cs</GeneratedAssemblyInfoFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>    
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -44,9 +43,9 @@
     <RepositoryUrl>https://github.com/$(Author)/$(Product)</RepositoryUrl>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(Configuration.Equals('Debug'))">
-    <DebugType>full</DebugType>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  <PropertyGroup Condition="$(Configuration.Equals('Release'))">
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">
@@ -64,10 +63,6 @@
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="System.Diagnostics" />
     <Using Include="System.Diagnostics.CodeAnalysis" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
