@@ -13,13 +13,13 @@
   <PropertyGroup Label="Technical">
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <AnalysisLevel>latest</AnalysisLevel>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DebugType>full</DebugType>
     <Deterministic>True</Deterministic>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>    
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>    
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -48,12 +48,6 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">
-    <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup Condition="!$(MSBuildProjectName.EndsWith('Tests'))">
     <InternalsVisibleTo Include="$(AssemblyName)Tests"/>
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
@@ -63,6 +57,7 @@
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="System.Diagnostics" />
     <Using Include="System.Diagnostics.CodeAnalysis" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
   </ItemGroup>
 
 </Project>
