@@ -9,8 +9,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "BoBoBaSs84"
+      day: "monday"
+      time: "03:00"
     assignees:
       - "BoBoBaSs84"
     groups:
@@ -28,7 +28,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "BoBoBaSs84"
+      day: "monday"
+      time: "03:00"
     assignees:
       - "BoBoBaSs84"
