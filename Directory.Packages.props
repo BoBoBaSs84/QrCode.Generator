@@ -6,7 +6,7 @@
     <PackageVersion Include="BB84.Extensions" Version="3.0.817" />
     <PackageVersion Include="BB84.Notifications" Version="3.6.531" />
     <PackageVersion Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.124" />
-    <PackageVersion Include="FluentAssertions" Version="8.3.0" />
+    <PackageVersion Include="FluentAssertions" Version="8.6.0" />
     <PackageVersion Include="MSTest" Version="3.10.2" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
     <PackageVersion Include="Moq" Version="4.20.72" />
