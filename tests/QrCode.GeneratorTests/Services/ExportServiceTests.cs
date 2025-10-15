@@ -30,7 +30,7 @@ public sealed class ExportServiceTests : UnitTestBase
   {
     ExportService<TestClass> sut = CreateMockedInstance();
 
-    Assert.ThrowsException<NotImplementedException>(() => sut.Export(string.Empty, ExportType.JPEG, string.Empty, new()));
+    Assert.Throws<NotImplementedException>(() => sut.Export(string.Empty, ExportType.JPEG, string.Empty, new()));
 
     _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<NotImplementedException>()), Times.Once);
   }

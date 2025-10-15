@@ -16,14 +16,12 @@ namespace QrCode.GeneratorTests.Extensions;
 public sealed class ExportTypeExtensionsTests : UnitTestBase
 {
   [TestMethod]
-  [ExpectedException(typeof(ArgumentOutOfRangeException))]
   public void GetFilterFromTypeShouldThrowArgumentOutOfRangeException()
-    => ((ExportType)42).GetFilterFromType();
+    => Assert.Throws<ArgumentOutOfRangeException>(() => ((ExportType)int.MaxValue).GetFilterFromType());
 
   [TestMethod]
-  [ExpectedException(typeof(NotImplementedException))]
   public void GetFilterFromTypeShouldThrowNotImplementedException()
-    => ExportType.JPEG.GetFilterFromType();
+    => Assert.Throws<NotImplementedException>(() => ExportType.JPEG.GetFilterFromType());
 
   [TestMethod]
   [DataRow(ExportType.BMP)]

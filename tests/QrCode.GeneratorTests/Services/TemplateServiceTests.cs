@@ -30,7 +30,7 @@ public sealed class TemplateServiceTests : UnitTestBase
   {
     TemplateService<TestClass> sut = CreateMockedInstance();
 
-    Assert.ThrowsException<ArgumentNullException>(() => sut.From(null!));
+    Assert.Throws<ArgumentNullException>(() => sut.From(null!));
 
     _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Once);
   }
@@ -55,7 +55,7 @@ public sealed class TemplateServiceTests : UnitTestBase
     _fileProviderMock.Setup(x => x.ReadAllText(UnitTest))
       .Throws<Exception>();
 
-    Assert.ThrowsException<Exception>(() => sut.Load(UnitTest));
+    Assert.Throws<Exception>(() => sut.Load(UnitTest));
 
     _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Once);
   }
@@ -82,7 +82,7 @@ public sealed class TemplateServiceTests : UnitTestBase
     _fileProviderMock.Setup(x => x.WriteAllText(UnitTest, jsonContent))
       .Throws<Exception>();
 
-    Assert.ThrowsException<Exception>(() => sut.Save(UnitTest, jsonContent));
+    Assert.Throws<Exception>(() => sut.Save(UnitTest, jsonContent));
 
     _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Once);
   }
@@ -104,7 +104,7 @@ public sealed class TemplateServiceTests : UnitTestBase
   {
     TemplateService<TestClass> sut = CreateMockedInstance();
 
-    Assert.ThrowsException<ArgumentNullException>(() => sut.To(null!));
+    Assert.Throws<ArgumentNullException>(() => sut.To(null!));
 
     _loggerServiceMock.Verify(x => x.Log(It.IsAny<Action<ILogger, Exception?>>(), It.IsAny<Exception>()), Times.Once);
   }

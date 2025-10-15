@@ -64,19 +64,19 @@ public abstract class UnitTestBase
 
 public class WpfTestMethodAttribute : TestMethodAttribute
 {
-  public override TestResult[] Execute(ITestMethod testMethod)
+  public override async Task<TestResult[]> ExecuteAsync(ITestMethod testMethod)
   {
     if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
-      return Invoke(testMethod);
+      return await Invoke(testMethod);
 
     TestResult[] result = [];
-    Thread thread = new(() => result = Invoke(testMethod));
+    Thread thread = new(async () => result = await Invoke(testMethod));
     thread.SetApartmentState(ApartmentState.STA);
     thread.Start();
     thread.Join();
     return result;
   }
 
-  private static TestResult[] Invoke(ITestMethod testMethod)
-    => new[] { testMethod.Invoke(null) };
+  private static async Task<TestResult[]> Invoke(ITestMethod testMethod)
+    => [await testMethod.InvokeAsync(null)];
 }
