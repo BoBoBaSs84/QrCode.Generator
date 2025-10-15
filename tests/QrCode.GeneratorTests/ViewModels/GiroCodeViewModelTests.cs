@@ -25,9 +25,9 @@ public sealed class GiroCodeViewModelTests : UnitTestBase
 
     Assert.IsNotNull(viewModel);
     Assert.IsNotNull(viewModel.Model);
-    Assert.IsTrue(viewModel.EncodingTypes.Length != 0);
-    Assert.IsTrue(viewModel.ReferenceTypes.Length != 0);
-    Assert.IsTrue(viewModel.VersionTypes.Length != 0);
+    Assert.IsNotEmpty(viewModel.EncodingTypes);
+    Assert.IsNotEmpty(viewModel.ReferenceTypes);
+    Assert.IsNotEmpty(viewModel.VersionTypes);
   }
 
   [WpfTestMethod]

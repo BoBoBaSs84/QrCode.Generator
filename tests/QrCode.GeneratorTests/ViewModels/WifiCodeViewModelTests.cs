@@ -25,7 +25,7 @@ public sealed class WifiCodeViewModelTests : UnitTestBase
 
     Assert.IsNotNull(viewModel);
     Assert.IsNotNull(viewModel.Model);
-    Assert.IsTrue(viewModel.AuthenticationTypes.Length != 0);
+    Assert.IsNotEmpty(viewModel.AuthenticationTypes);
   }
 
   [WpfTestMethod]
