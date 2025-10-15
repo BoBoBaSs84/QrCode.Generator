@@ -40,8 +40,8 @@ public sealed class QrCodeViewModelTests : UnitTestBase
     Assert.IsNotNull(viewModel.ExportCommand);
     Assert.IsNotNull(viewModel.LoadTemplateCommand);
     Assert.IsNotNull(viewModel.SaveTemplateCommand);
-    Assert.IsTrue(viewModel.ErrorCorrectionLevels.Length != 0);
-    Assert.IsTrue(viewModel.ExportTypes.Length != 0);
+    Assert.IsNotEmpty(viewModel.ErrorCorrectionLevels);
+    Assert.IsNotEmpty(viewModel.ExportTypes);
   }
 
   [WpfTestMethod]

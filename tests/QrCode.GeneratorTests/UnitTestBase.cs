@@ -5,6 +5,8 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 // -----------------------------------------------------------------------------
+using System.Runtime.CompilerServices;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using QrCode.Generator.Extensions;
@@ -14,23 +16,13 @@ namespace QrCode.GeneratorTests;
 [TestClass]
 public abstract class UnitTestBase
 {
-  private static TestContext? s_context;
   private static IServiceProvider? s_serviceProvider;
 
   [AssemblyInitialize]
   public static void AssemblyInitialize(TestContext context)
   {
-    s_context = context;
     s_serviceProvider = GetServiceProvider();
   }
-
-  [TestInitialize]
-  public void TestInitialize()
-    => s_context?.WriteLine($"Initialize {s_context.TestName} ..");
-
-  [TestCleanup]
-  public void TestCleanup()
-    => s_context?.WriteLine($"Cleanup {s_context.TestName} ..");
 
   /// <summary>
   /// Returns the requested registered service.
@@ -62,21 +54,22 @@ public abstract class UnitTestBase
   }
 }
 
-public class WpfTestMethodAttribute : TestMethodAttribute
+public class WpfTestMethodAttribute([CallerFilePath] string callerFilePath = "", [CallerLineNumber] int callerLineNumber = -1)
+  : TestMethodAttribute(callerFilePath, callerLineNumber)
 {
-  public override TestResult[] Execute(ITestMethod testMethod)
+  public override async Task<TestResult[]> ExecuteAsync(ITestMethod testMethod)
   {
     if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
-      return Invoke(testMethod);
+      return await Invoke(testMethod);
 
     TestResult[] result = [];
-    Thread thread = new(() => result = Invoke(testMethod));
+    Thread thread = new(async () => result = await Invoke(testMethod));
     thread.SetApartmentState(ApartmentState.STA);
     thread.Start();
     thread.Join();
     return result;
   }
 
-  private static TestResult[] Invoke(ITestMethod testMethod)
-    => new[] { testMethod.Invoke(null) };
+  private static async Task<TestResult[]> Invoke(ITestMethod testMethod)
+    => [await testMethod.InvokeAsync(null)];
 }

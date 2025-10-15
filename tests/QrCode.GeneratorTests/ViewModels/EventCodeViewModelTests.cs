@@ -25,7 +25,7 @@ public sealed class EventViewModelTests : UnitTestBase
 
     Assert.IsNotNull(viewModel);
     Assert.IsNotNull(viewModel.Model);
-    Assert.IsTrue(viewModel.GetEncodingTypes.Length != 0);
+    Assert.IsNotEmpty(viewModel.GetEncodingTypes);
   }
 
   [WpfTestMethod]

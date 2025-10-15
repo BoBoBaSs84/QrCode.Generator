@@ -25,8 +25,8 @@ public sealed class ContactDataViewModelTests : UnitTestBase
 
     Assert.IsNotNull(viewModel);
     Assert.IsNotNull(viewModel.Model);
-    Assert.IsTrue(viewModel.AddressOrderTypes.Length != 0);
-    Assert.IsTrue(viewModel.ContactOutputTypes.Length != 0);
+    Assert.IsNotEmpty(viewModel.AddressOrderTypes);
+    Assert.IsNotEmpty(viewModel.ContactOutputTypes);
   }
 
   [WpfTestMethod]

@@ -32,7 +32,7 @@ public sealed class EventCodeModelTests : UnitTestBase
     Assert.AreEqual(string.Empty, model.Location);
     Assert.AreNotEqual(DateTime.Today, model.Start);
     Assert.AreNotEqual(DateTime.Today, model.End);
-    Assert.AreEqual(false, model.AllDay);
+    Assert.IsFalse(model.AllDay);
     Assert.AreEqual(EventEncoding.iCalComplete, model.Encoding);
   }
 

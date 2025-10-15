@@ -28,7 +28,7 @@ public class WifiCodeModelTests : UnitTestBase
     Assert.AreEqual(Authentication.WPA, model.Authentication);
     Assert.AreEqual(string.Empty, model.SSID);
     Assert.AreEqual(string.Empty, model.Password);
-    Assert.AreEqual(false, model.Hidden);
+    Assert.IsFalse(model.Hidden);
     Assert.IsFalse(model.IsValid);
   }
 
