@@ -5,7 +5,7 @@
   <ItemGroup>
     <PackageVersion Include="BB84.Extensions" Version="3.3.1026" />
     <PackageVersion Include="BB84.Notifications" Version="3.6.1026" />
-    <PackageVersion Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.124" />
+    <PackageVersion Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.129" />
     <PackageVersion Include="FluentAssertions" Version="8.8.0" />
     <PackageVersion Include="MSTest" Version="4.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
