@@ -29,8 +29,7 @@ public interface IQRCodeService
   /// </summary>
   /// <remarks>
   /// The method creates a QR code that encodes the Wi-Fi credentials specified in the
-  /// <paramref name="request"/>. The QR code is customized with the specified foreground
-  /// and background colors.
+  /// request. The QR code is customized with the specified foreground and background colors.
   /// </remarks>
   /// <param name="request">
   /// The request containing Wi-Fi details such as SSID, password, authentication type,

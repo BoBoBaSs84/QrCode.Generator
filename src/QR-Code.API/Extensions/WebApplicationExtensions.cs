@@ -1,4 +1,6 @@
-﻿using QRCode.API.Abstractions;
+﻿using Microsoft.AspNetCore.Mvc;
+
+using QRCode.API.Abstractions;
 using QRCode.API.Common;
 using QRCode.API.Contracts;
 
@@ -23,10 +25,11 @@ public static class WebApplicationExtensions
   /// </returns>
   public static WebApplication AddEventCodeEndpoint(this WebApplication webApp)
   {
-    webApp.MapPost(Endpoints.EventCodeEndpoint, (EventCodeRequest request, IQRCodeService codeService)
+    webApp.MapPost(Endpoints.EventCodeEndpoint, ([FromServices] IQRCodeService codeService, [FromBody] EventCodeRequest request)
       => codeService.GetEventCode(request))
         .WithName(Endpoints.GetEventCodeEndpointName)
-        .WithDescription(Endpoints.EventCodeOperationSummary)
+        .WithDescription(Endpoints.EventCodeOperationDescription)
+        .WithSummary(Endpoints.EventCodeOperationSummary)
         .WithOpenApi();
 
     return webApp;
@@ -46,10 +49,11 @@ public static class WebApplicationExtensions
   /// </returns>
   public static WebApplication AddWifiCodeEndpoint(this WebApplication webApp)
   {
-    webApp.MapPost(Endpoints.WifiCodeEndpoint, (WifiCodeRequest request, IQRCodeService codeService)
+    webApp.MapPost(Endpoints.WifiCodeEndpoint, ([FromServices] IQRCodeService codeService, [FromBody] WifiCodeRequest request)
       => codeService.GetWifiCode(request))
         .WithName(Endpoints.GetWifiCodeEndpointName)
-        .WithDescription(Endpoints.WifiCodeOperationSummary)
+        .WithDescription(Endpoints.WifiCodeOperationDescription)
+        .WithSummary(Endpoints.WifiCodeOperationSummary)
         .WithOpenApi();
 
     return webApp;
