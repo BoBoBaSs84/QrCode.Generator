@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="BB84.Extensions" Version="3.3.1026" />
+    <PackageVersion Include="BB84.Extensions" Version="3.4.1104" />
     <PackageVersion Include="BB84.Notifications" Version="3.6.1026" />
     <PackageVersion Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.129" />
     <PackageVersion Include="FluentAssertions" Version="8.8.0" />
