@@ -28,10 +28,13 @@ public static class ServiceCollectionExtensions
   {
     services.AddSingleton<IQRCodeService, QRCodeService>();
     services.AddEndpointsApiExplorer();
+
     services.AddSwaggerGen(options
       => options.IncludeXmlComments(XmlCommentsFilePath));
+
     services.ConfigureHttpJsonOptions(options
       => options.SerializerOptions.Converters.Add(JsonStringEnumConverter));
+
     services.Configure<JsonOptions>(options
       => options.JsonSerializerOptions.Converters.Add(JsonStringEnumConverter));
 

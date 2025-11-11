@@ -14,7 +14,9 @@ internal sealed class Program
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    app.AddEventCodeEndpoint()
+    app.AddContactCodeEndpoint()
+      .AddEventCodeEndpoint()
+      .AddGiroCodeEndpoint()
       .AddWifiCodeEndpoint();
 
     await app.RunAsync()
