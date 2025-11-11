@@ -13,9 +13,7 @@
 
 # Create a stage for building the application.
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
-
 COPY . /source
-
 WORKDIR /source/src/QR-Code.API
 
 # This is the architecture you’re building for, which is passed in by the builder.
