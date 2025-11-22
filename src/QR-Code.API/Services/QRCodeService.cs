@@ -15,10 +15,12 @@ using QRCode.API.Contracts.Base;
 
 using QRCoder;
 
-using CalendarEvent = QRCoder.PayloadGenerator.CalendarEvent;
+using BookmarkData = QRCoder.PayloadGenerator.Bookmark;
+using CalendarEventData = QRCoder.PayloadGenerator.CalendarEvent;
 using ContactData = QRCoder.PayloadGenerator.ContactData;
-using Girocode = QRCoder.PayloadGenerator.Girocode;
-using WiFi = QRCoder.PayloadGenerator.WiFi;
+using GiroCodeData = QRCoder.PayloadGenerator.Girocode;
+using MailCodeData = QRCoder.PayloadGenerator.Mail;
+using WiFiData = QRCoder.PayloadGenerator.WiFi;
 
 namespace QRCode.API.Services;
 
@@ -27,6 +29,18 @@ namespace QRCode.API.Services;
 /// </summary>
 internal sealed class QRCodeService : IQRCodeService
 {
+  public IResult GetBookmarkCode(BookmarkCodeRequest request)
+  {
+    BookmarkData generator = new(
+      url: request.Url,
+      title: request.Title
+      );
+
+    string payload = generator.ToString();
+
+    return GenerateBarCode(request, payload);
+  }
+
   public IResult GetContactCode(ContactCodeRequest request)
   {
     ContactData generator = new(
@@ -59,7 +73,7 @@ internal sealed class QRCodeService : IQRCodeService
 
   public IResult GetEventCode(EventCodeRequest request)
   {
-    CalendarEvent generator = new(
+    CalendarEventData generator = new(
       subject: request.Subject,
       description: request.Description?.Replace("\r\n", @"\n"),
       location: request.Location?.Replace("\r\n", @"\n"),
@@ -76,7 +90,7 @@ internal sealed class QRCodeService : IQRCodeService
 
   public IResult GetGiroCode(GiroCodeRequest request)
   {
-    Girocode generator = new(
+    GiroCodeData generator = new(
       iban: request.IBAN,
       bic: request.BIC,
       name: request.Name,
@@ -94,9 +108,23 @@ internal sealed class QRCodeService : IQRCodeService
     return GenerateBarCode(request, payload);
   }
 
+  public IResult GetMailCode(MailCodeRequest request)
+  {
+    MailCodeData generator = new(
+      mailReceiver: request.Recipient,
+      subject: request.Subject,
+      message: request.Message,
+      encoding: request.Encoding ?? MailCodeData.MailEncoding.MAILTO
+      );
+
+    string payload = generator.ToString();
+
+    return GenerateBarCode(request, payload);
+  }
+
   public IResult GetWifiCode(WifiCodeRequest request)
   {
-    WiFi generator = new(
+    WiFiData generator = new(
       ssid: request.SSID,
       password: request.Password,
       authenticationMode: request.Authentication,

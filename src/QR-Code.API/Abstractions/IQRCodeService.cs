@@ -14,6 +14,8 @@ namespace QRCode.API.Abstractions;
 /// </summary>
 public interface IQRCodeService
 {
+  IResult GetBookmarkCode(BookmarkCodeRequest request);
+
   /// <summary>
   /// Generates a QR code for a contact based on the provided event details.
   /// </summary>
@@ -62,6 +64,8 @@ public interface IQRCodeService
   /// An <see cref="IResult"/> containing the generated QR code as a PNG image.
   /// </returns>
   IResult GetGiroCode(GiroCodeRequest request);
+
+  IResult GetMailCode(MailCodeRequest request);
 
   /// <summary>
   /// Generates a QR code for Wi-Fi access based on the provided request details.

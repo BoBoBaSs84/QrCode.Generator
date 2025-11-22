@@ -19,6 +19,30 @@ namespace QRCode.API.Extensions;
 public static class WebApplicationExtensions
 {
   /// <summary>
+  /// Adds an endpoint to the <see cref="WebApplication"/> for generating bookmark data codes.
+  /// </summary>
+  /// <remarks>
+  /// This method maps a POST request to the "/bookmark" route, which generates a bookmark data code
+  /// based on the provided <see cref="BookmarkCodeRequest"/>. The endpoint is named "GetBookmarkCode" and
+  /// is configured with OpenAPI support.
+  /// </remarks>
+  /// <param name="webApp">The <see cref="WebApplication"/> to which the endpoint is added.</param>
+  /// <returns>
+  /// The same <see cref="WebApplication"/> instance, so that additional configuration can be chained.
+  /// </returns>
+  public static WebApplication AddBookmarkEndpoint(this WebApplication webApp)
+  {
+    webApp.MapPost(Endpoints.ContactCodeEndpoint, ([FromServices] IQRCodeService codeService, [FromBody] BookmarkCodeRequest request)
+      => codeService.GetBookmarkCode(request))
+        .WithName(Endpoints.GetContactCodeEndpointName)
+        .WithDescription(Endpoints.ContactCodeOperationDescription)
+        .WithSummary(Endpoints.ContactCodeOperationSummary)
+        .WithOpenApi();
+
+    return webApp;
+  }
+
+  /// <summary>
   /// Adds an endpoint to the <see cref="WebApplication"/> for generating contact data codes.
   /// </summary>
   /// <remarks>
@@ -85,6 +109,30 @@ public static class WebApplicationExtensions
         .WithName(Endpoints.GetGiroCodeEndpointName)
         .WithDescription(Endpoints.GiroCodeOperationDescription)
         .WithSummary(Endpoints.GiroCodeOperationSummary)
+        .WithOpenApi();
+
+    return webApp;
+  }
+
+  /// <summary>
+  /// Adds an endpoint to the <see cref="WebApplication"/> for generating mail data codes.
+  /// </summary>
+  /// <remarks>
+  /// This method maps a POST request to the "/mail" route, which generates a mail data code
+  /// based on the provided <see cref="MailCodeRequest"/>. The endpoint is named "GetMailCode" and
+  /// is configured with OpenAPI support.
+  /// </remarks>
+  /// <param name="webApp">The <see cref="WebApplication"/> to which the endpoint is added.</param>
+  /// <returns>
+  /// The same <see cref="WebApplication"/> instance, so that additional configuration can be chained.
+  /// </returns>
+  public static WebApplication AddMailCodeEndpoint(this WebApplication webApp)
+  {
+    webApp.MapPost(Endpoints.ContactCodeEndpoint, ([FromServices] IQRCodeService codeService, [FromBody] MailCodeRequest request)
+      => codeService.GetMailCode(request))
+        .WithName(Endpoints.GetContactCodeEndpointName)
+        .WithDescription(Endpoints.ContactCodeOperationDescription)
+        .WithSummary(Endpoints.ContactCodeOperationSummary)
         .WithOpenApi();
 
     return webApp;
