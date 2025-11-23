@@ -32,11 +32,11 @@ public static class WebApplicationExtensions
   /// </returns>
   public static WebApplication AddBookmarkEndpoint(this WebApplication webApp)
   {
-    webApp.MapPost(Endpoints.ContactCodeEndpoint, ([FromServices] IQRCodeService codeService, [FromBody] BookmarkCodeRequest request)
+    webApp.MapPost(Endpoints.BookmarkCodeEndpoint, ([FromServices] IQRCodeService codeService, [FromBody] BookmarkCodeRequest request)
       => codeService.GetBookmarkCode(request))
-        .WithName(Endpoints.GetContactCodeEndpointName)
-        .WithDescription(Endpoints.ContactCodeOperationDescription)
-        .WithSummary(Endpoints.ContactCodeOperationSummary)
+        .WithName(Endpoints.GetBookmarkCodeEndpointName)
+        .WithDescription(Endpoints.BookmarkCodeOperationDescription)
+        .WithSummary(Endpoints.BookmarkCodeOperationSummary)
         .WithOpenApi();
 
     return webApp;
@@ -128,11 +128,11 @@ public static class WebApplicationExtensions
   /// </returns>
   public static WebApplication AddMailCodeEndpoint(this WebApplication webApp)
   {
-    webApp.MapPost(Endpoints.ContactCodeEndpoint, ([FromServices] IQRCodeService codeService, [FromBody] MailCodeRequest request)
+    webApp.MapPost(Endpoints.MailCodeEndpoint, ([FromServices] IQRCodeService codeService, [FromBody] MailCodeRequest request)
       => codeService.GetMailCode(request))
-        .WithName(Endpoints.GetContactCodeEndpointName)
-        .WithDescription(Endpoints.ContactCodeOperationDescription)
-        .WithSummary(Endpoints.ContactCodeOperationSummary)
+        .WithName(Endpoints.GetMailCodeEndpointName)
+        .WithDescription(Endpoints.MailCodeOperationDescription)
+        .WithSummary(Endpoints.MailCodeOperationSummary)
         .WithOpenApi();
 
     return webApp;

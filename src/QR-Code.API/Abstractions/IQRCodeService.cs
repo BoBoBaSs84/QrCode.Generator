@@ -14,6 +14,15 @@ namespace QRCode.API.Abstractions;
 /// </summary>
 public interface IQRCodeService
 {
+  /// <summary>
+  /// Generates a QR code for a bookmark based on the provided request details.
+  /// </summary>
+  /// <remarks>
+  /// The method uses the URL and title provided in the <paramref name="request"/> to generate
+  /// a QR code for the bookmark.
+  /// </remarks>
+  /// <param name="request">The request containing the bookmark details to be encoded.</param>
+  /// <returns>An <see cref="IResult"/> containing the generated QR code as a PNG image.</returns>
   IResult GetBookmarkCode(BookmarkCodeRequest request);
 
   /// <summary>
@@ -25,9 +34,7 @@ public interface IQRCodeService
   /// The generated contact can be used to create a QR code representation of the contact details.
   /// </remarks>
   /// <param name="request">The request containing the contact details to be encoded.</param>
-  /// <returns>
-  /// An <see cref="IResult"/> containing the generated QR code as a PNG image.
-  /// </returns>
+  /// <returns>An <see cref="IResult"/> containing the generated QR code as a PNG image.</returns>
   IResult GetContactCode(ContactCodeRequest request);
 
   /// <summary>
@@ -42,9 +49,7 @@ public interface IQRCodeService
   /// The request containing details of the calendar event, such as subject, description, location,
   /// start and end times, and encoding options.
   /// </param>
-  /// <returns>
-  /// An <see cref="IResult"/> containing the generated QR code as a PNG image.
-  /// </returns>
+  /// <returns>An <see cref="IResult"/> containing the generated QR code as a PNG image.</returns>
   IResult GetEventCode(EventCodeRequest request);
 
   /// <summary>
@@ -60,11 +65,18 @@ public interface IQRCodeService
   /// The request containing banking details such as IBAN, BIC, beneficiary name, amount, remittance information,
   /// version, and encoding options.
   /// </param>
-  /// <returns>
-  /// An <see cref="IResult"/> containing the generated QR code as a PNG image.
-  /// </returns>
+  /// <returns>An <see cref="IResult"/> containing the generated QR code as a PNG image.</returns>
   IResult GetGiroCode(GiroCodeRequest request);
 
+  /// <summary>
+  /// Generates a QR mail code based on the specified request parameters.
+  /// </summary>
+  /// <remarks>
+  /// The method generates a QR code that encodes the email address and subject specified in the
+  /// <paramref name="request"/>.
+  /// </remarks>
+  /// <param name="request">The request containing parameters for retrieving the mail code.</param>
+  /// <returns>An <see cref="IResult"/> containing the generated QR code as a PNG image.</returns>
   IResult GetMailCode(MailCodeRequest request);
 
   /// <summary>
@@ -78,8 +90,6 @@ public interface IQRCodeService
   /// The request containing Wi-Fi details such as SSID, password, authentication type,
   /// visibility, and QR code customization options.
   /// </param>
-  /// <returns>
-  /// An <see cref="IResult"/> containing the generated QR code as a PNG image.
-  /// </returns>
+  /// <returns>An <see cref="IResult"/> containing the generated QR code as a PNG image.</returns>
   IResult GetWifiCode(WifiCodeRequest request);
 }

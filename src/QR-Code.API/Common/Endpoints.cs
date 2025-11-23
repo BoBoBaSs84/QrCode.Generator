@@ -13,6 +13,26 @@ namespace QRCode.API.Common;
 public static class Endpoints
 {
   /// <summary>
+  /// Represents the endpoint for generating bookmark QR codes.
+  /// </summary>
+  public const string BookmarkCodeEndpoint = "/bookmark";
+
+  /// <summary>
+  /// Represents the name of the endpoint for generating bookmark QR codes.
+  /// </summary>
+  public const string GetBookmarkCodeEndpointName = "GetBookmarkCode";
+
+  /// <summary>
+  /// Represents the detailed description for the bookmark QR code generation operation.
+  /// </summary>
+  public const string BookmarkCodeOperationDescription = "The method generates a QR code for a browser bookmark using the URL and title provided in the request. The generated QR code can be scanned to quickly access the bookmarked webpage.";
+
+  /// <summary>
+  /// Represents the detailed description for the bookmark QR code generation operation.
+  /// </summary>
+  public const string BookmarkCodeOperationSummary = "Generates a browser bookmark data QR code based on the provided parameters.";
+
+  /// <summary>
   /// Represents the endpoint for generating contact data QR codes.
   /// </summary>
   public const string ContactCodeEndpoint = "/contact";
@@ -55,7 +75,7 @@ public static class Endpoints
   /// <summary>
   /// Represents the endpoint for generating Girocode QR codes.
   /// </summary>
-  public const string GiroCodeEndpoint = "/girocode";
+  public const string GiroCodeEndpoint = "/giro";
 
   /// <summary>
   /// Represents the name of the endpoint for generating Girocode QR codes.
@@ -71,6 +91,26 @@ public static class Endpoints
   /// Represents the detailed description for the Girocode QR code generation operation.
   /// </summary>
   public const string GiroCodeOperationDescription = "The method creates a Girocode payload for SEPA credit transfers using the specified banking details and generates a QR code representation. The Girocode contains information such as IBAN, BIC, beneficiary name, amount, and remittance information according to the European Payments Council (EPC) specifications.";
+
+  /// <summary>
+  /// Represents the endpoint for generating mail data QR codes.
+  /// </summary>
+  public const string MailCodeEndpoint = "/mail";
+
+  /// <summary>
+  /// Represents the name of the endpoint for generating mail data QR codes.
+  /// </summary>
+  public const string GetMailCodeEndpointName = "GetMailCode";
+
+  /// <summary>
+  /// Represents the summary for the mail data QR code generation operation.
+  /// </summary>
+  public const string MailCodeOperationSummary = "Generates a mail data QR code based on the provided parameters.";
+
+  /// <summary>
+  /// Represents the detailed description for the mail data QR code generation operation.
+  /// </summary>
+  public const string MailCodeOperationDescription = "The method generates a QR mail code using the email details provided in the request. The generated QR code can be scanned to quickly compose an email with the specified recipient, subject, and body.";
 
   /// <summary>
   /// Represents the endpoint for generating Wi-Fi QR codes.
