@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>QRCode.API</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <ConcurrentGarbageCollection>True</ConcurrentGarbageCollection>
+    <ServerGarbageCollection>True</ServerGarbageCollection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BB84.Extensions" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="QRCoder" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+</Project>

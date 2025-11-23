@@ -3,13 +3,16 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="BB84.Extensions" Version="3.4.1104" />
+    <PackageVersion Include="BB84.Extensions" Version="3.5.1120" />
     <PackageVersion Include="BB84.Notifications" Version="3.6.1026" />
     <PackageVersion Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.129" />
     <PackageVersion Include="FluentAssertions" Version="8.8.0" />
-    <PackageVersion Include="MSTest" Version="4.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+    <PackageVersion Include="MSTest" Version="4.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
     <PackageVersion Include="Moq" Version="4.20.72" />
+    <PackageVersion Include="QRCoder" Version="1.7.0" />
     <PackageVersion Include="QRCoder.Xaml" Version="1.7.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.22" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.3.2" />
   </ItemGroup>
 </Project>
