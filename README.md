@@ -1,4 +1,4 @@
-﻿## Technical Documentation
+﻿## QrCode.Generator
 
 ### Overview 🔍
 
@@ -13,6 +13,7 @@ The QrCode.Generator repository is a .NET 8 solution that provides robust QR cod
 This project is a Windows Presentation Foundation (WPF) application that offers a graphical user interface for generating and exporting QR codes.
 
 **Technical Details:**
+
 - **Target Framework:** .NET 8.0
 - **Output Type:** WinExe (Windows desktop application)
 - **UI Technology:** WPF with XAML
@@ -20,12 +21,14 @@ This project is a Windows Presentation Foundation (WPF) application that offers 
 - **Deployment:** Single-file publish enabled, includes application icon and embedded resources
 
 **Features:**
+
 - Interactive interface for generating QR codes of various types
 - Real-time preview and export of QR codes
 - Support for GiroCode, WiFi, bookmarks, contacts, events, and mail QR codes
 - Extensible via custom controls and services
 
 **Dependencies:**
+
 - BB84.Extensions
 - BB84.Notifications
 - DotNetProjects.Extended.Wpf.Toolkit
@@ -33,6 +36,7 @@ This project is a Windows Presentation Foundation (WPF) application that offers 
 - QRCoder.Xaml
 
 **Structure:**
+
 - **Controls:** Custom WPF controls for QR code types
 - **Models:** Data models for QR code content
 - **Services:** Business logic and export functionality
@@ -46,23 +50,27 @@ This project is a Windows Presentation Foundation (WPF) application that offers 
 This project exposes QR code generation functionality via a RESTful API, suitable for integration with other systems and automation.
 
 **Technical Details:**
+
 - **Target Framework:** .NET 8.0
 - **Type:** ASP.NET Core Web API
 - **Documentation:** Integrated OpenAPI/Swagger
 - **Performance:** Concurrent and server garbage collection enabled
 
 **Features:**
+
 - Endpoints for generating QR codes for bookmarks, contacts, events, GiroCode, mail, and WiFi
 - OpenAPI/Swagger documentation for easy integration
 - Asynchronous processing for scalability
 
 **Dependencies:**
+
 - BB84.Extensions
 - Microsoft.AspNetCore.OpenApi
 - QRCoder
 - Swashbuckle.AspNetCore
 
 **Endpoints:**
+
 - `/bookmark` - Generate bookmark QR codes
 - `/contact` - Generate contact QR codes (VCard)
 - `/event` - Generate event QR codes
@@ -71,6 +79,7 @@ This project exposes QR code generation functionality via a RESTful API, suitabl
 - `/wifi` - Generate WiFi configuration QR codes
 
 **Structure:**
+
 - **Abstractions:** Interface definitions for services
 - **Common:** Shared constants and endpoint definitions
 - **Contracts:** Request and response models
@@ -99,11 +108,13 @@ This project exposes QR code generation functionality via a RESTful API, suitabl
 The repository supports containerization for the QR-Code.API project, allowing you to run the Web API in a consistent and isolated environment. Using Docker, you can easily deploy the API without worrying about local dependencies or configuration.
 
 **Key Points:**
+
 - The API project can be built into a Docker image using a standard .NET 8 SDK base image.
 - Containerization ensures portability and simplifies deployment to cloud platforms or on-premises servers.
 - The container exposes the API endpoints over HTTP, making integration straightforward.
 
 **How to Build and Run:**
+
 1. Make sure Docker is installed on your system.
 2. Build the Docker image by running:
 
@@ -120,6 +131,7 @@ docker run -d -p 8080:80 --name qrcode-api qrcode-api
 4. Access the API at `http://localhost:8080` and use the documented endpoints.
 
 **Notes:**
+
 - The WPF desktop application is not intended to run in a container, as it requires a Windows graphical environment.
 - The API container is suitable for automated deployments, CI/CD pipelines, and cloud hosting.
 
