@@ -1,6 +1,6 @@
 ﻿## Technical Documentation
 
-### Overview 🪧
+### Overview 🔍
 
 The QrCode.Generator repository is a .NET 8 solution that provides robust QR code generation capabilities through two main projects: a WPF desktop application and an ASP.NET Core Web API. These projects are designed to address a variety of QR code generation scenarios, including bookmarks, contact information, events, payment codes, email, and WiFi configuration.
 
@@ -8,7 +8,7 @@ The QrCode.Generator repository is a .NET 8 solution that provides robust QR cod
 
 ### Projects 📁
 
-#### 1. QrCode.Generator (WPF Desktop Application)
+#### 1. QrCode.Generator (WPF Desktop Application) 🖥️
 
 This project is a Windows Presentation Foundation (WPF) application that offers a graphical user interface for generating and exporting QR codes.
 
@@ -41,7 +41,7 @@ This project is a Windows Presentation Foundation (WPF) application that offers 
 
 ---
 
-#### 2. QR-Code.API (ASP.NET Core Web API)
+#### 2. QR-Code.API (ASP.NET Core Web API) 🌐
 
 This project exposes QR code generation functionality via a RESTful API, suitable for integration with other systems and automation.
 
