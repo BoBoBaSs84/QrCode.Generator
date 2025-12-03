@@ -1,7 +1,4 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
-
-using Swashbuckle.AspNetCore.SwaggerUI;
+﻿using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace QRCode.API.Extensions;
 
@@ -19,8 +16,7 @@ public static class SwaggerUIOptionsExtensions
   /// </returns>
   internal static SwaggerUIOptions ConfigureSwaggerUIOptions(this SwaggerUIOptions options)
   {
-    options.JsonSerializerOptions = new JsonSerializerOptions();
-    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "QR-Code.API v1");
 
     return options;
   }
