@@ -3,7 +3,7 @@
 When you're ready, start your application by running:
 `docker compose up --build`.
 
-Your application will be available at http://localhost:8082.
+Your application will be available at `http://localhost:8082`.
 
 ### Deploying your application to the cloud
 
@@ -19,6 +19,10 @@ Consult Docker's [getting started](https://docs.docker.com/go/get-started-sharin
 docs for more detail on building and pushing.
 
 ### References
+
 * [Docker's .NET guide](https://docs.docker.com/language/dotnet/)
 * The [dotnet-docker](https://github.com/dotnet/dotnet-docker/tree/main/samples)
   repository has many relevant samples and docs.
+* [Docker's best practices](https://docs.docker.com/develop/develop-images/build_enhancements/)
+* [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
+* [Docker Compose](https://docs.docker.com/compose/)
