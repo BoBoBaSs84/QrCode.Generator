@@ -27,8 +27,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64</Platforms>
     <RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
-    <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>    
   </PropertyGroup>
 
   <PropertyGroup Condition="!$(MSBuildProjectName.EndsWith('Tests'))">
