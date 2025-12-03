@@ -1,15 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
     <IsPackable>False</IsPackable>
     <IsTestProject>True</IsTestProject>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <TargetFramework>net8.0-windows</TargetFramework>
   </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="Moq" />
     <PackageReference Include="MSTest" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\..\src\QrCode.Generator\QrCode.Generator.csproj" />
   </ItemGroup>
+
 </Project>

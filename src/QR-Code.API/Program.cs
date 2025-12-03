@@ -18,8 +18,8 @@ internal sealed class Program
     builder.Services.RegisterServices();
     WebApplication app = builder.Build();
 
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(options => options.ConfigureSwaggerOptions());
+    app.UseSwaggerUI(options => options.ConfigureSwaggerUIOptions());
 
     app.AddBookmarkEndpoint()
       .AddContactCodeEndpoint()
