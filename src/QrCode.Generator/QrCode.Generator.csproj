@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
     <ApplicationIcon>Application.ico</ApplicationIcon>
     <IncludeAllContentForSelfExtract>True</IncludeAllContentForSelfExtract>
     <OutputType>WinExe</OutputType>
     <PublishSingleFile>True</PublishSingleFile>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>True</UseWPF>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="Application.ico" />
-  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="BB84.Extensions" />
     <PackageReference Include="BB84.Notifications" />
@@ -16,4 +16,9 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="QRCoder.Xaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Application.ico" />
+  </ItemGroup>
+
 </Project>

@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>QRCode.API</RootNamespace>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <ConcurrentGarbageCollection>True</ConcurrentGarbageCollection>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <IncludeAllContentForSelfExtract>True</IncludeAllContentForSelfExtract>
+    <RootNamespace>QRCode.API</RootNamespace>
     <ServerGarbageCollection>True</ServerGarbageCollection>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
