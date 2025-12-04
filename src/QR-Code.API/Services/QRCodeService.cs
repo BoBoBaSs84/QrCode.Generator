@@ -6,12 +6,14 @@
 // LICENSE file in the root directory of this source tree.
 // -----------------------------------------------------------------------------
 using System.Drawing;
+using System.Text;
 
 using BB84.Extensions;
 
 using QRCode.API.Abstractions;
 using QRCode.API.Contracts;
 using QRCode.API.Contracts.Base;
+using QRCode.API.Enumerators;
 
 using QRCoder;
 
@@ -29,6 +31,13 @@ namespace QRCode.API.Services;
 /// </summary>
 internal sealed class QRCodeService : IQRCodeService
 {
+  private const int PixelsPerModule = 10;
+  private const string PdfContentType = "application/pdf";
+  private const string SvgContentType = "image/svg+xml";
+  private const string JpegContentType = "image/jpeg";
+  private const string PngContentType = "image/png";
+  private const string BmpContentType = "image/bmp";
+
   public IResult GetBookmarkCode(BookmarkCodeRequest request)
   {
     BookmarkData generator = new(
@@ -145,9 +154,62 @@ internal sealed class QRCodeService : IQRCodeService
     QRCodeData codeData = new QRCodeGenerator()
       .CreateQrCode(payload, eccLevel);
 
-    byte[] pngBytes = new BitmapByteQRCode(codeData)
-      .GetGraphic(20, darkColor, lightColor);
+    (byte[] bytes, string mimeType) = GetExportBytesAndMimeType(codeData, request.ExportType, darkColor, lightColor);
 
-    return Results.Bytes(pngBytes, "image/png");
+    return Results.Bytes(bytes, mimeType);
+  }
+
+  private static (byte[] Bytes, string MimeType) GetExportBytesAndMimeType(QRCodeData qrCodeData, ExportType exportType, byte[] foreground, byte[] background)
+  {
+    return exportType switch
+    {
+      ExportType.BMP => CreateBmp(qrCodeData, foreground, background),
+      ExportType.PNG => CreatePng(qrCodeData, foreground, background),
+      ExportType.JPEG => CreateJpeg(qrCodeData, foreground, background),
+      ExportType.SVG => CreateSvg(qrCodeData, foreground, background),
+      ExportType.PDF => CreatePdf(qrCodeData, foreground, background),
+      _ => throw new ArgumentOutOfRangeException(nameof(exportType), exportType, null),
+    };
+  }
+
+  private static (byte[], string) CreatePdf(QRCodeData qrCodeData, byte[] foreground, byte[] background)
+  {
+    using PdfByteQRCode pdfCoder = new(qrCodeData);
+    byte[] content = pdfCoder.GetGraphic(PixelsPerModule, foreground.GetHexString(), background.GetHexString());
+
+    return (content, PdfContentType);
+  }
+
+  private static (byte[], string) CreateSvg(QRCodeData qrCodeData, byte[] foreground, byte[] background)
+  {
+    using SvgQRCode svgCoder = new(qrCodeData);
+    string xmlContent = svgCoder.GetGraphic(PixelsPerModule, foreground.GetHexString(), background.GetHexString());
+    byte[] content = Encoding.UTF8.GetBytes(xmlContent);
+
+    return (content, SvgContentType);
+  }
+
+  private static (byte[], string) CreateJpeg(QRCodeData qrCodeData, byte[] foreground, byte[] background)
+  {
+    using BitmapByteQRCode bitmapCoder = new(qrCodeData);
+    byte[] content = bitmapCoder.GetGraphic(PixelsPerModule, foreground, background);
+
+    return (content, JpegContentType);
+  }
+
+  private static (byte[], string) CreatePng(QRCodeData qrCodeData, byte[] foreground, byte[] background)
+  {
+    using PngByteQRCode pngCoder = new(qrCodeData);
+    byte[] content = pngCoder.GetGraphic(PixelsPerModule, foreground, background);
+
+    return (content, PngContentType);
+  }
+
+  private static (byte[], string) CreateBmp(QRCodeData qrCodeData, byte[] foreground, byte[] background)
+  {
+    using BitmapByteQRCode bitmapCoder = new(qrCodeData);
+    byte[] content = bitmapCoder.GetGraphic(PixelsPerModule, foreground, background);
+
+    return (content, BmpContentType);
   }
 }

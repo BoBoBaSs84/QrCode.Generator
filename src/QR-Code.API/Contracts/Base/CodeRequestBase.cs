@@ -7,6 +7,8 @@
 // -----------------------------------------------------------------------------
 using System.ComponentModel.DataAnnotations;
 
+using QRCode.API.Enumerators;
+
 using static QRCoder.QRCodeGenerator;
 
 namespace QRCode.API.Contracts.Base;
@@ -16,6 +18,11 @@ namespace QRCode.API.Contracts.Base;
 /// </summary>
 public abstract class CodeRequestBase
 {
+  /// <summary>
+  /// Gets or sets the export type to use.
+  /// </summary>
+  public ExportType ExportType { get; init; }
+
   /// <summary>
   /// Gets or sets the error correction level to use.
   /// </summary>
