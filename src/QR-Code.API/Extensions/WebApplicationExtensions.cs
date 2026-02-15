@@ -36,8 +36,7 @@ public static class WebApplicationExtensions
       => codeService.GetBookmarkCode(request))
         .WithName(Endpoints.GetBookmarkCodeEndpointName)
         .WithDescription(Endpoints.BookmarkCodeOperationDescription)
-        .WithSummary(Endpoints.BookmarkCodeOperationSummary)
-        .WithOpenApi();
+        .WithSummary(Endpoints.BookmarkCodeOperationSummary);
 
     return webApp;
   }
@@ -60,8 +59,7 @@ public static class WebApplicationExtensions
       => codeService.GetContactCode(request))
         .WithName(Endpoints.GetContactCodeEndpointName)
         .WithDescription(Endpoints.ContactCodeOperationDescription)
-        .WithSummary(Endpoints.ContactCodeOperationSummary)
-        .WithOpenApi();
+        .WithSummary(Endpoints.ContactCodeOperationSummary);
 
     return webApp;
   }
@@ -84,8 +82,7 @@ public static class WebApplicationExtensions
       => codeService.GetEventCode(request))
         .WithName(Endpoints.GetEventCodeEndpointName)
         .WithDescription(Endpoints.EventCodeOperationDescription)
-        .WithSummary(Endpoints.EventCodeOperationSummary)
-        .WithOpenApi();
+        .WithSummary(Endpoints.EventCodeOperationSummary);
 
     return webApp;
   }
@@ -108,8 +105,7 @@ public static class WebApplicationExtensions
       => codeService.GetGiroCode(request))
         .WithName(Endpoints.GetGiroCodeEndpointName)
         .WithDescription(Endpoints.GiroCodeOperationDescription)
-        .WithSummary(Endpoints.GiroCodeOperationSummary)
-        .WithOpenApi();
+        .WithSummary(Endpoints.GiroCodeOperationSummary);
 
     return webApp;
   }
@@ -132,8 +128,7 @@ public static class WebApplicationExtensions
       => codeService.GetMailCode(request))
         .WithName(Endpoints.GetMailCodeEndpointName)
         .WithDescription(Endpoints.MailCodeOperationDescription)
-        .WithSummary(Endpoints.MailCodeOperationSummary)
-        .WithOpenApi();
+        .WithSummary(Endpoints.MailCodeOperationSummary);
 
     return webApp;
   }
@@ -156,8 +151,7 @@ public static class WebApplicationExtensions
       => codeService.GetWifiCode(request))
         .WithName(Endpoints.GetWifiCodeEndpointName)
         .WithDescription(Endpoints.WifiCodeOperationDescription)
-        .WithSummary(Endpoints.WifiCodeOperationSummary)
-        .WithOpenApi();
+        .WithSummary(Endpoints.WifiCodeOperationSummary);
 
     return webApp;
   }

@@ -19,9 +19,6 @@ namespace QRCode.API.Extensions;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
-  private static readonly string XmlCommentsFilePath
-    = Path.Combine(AppContext.BaseDirectory, $"{typeof(ServiceCollectionExtensions).Assembly.GetName().Name}.xml");
-
   private static readonly JsonStringEnumConverter JsonStringEnumConverter = new();
 
   /// <summary>
@@ -36,8 +33,7 @@ public static class ServiceCollectionExtensions
     services.AddSingleton<IQRCodeService, QRCodeService>();
     services.AddEndpointsApiExplorer();
 
-    services.AddSwaggerGen(options
-      => options.IncludeXmlComments(XmlCommentsFilePath));
+    services.AddSwaggerGen(options => options.ConfigureSwaggerGenOptions());
 
     services.ConfigureHttpJsonOptions(options
       => options.SerializerOptions.Converters.Add(JsonStringEnumConverter));
