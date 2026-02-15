@@ -63,7 +63,7 @@ This project exposes QR code generation functionality via a RESTful API, suitabl
 
 **Technical Details:**
 
-- **Target Framework:** .NET 8.0
+- **Target Framework:** .NET 10.0
 - **Type:** ASP.NET Core Web API
 - **Documentation:** Integrated OpenAPI/Swagger
 - **Performance:** Concurrent and server garbage collection enabled
@@ -102,8 +102,8 @@ This project exposes QR code generation functionality via a RESTful API, suitabl
 
 ### 🛠️ Development Environment
 
-- **Requirements:** .NET 8.0 SDK, Visual Studio 2022 or newer, Windows OS for WPF development
-- **Build:** Both projects target .NET 8.0 and support documentation generation
+- **Requirements:** .NET 8.0 SDK and .NET 10.0 SDK, Visual Studio 2022 or newer, Windows OS for WPF development
+- **Build:** Both projects target .NET 8.0 and .NET 10.0 and support documentation generation
 - **Deployment:** WPF app supports single-file publishing; API is optimized for server environments
 
 ---
