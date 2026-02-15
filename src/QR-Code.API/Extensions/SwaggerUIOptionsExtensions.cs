@@ -23,7 +23,10 @@ public static class SwaggerUIOptionsExtensions
   /// </returns>
   internal static SwaggerUIOptions ConfigureSwaggerUIOptions(this SwaggerUIOptions options)
   {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "QR-Code.API v1");
+    options.DocumentTitle = "QRCode.API";
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.ShowCommonExtensions();
+    options.ShowExtensions();
 
     return options;
   }

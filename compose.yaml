@@ -7,17 +7,13 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
-networks:
-  bb84home:
 services:
   server:
     build:
       context: .
       target: final
     ports:
-      - 8082:8080
-    networks:
-      bb84home:
+      - 8080:8080
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
