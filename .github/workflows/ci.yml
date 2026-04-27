@@ -1,6 +1,7 @@
+name: Continuous Integration
+
 permissions:
   contents: read
-name: CI
 
 on:
   push:
@@ -10,24 +11,27 @@ on:
 
 jobs:
   build:
+    name: Build and Test
     runs-on: windows-latest
 
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
-    - name: Setup
-      uses: actions/setup-dotnet@v5
-      with:
-        dotnet-version: 8.0.x
+      - name: Setup
+        uses: actions/setup-dotnet@v5
 
-    - name: Restore
-      run: dotnet restore
+      - name: Restore
+        run: dotnet restore QrCode.Generator.slnx
 
-    - name: Build
-      run: dotnet build --no-restore --configuration release --verbosity minimal
-    
-    - name: Test
-      run: dotnet test --no-build --configuration release --verbosity minimal
+      - name: Build
+        run: dotnet build QrCode.Generator.slnx --no-restore --configuration release --verbosity minimal
+
+      - name: Test
+        run: dotnet test QrCode.Generator.slnx --no-build --configuration release --verbosity minimal
