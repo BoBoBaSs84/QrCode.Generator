@@ -1,4 +1,6 @@
-﻿## QrCode.Generator
+﻿# QrCode.Generator
+
+The QrCode.Generator repository is a .NET 8 solution that provides robust QR code generation capabilities through two main projects: a WPF desktop application and an ASP.NET Core Web API. These projects are designed to address a variety of QR code generation scenarios, including bookmarks, contact information, events, payment codes, email, and WiFi configuration.
 
 [![CI](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/github-code-scanning/codeql)
@@ -12,15 +14,9 @@
 [![License](https://img.shields.io/github/license/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/v/release/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/releases/latest)
 
-### 🔍 Overview
+## 📁 Projects
 
-The QrCode.Generator repository is a .NET 8 solution that provides robust QR code generation capabilities through two main projects: a WPF desktop application and an ASP.NET Core Web API. These projects are designed to address a variety of QR code generation scenarios, including bookmarks, contact information, events, payment codes, email, and WiFi configuration.
-
----
-
-### 📁 Projects
-
-#### 🖥️ QrCode.Generator (WPF Desktop Application)
+### 🖥️ QrCode.Generator (WPF Desktop Application)
 
 This project is a Windows Presentation Foundation (WPF) application that offers a graphical user interface for generating and exporting QR codes.
 
@@ -55,9 +51,7 @@ This project is a Windows Presentation Foundation (WPF) application that offers 
 - **ViewModels:** MVVM data binding and logic
 - **Windows:** Main application windows
 
----
-
-#### 🌐 QR-Code.API (ASP.NET Core Web API)
+### 🌐 QR-Code.API (ASP.NET Core Web API)
 
 This project exposes QR code generation functionality via a RESTful API, suitable for integration with other systems and automation.
 
@@ -98,24 +92,18 @@ This project exposes QR code generation functionality via a RESTful API, suitabl
 - **Extensions:** Service registration and application configuration
 - **Services:** Core QR code generation logic
 
----
-
-### 🛠️ Development Environment
+## 🛠️ Development Environment
 
 - **Requirements:** .NET 8.0 SDK and .NET 10.0 SDK, Visual Studio 2022 or newer, Windows OS for WPF development
 - **Build:** Both projects target .NET 8.0 and .NET 10.0 and support documentation generation
 - **Deployment:** WPF app supports single-file publishing; API is optimized for server environments
 
----
-
-### 🚀 Usage
+## 🚀 Usage
 
 - **Desktop Application:** Launch the WPF app to interactively generate and export QR codes for various scenarios.
 - **Web API:** Integrate with the API by sending HTTP requests to the relevant endpoints with the required data to receive QR code images or data.
 
----
-
-### 🐳 Docker Container
+## 🐳 Docker Container
 
 The repository supports containerization for the QR-Code.API project, allowing you to run the Web API in a consistent and isolated environment. Using Docker, you can easily deploy the API without worrying about local dependencies or configuration.
 
@@ -149,4 +137,21 @@ docker run -d -p 8080:80 --name qrcode-api qrcode-api
 
 For more details on customizing the container or environment variables, refer to the Dockerfile in the directory.
 
----
+## 🤝🏼 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request but see the [Conduct](CODE_OF_CONDUCT.md) first.
+
+## ⚖️ License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Robert Peter Meyer (BoBoBaSs84)**
+
+- GitHub: [@BoBoBaSs84](https://github.com/BoBoBaSs84)
+- Repository: [QrCode.Generator](https://github.com/BoBoBaSs84/QrCode.Generator)
+
+## 📋 Changelog
+
+See [releases](https://github.com/BoBoBaSs84/QrCode.Generator/releases) for version history and changelog.
