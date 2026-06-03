@@ -23,6 +23,9 @@ updates:
       microsoft-extensions-dependencies:
         patterns:
           - "Microsoft.Extensions*"
+      swashbuckle-extensions-dependencies:
+        patterns:
+          - "Swashbuckle*"
       
   - package-ecosystem: "github-actions"
     directory: "/"
