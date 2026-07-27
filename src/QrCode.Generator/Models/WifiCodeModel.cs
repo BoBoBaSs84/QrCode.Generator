@@ -7,8 +7,6 @@
 // -----------------------------------------------------------------------------
 using System.ComponentModel.DataAnnotations;
 
-using BB84.Notifications.Attributes;
-
 using QrCode.Generator.Models.Base;
 
 using static QRCoder.PayloadGenerator.WiFi;
@@ -21,7 +19,7 @@ namespace QrCode.Generator.Models;
 public sealed class WifiCodeModel : QrCodeModel
 {
   private Authentication _authentication;
-  private string _sSID;
+  private string _ssid;
   private string _password;
   private bool _hidden;
 
@@ -31,7 +29,7 @@ public sealed class WifiCodeModel : QrCodeModel
   public WifiCodeModel()
   {
     _authentication = Authentication.WPA;
-    _sSID = string.Empty;
+    _ssid = string.Empty;
     _password = string.Empty;
     _hidden = false;
   }
@@ -40,22 +38,20 @@ public sealed class WifiCodeModel : QrCodeModel
   /// The authentication mode to use.
   /// </summary>
   [Required]
-  [NotifyChanged(nameof(IsValid))]
   public Authentication Authentication
   {
     get => _authentication;
-    set => SetProperty(ref _authentication, value);
+    set => SetPropertyAndValidate(ref _authentication, value);
   }
 
   /// <summary>
   /// The service set identifier.
   /// </summary>
   [Required]
-  [NotifyChanged(nameof(IsValid))]
   public string SSID
   {
-    get => _sSID;
-    set => SetPropertyAndValidate(ref _sSID, value);
+    get => _ssid;
+    set => SetPropertyAndValidate(ref _ssid, value);
   }
 
   /// <summary>

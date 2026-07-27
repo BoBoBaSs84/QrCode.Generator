@@ -123,7 +123,6 @@
                     Content="Create"
                     Command="{Binding CreateCommand}"
                     CommandParameter="{Binding Model}"
-                    IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
                     Margin="1" />
             <Button x:Name="CopyButton"
                     Grid.Column="1"
@@ -131,7 +130,6 @@
                     Content="Copy"
                     Command="{Binding CopyCommand}"
                     CommandParameter="{Binding Model}"
-                    IsEnabled="{Binding Model.IsValid, UpdateSourceTrigger=PropertyChanged}"
                     Margin="1" />
             <Button x:Name="SaveButton"
                     Grid.Column="2"
