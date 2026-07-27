@@ -5,6 +5,7 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 // -----------------------------------------------------------------------------
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -28,23 +29,45 @@ namespace QrCode.Generator.ViewModels.Base;
 /// <summary>
 /// The qr code view model base class.
 /// </summary>
-/// <remarks>
-/// Initializes an instance of <see cref="QrCodeViewModel{T}"/> class.
-/// </remarks>
-/// <param name="qrCodeService">The QR code service instance to use.</param>
-/// <param name="exportService">The export service instance to use.</param>
-/// <param name="templateService">The template service instance to use.</param>
-/// <param name="model">The model instance to use.</param>
-public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportService<T> exportService, ITemplateService<T> templateService, T model)
-  : ViewModelBase, ITemplatable<T>, IExportable<T> where T : QrCodeModel
+public abstract class QrCodeViewModel<T> : ViewModelBase, ITemplatable<T>, IExportable<T> where T : QrCodeModel
 {
+  private readonly IQrCodeService _qrCodeService;
+  private readonly IExportService<T> _exportService;
+  private readonly ITemplateService<T> _templateService;
+  private readonly ActionCommand<QrCodeModel> _createCommand;
+  private readonly ActionCommand<QrCodeModel> _copyCommand;
+
   private Image _qrCodeImage = new();
   private string _payload = string.Empty;
 
   /// <summary>
+  /// Initializes an instance of <see cref="QrCodeViewModel{T}"/> class.
+  /// </summary>
+  /// <param name="qrCodeService">The QR code service instance to use.</param>
+  /// <param name="exportService">The export service instance to use.</param>
+  /// <param name="templateService">The template service instance to use.</param>
+  /// <param name="model">The model instance to use.</param>
+  protected QrCodeViewModel(IQrCodeService qrCodeService, IExportService<T> exportService, ITemplateService<T> templateService, T model)
+  {
+    _qrCodeService = qrCodeService;
+    _exportService = exportService;
+    _templateService = templateService;
+    _createCommand = new(UpdateQrCode, CanExecute);
+    _copyCommand = new(CopyQrCode, CanExecute);
+
+    Model = model;
+    Model.PropertyChanged += OnModelPropertyChanged;
+    Model.ErrorsChanged += OnModelErrorsChanged;
+
+    // The model reports no errors until it has been validated at least once,
+    // so an empty model would otherwise start out as valid.
+    Model.Validate();
+  }
+
+  /// <summary>
   /// The model instance to use.
   /// </summary>
-  public T Model { get; } = model;
+  public T Model { get; }
 
   /// <summary>
   /// The actual qr code payload to encode.
@@ -90,13 +113,28 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportSe
   /// The command to create or update the QR code.
   /// </summary>
   public IActionCommand<QrCodeModel> CreateCommand
-    => new ActionCommand<QrCodeModel>(UpdateQrCode);
+    => _createCommand;
 
   /// <summary>
   /// The command for copying the QR code.
   /// </summary>
   public IActionCommand<QrCodeModel> CopyCommand
-    => new ActionCommand<QrCodeModel>(CopyQrCode);
+    => _copyCommand;
+
+  private static bool CanExecute(QrCodeModel model)
+    => model is not null && model.IsValid;
+
+  private void OnModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    => RaiseCanExecuteChanged();
+
+  private void OnModelErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
+    => RaiseCanExecuteChanged();
+
+  private void RaiseCanExecuteChanged()
+  {
+    _createCommand.RaiseCanExecuteChanged();
+    _copyCommand.RaiseCanExecuteChanged();
+  }
 
   /// <inheritdoc/>
   public IActionCommand<T> LoadTemplateCommand
@@ -114,7 +152,7 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportSe
   /// Exports the qr code.
   /// </summary>
   protected virtual void Export()
-    => exportService.Export(ExportPath, ExportType, Payload, Model);
+    => _exportService.Export(ExportPath, ExportType, Payload, Model);
 
   /// <summary>
   /// Loads the template into the current model.
@@ -122,8 +160,8 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportSe
   /// <param name="model">The model to load into.</param>
   protected virtual void LoadTemplate(T model)
   {
-    string fileContent = templateService.Load(LoadPath);
-    T template = templateService.From(fileContent);
+    string fileContent = _templateService.Load(LoadPath);
+    T template = _templateService.From(fileContent);
     model.FromTemplate(template);
   }
 
@@ -133,8 +171,8 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportSe
   /// <param name="model">The model to save from.</param>
   protected virtual void SaveTemplate(T model)
   {
-    string jsonContent = templateService.To(model);
-    templateService.Save(SavePath, jsonContent);
+    string jsonContent = _templateService.To(model);
+    _templateService.Save(SavePath, jsonContent);
   }
 
   /// <summary>
@@ -149,7 +187,7 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportSe
   {
     SetPayLoad();
 
-    DrawingImage drawing = qrCodeService
+    DrawingImage drawing = _qrCodeService
       .CreateDrawing(Payload, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
 
     QrCodeImage.Source = drawing;
@@ -162,7 +200,7 @@ public abstract class QrCodeViewModel<T>(IQrCodeService qrCodeService, IExportSe
   {
     SetPayLoad();
 
-    BitmapSource bitmap = qrCodeService
+    BitmapSource bitmap = _qrCodeService
       .CreateBitmap(Payload, 20, model.ForegroundColor, model.BackgroundColor, model.ErrorCorrection);
 
     DataObject dataObject = new();

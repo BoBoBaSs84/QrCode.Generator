@@ -7,8 +7,6 @@
 // -----------------------------------------------------------------------------
 using System.ComponentModel.DataAnnotations;
 
-using BB84.Notifications.Attributes;
-
 using QrCode.Generator.Models.Base;
 
 using static QRCoder.PayloadGenerator.ContactData;
@@ -23,23 +21,7 @@ public sealed class ContactDataModel : QrCodeModel
   private ContactOutputType _outputType;
   private string _firstName;
   private string _lastName;
-  private string? _nickName;
-  private string? _phone;
-  private string? _mobilePhone;
-  private string? _officePhone;
-  private string? _email;
-  private DateTime? _dateOfBirth;
-  private string? _webSite;
-  private string? _street;
-  private string? _houseNumber;
-  private string? _city;
-  private string? _country;
-  private string? _zipCode;
-  private string? _note;
-  private string? _stateRegion;
   private AddressOrder _addressOrder;
-  private string? _org;
-  private string? _orgTitle;
 
   /// <summary>
   /// Initializes an instance of <see cref="ContactDataModel"/> class.
@@ -65,7 +47,6 @@ public sealed class ContactDataModel : QrCodeModel
   /// The first name.
   /// </summary>
   [Required]
-  [NotifyChanged(nameof(IsValid))]
   public string FirstName
   {
     get => _firstName;
@@ -76,7 +57,6 @@ public sealed class ContactDataModel : QrCodeModel
   /// The last name.
   /// </summary>
   [Required]
-  [NotifyChanged(nameof(IsValid))]
   public string LastName
   {
     get => _lastName;
@@ -88,52 +68,48 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? NickName
   {
-    get => _nickName;
-    set => SetProperty(ref _nickName, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
   /// The normal phone number.
   /// </summary>
   [Phone]
-  [NotifyChanged(nameof(IsValid))]
   public string? Phone
   {
-    get => _phone;
-    set => SetPropertyAndValidate(ref _phone, value);
+    get;
+    set => SetPropertyAndValidate(ref field, value);
   }
 
   /// <summary>
   /// The mobile phone number.
   /// </summary>
   [Phone]
-  [NotifyChanged(nameof(IsValid))]
   public string? MobilePhone
   {
-    get => _mobilePhone;
-    set => SetPropertyAndValidate(ref _mobilePhone, value);
+    get;
+    set => SetPropertyAndValidate(ref field, value);
   }
 
   /// <summary>
   /// The office phone number.
   /// </summary>
   [Phone]
-  [NotifyChanged(nameof(IsValid))]
   public string? OfficePhone
   {
-    get => _officePhone;
-    set => SetPropertyAndValidate(ref _officePhone, value);
+    get;
+    set => SetPropertyAndValidate(ref field, value);
   }
 
   /// <summary>
   /// The E-Mail address.
   /// </summary>
   [EmailAddress]
-  [NotifyChanged(nameof(IsValid))]
   public string? Email
   {
-    get => _email;
-    set => SetPropertyAndValidate(ref _email, value);
+    get;
+    set => SetPropertyAndValidate(ref field, value);
   }
 
   /// <summary>
@@ -141,19 +117,18 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public DateTime? Birthday
   {
-    get => _dateOfBirth;
-    set => SetProperty(ref _dateOfBirth, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
   ///	Website / Homepage
   /// </summary>
   [Url]
-  [NotifyChanged(nameof(IsValid))]
   public string? WebSite
   {
-    get => _webSite;
-    set => SetProperty(ref _webSite, value);
+    get;
+    set => SetPropertyAndValidate(ref field, value);
   }
 
   /// <summary>
@@ -161,8 +136,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? Street
   {
-    get => _street;
-    set => SetProperty(ref _street, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
@@ -170,8 +145,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? HouseNumber
   {
-    get => _houseNumber;
-    set => SetProperty(ref _houseNumber, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
@@ -179,8 +154,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? City
   {
-    get => _city;
-    set => SetProperty(ref _city, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
@@ -188,8 +163,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? Country
   {
-    get => _country;
-    set => SetProperty(ref _country, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
@@ -197,8 +172,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? ZipCode
   {
-    get => _zipCode;
-    set => SetProperty(ref _zipCode, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
@@ -206,8 +181,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? Note
   {
-    get => _note;
-    set => SetProperty(ref _note, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
@@ -215,8 +190,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? StateRegion
   {
-    get => _stateRegion;
-    set => SetProperty(ref _stateRegion, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
@@ -236,8 +211,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? Org
   {
-    get => _org;
-    set => SetProperty(ref _org, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <summary>
@@ -245,8 +220,8 @@ public sealed class ContactDataModel : QrCodeModel
   /// </summary>
   public string? OrgTitle
   {
-    get => _orgTitle;
-    set => SetProperty(ref _orgTitle, value);
+    get;
+    set => SetProperty(ref field, value);
   }
 
   /// <inheritdoc/>

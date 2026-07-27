@@ -48,7 +48,6 @@ public sealed class EventCodeModel : QrCodeModel
   /// The subject / title of the calender event.
   /// </summary>
   [Required(AllowEmptyStrings = false), StringLength(100, MinimumLength = 1)]
-  [NotifyChanged(nameof(IsValid))]
   public string Subject
   {
     get => _subject;
@@ -77,7 +76,7 @@ public sealed class EventCodeModel : QrCodeModel
   /// The start time of the event.
   /// </summary>
   [Required]
-  [NotifyChanged(nameof(IsValid), nameof(End))]
+  [NotifyChanged(nameof(End))]
   public DateTime Start
   {
     get => _start;
@@ -88,7 +87,7 @@ public sealed class EventCodeModel : QrCodeModel
   /// The end time of the event.
   /// </summary>
   [Required]
-  [NotifyChanged(nameof(IsValid), nameof(Start))]
+  [NotifyChanged(nameof(Start))]
   public DateTime End
   {
     get => _end;
@@ -116,7 +115,7 @@ public sealed class EventCodeModel : QrCodeModel
   public EventEncoding Encoding
   {
     get => _encoding;
-    set => SetProperty(ref _encoding, value);
+    set => SetPropertyAndValidate(ref _encoding, value);
   }
 
   /// <inheritdoc/>

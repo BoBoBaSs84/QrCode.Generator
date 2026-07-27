@@ -35,7 +35,16 @@ public sealed class ContactDataViewModelTests : UnitTestBase
     Mock<IQrCodeService> qrCodeServiceMock = new();
     Mock<IExportService<ContactDataModel>> exportServiceMock = new();
     Mock<ITemplateService<ContactDataModel>> templateServiceMock = new();
-    ContactDataViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, new());
+    ContactDataModel model = new()
+    {
+      FirstName = "UnitTest",
+      LastName = "UnitTest",
+      Phone = "+1 505-644-9930",
+      MobilePhone = "+1 203-337-9287",
+      OfficePhone = "+1 505-288-3106",
+      Email = "UnitTest@UnitTest.org"
+    };
+    ContactDataViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, model);
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

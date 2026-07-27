@@ -34,7 +34,15 @@ public sealed class EventViewModelTests : UnitTestBase
     Mock<IQrCodeService> qrCodeServiceMock = new();
     Mock<IExportService<EventCodeModel>> exportServiceMock = new();
     Mock<ITemplateService<EventCodeModel>> templateServiceMock = new();
-    EventCodeViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, new());
+    EventCodeModel model = new()
+    {
+      Subject = "UnitTest",
+      Description = "UnitTest",
+      Location = "UnitTest",
+      Start = DateTime.Today,
+      End = DateTime.Today
+    };
+    EventCodeViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, model);
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 

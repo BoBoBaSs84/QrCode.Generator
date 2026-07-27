@@ -11,6 +11,8 @@ using QrCode.Generator.Interfaces.Services;
 using QrCode.Generator.Models;
 using QrCode.Generator.ViewModels;
 
+using static QRCoder.PayloadGenerator.WiFi;
+
 namespace QrCode.GeneratorTests.ViewModels;
 
 [TestClass]
@@ -34,10 +36,35 @@ public sealed class WifiCodeViewModelTests : UnitTestBase
     Mock<IQrCodeService> qrCodeServiceMock = new();
     Mock<IExportService<WifiCodeModel>> exportServiceMock = new();
     Mock<ITemplateService<WifiCodeModel>> templateServiceMock = new();
-    WifiCodeViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, new());
+    WifiCodeModel model = new()
+    {
+      SSID = "UnitTest",
+      Password = "UnitTest",
+      Authentication = Authentication.WPA
+    };
+    WifiCodeViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, model);
 
     viewModel.CreateCommand.Execute(viewModel.Model);
 
     Assert.AreNotEqual(string.Empty, viewModel.Payload);
+  }
+
+  [WpfTestMethod]
+  public void CreateCommandCanExecuteTest()
+  {
+    Mock<IQrCodeService> qrCodeServiceMock = new();
+    Mock<IExportService<WifiCodeModel>> exportServiceMock = new();
+    Mock<ITemplateService<WifiCodeModel>> templateServiceMock = new();
+    WifiCodeViewModel viewModel = new(qrCodeServiceMock.Object, exportServiceMock.Object, templateServiceMock.Object, new());
+    int canExecuteChangedCount = 0;
+    viewModel.CreateCommand.CanExecuteChanged += (sender, args) => canExecuteChangedCount++;
+
+    Assert.AreSame(viewModel.CreateCommand, viewModel.CreateCommand);
+    Assert.IsFalse(viewModel.CreateCommand.CanExecute(viewModel.Model));
+
+    viewModel.Model.SSID = "UnitTest";
+
+    Assert.IsTrue(viewModel.CreateCommand.CanExecute(viewModel.Model));
+    Assert.IsGreaterThan(0, canExecuteChangedCount);
   }
 }
