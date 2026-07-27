@@ -25,6 +25,7 @@ public sealed class ContactDataModelTests : UnitTestBase
     ContactDataModel? model;
 
     model = GetService<ContactDataModel>();
+    model.Validate();
 
     Assert.IsNotNull(model);
     Assert.AreEqual(ContactOutputType.VCard3, model.OutputType);

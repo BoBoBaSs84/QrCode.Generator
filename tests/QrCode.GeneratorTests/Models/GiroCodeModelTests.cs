@@ -25,6 +25,7 @@ public sealed class GiroCodeModelTests : UnitTestBase
     GiroCodeModel? model;
 
     model = GetService<GiroCodeModel>();
+    model.Validate();
 
     Assert.IsNotNull(model);
     Assert.AreEqual(string.Empty, model.IBAN);
