@@ -23,6 +23,7 @@ public class WifiCodeModelTests : UnitTestBase
     WifiCodeModel? model;
 
     model = GetService<WifiCodeModel>();
+    model.Validate();
 
     Assert.IsNotNull(model);
     Assert.AreEqual(Authentication.WPA, model.Authentication);
