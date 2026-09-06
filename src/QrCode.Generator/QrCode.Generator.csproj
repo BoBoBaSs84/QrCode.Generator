@@ -5,7 +5,7 @@
     <IncludeAllContentForSelfExtract>True</IncludeAllContentForSelfExtract>
     <OutputType>WinExe</OutputType>
     <PublishSingleFile>True</PublishSingleFile>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <UseWPF>True</UseWPF>
   </PropertyGroup>
   

@@ -1,13 +1,13 @@
 ﻿# QrCode.Generator
 
-The QrCode.Generator repository is a .NET solution that provides robust QR code generation capabilities through two main projects: a WPF desktop application targeting .NET 8.0 and an ASP.NET Core Web API targeting .NET 10.0. These projects are designed to address a variety of QR code generation scenarios, including bookmarks, contact information, events, payment codes, email, and WiFi configuration.
+The QrCode.Generator repository is a .NET solution that provides robust QR code generation capabilities through two main projects: a WPF desktop application and an ASP.NET Core Web API, both targeting .NET 10.0. These projects are designed to address a variety of QR code generation scenarios, including bookmarks, contact information, events, payment codes, email, and WiFi configuration.
 
 [![CI](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/github-code-scanning/codeql)
 [![Dependabot](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/dependabot/dependabot-updates/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/dependabot/dependabot-updates)
 
-[![.NET](https://img.shields.io/badge/net8.0%20%7C%20net10.0-5C2D91?logo=.NET&labelColor=gray)](https://github.com/BoBoBaSs84/QrCode.Generator)
-[![C#](https://img.shields.io/badge/C%23-13.0-239120)](https://github.com/BoBoBaSs84/QrCode.Generator)
+[![.NET](https://img.shields.io/badge/net10.0-5C2D91?logo=.NET&labelColor=gray)](https://github.com/BoBoBaSs84/QrCode.Generator)
+[![C#](https://img.shields.io/badge/C%23-14.0-239120)](https://github.com/BoBoBaSs84/QrCode.Generator)
 [![Issues](https://img.shields.io/github/issues/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/issues)
 [![Commit](https://img.shields.io/github/last-commit/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/commits/main/)
 [![RepoSize](https://img.shields.io/github/repo-size/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator)
@@ -22,7 +22,7 @@ This project is a Windows Presentation Foundation (WPF) application that offers 
 
 **Technical Details:**
 
-- **Target Framework:** .NET 8.0
+- **Target Framework:** .NET 10.0
 - **Output Type:** WinExe (Windows desktop application)
 - **UI Technology:** WPF with XAML
 - **Architecture:** MVVM pattern with dependency injection
@@ -94,8 +94,8 @@ This project exposes QR code generation functionality via a RESTful API, suitabl
 
 ## 🛠️ Development Environment
 
-- **Requirements:** .NET 8.0 SDK and .NET 10.0 SDK, Visual Studio 2022 or newer, Windows OS for WPF development
-- **Build:** The WPF application targets .NET 8.0, the Web API targets .NET 10.0; both support documentation generation
+- **Requirements:** .NET 10.0 SDK, Visual Studio 2022 or newer, Windows OS for WPF development
+- **Build:** Both projects target .NET 10.0 and support documentation generation
 - **Deployment:** WPF app supports single-file publishing; API is optimized for server environments
 
 ## 🚀 Usage
