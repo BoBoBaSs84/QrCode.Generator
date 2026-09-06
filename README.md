@@ -1,12 +1,12 @@
 ﻿# QrCode.Generator
 
-The QrCode.Generator repository is a .NET 8 solution that provides robust QR code generation capabilities through two main projects: a WPF desktop application and an ASP.NET Core Web API. These projects are designed to address a variety of QR code generation scenarios, including bookmarks, contact information, events, payment codes, email, and WiFi configuration.
+The QrCode.Generator repository is a .NET solution that provides robust QR code generation capabilities through two main projects: a WPF desktop application targeting .NET 8.0 and an ASP.NET Core Web API targeting .NET 10.0. These projects are designed to address a variety of QR code generation scenarios, including bookmarks, contact information, events, payment codes, email, and WiFi configuration.
 
 [![CI](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/github-code-scanning/codeql)
 [![Dependabot](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/dependabot/dependabot-updates/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/dependabot/dependabot-updates)
 
-[![.NET](https://img.shields.io/badge/net8.0-5C2D91?logo=.NET&labelColor=gray)](https://github.com/BoBoBaSs84/QrCode.Generator)
+[![.NET](https://img.shields.io/badge/net8.0%20%7C%20net10.0-5C2D91?logo=.NET&labelColor=gray)](https://github.com/BoBoBaSs84/QrCode.Generator)
 [![C#](https://img.shields.io/badge/C%23-13.0-239120)](https://github.com/BoBoBaSs84/QrCode.Generator)
 [![Issues](https://img.shields.io/github/issues/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/issues)
 [![Commit](https://img.shields.io/github/last-commit/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/commits/main/)
@@ -80,7 +80,7 @@ This project exposes QR code generation functionality via a RESTful API, suitabl
 - `/bookmark` - Generate bookmark QR codes
 - `/contact` - Generate contact QR codes (VCard)
 - `/event` - Generate event QR codes
-- `/girocode` - Generate payment QR codes (GiroCode)
+- `/giro` - Generate payment QR codes (GiroCode)
 - `/mail` - Generate mail QR codes
 - `/wifi` - Generate WiFi configuration QR codes
 
@@ -95,7 +95,7 @@ This project exposes QR code generation functionality via a RESTful API, suitabl
 ## 🛠️ Development Environment
 
 - **Requirements:** .NET 8.0 SDK and .NET 10.0 SDK, Visual Studio 2022 or newer, Windows OS for WPF development
-- **Build:** Both projects target .NET 8.0 and .NET 10.0 and support documentation generation
+- **Build:** The WPF application targets .NET 8.0, the Web API targets .NET 10.0; both support documentation generation
 - **Deployment:** WPF app supports single-file publishing; API is optimized for server environments
 
 ## 🚀 Usage
@@ -109,7 +109,7 @@ The repository supports containerization for the QR-Code.API project, allowing y
 
 **Key Points:**
 
-- The API project can be built into a Docker image using a standard .NET 8 SDK base image.
+- The API project can be built into a Docker image using the standard .NET 10 SDK base image (`mcr.microsoft.com/dotnet/sdk:10.0-alpine`).
 - Containerization ensures portability and simplifies deployment to cloud platforms or on-premises servers.
 - The container exposes the API endpoints over HTTP, making integration straightforward.
 
@@ -119,13 +119,13 @@ The repository supports containerization for the QR-Code.API project, allowing y
 2. Build the Docker image by running:
 
 ```pwsh
-docker build -t qrcode-api -f src/QR-Code.API/Dockerfile .
+docker build -t qrcode-api .
 ```
 
 3. Start the container with:
 
 ```pwsh
-docker run -d -p 8080:80 --name qrcode-api qrcode-api
+docker run -d -p 8080:8080 --name qrcode-api qrcode-api
 ```
 
 4. Access the API at `http://localhost:8080` and use the documented endpoints.
@@ -135,7 +135,7 @@ docker run -d -p 8080:80 --name qrcode-api qrcode-api
 - The WPF desktop application is not intended to run in a container, as it requires a Windows graphical environment.
 - The API container is suitable for automated deployments, CI/CD pipelines, and cloud hosting.
 
-For more details on customizing the container or environment variables, refer to the Dockerfile in the directory.
+For more details on customizing the container or environment variables, refer to the `Dockerfile` and `compose.yaml` in the repository root.
 
 ## 🤝🏼 Contributing
 
