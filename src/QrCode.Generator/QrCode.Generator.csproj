@@ -14,6 +14,7 @@
     <PackageReference Include="BB84.Notifications" />
     <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="QRCoder" />
     <PackageReference Include="QRCoder.Xaml" />
   </ItemGroup>
 
