@@ -1,55 +1,89 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
+# Dependabot configuration.
+# Version updates run weekly and are grouped per package family. Major bumps
+# get their own PR, except for Microsoft.* packages, the .NET SDK and Docker
+# images, where major bumps are ignored and must be upgraded manually.
+# Security updates are not affected by the schedule and arrive right away.
 version: 2
+
 updates:
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "04:00"
-    assignees:
-      - "BoBoBaSs84"
+      time: "03:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 10
+    assignees: ["BoBoBaSs84"]
+    labels: ["dependencies", "nuget"]
+    commit-message:
+      prefix: "chore(deps)"
+    ignore:
+      - dependency-name: "Microsoft.*"
+        update-types: ["version-update:semver-major"]
     groups:
-      bb84-dependencies:
-        patterns:
-          - "BB84*"
-      mstest-dependencies:
-        patterns:
-          - "MSTest*"
-      microsoft-extensions-dependencies:
-        patterns:
-          - "Microsoft.Extensions*"
-      swashbuckle-extensions-dependencies:
-        patterns:
-          - "Swashbuckle*"
-      
+      microsoft:
+        patterns: ["Microsoft.*"]
+        update-types: ["minor", "patch"]
+      bb84:
+        patterns: ["BB84.*"]
+        update-types: ["minor", "patch"]
+      testing:
+        patterns: ["FluentAssertions", "Moq"]
+        update-types: ["minor", "patch"]
+      qrcoder:
+        patterns: ["QRCoder*"]
+        update-types: ["minor", "patch"]
+      swagger:
+        patterns: ["Swashbuckle.*"]
+        update-types: ["minor", "patch"]
+      security:
+        applies-to: "security-updates"
+        patterns: ["*"]
+
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "04:00"
-    assignees:
-      - "BoBoBaSs84"
+      time: "03:00"
+      timezone: "Europe/Berlin"
+    assignees: ["BoBoBaSs84"]
+    labels: ["dependencies", "github-actions"]
+    commit-message:
+      prefix: "ci(deps)"
+    groups:
+      actions:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
 
-  - package-ecosystem: "docker-compose"
+  - package-ecosystem: "dotnet-sdk"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "04:00"
-    assignees:
-      - "BoBoBaSs84"
+      time: "03:00"
+      timezone: "Europe/Berlin"
+    assignees: ["BoBoBaSs84"]
+    labels: ["dependencies", "dotnet-sdk"]
+    commit-message:
+      prefix: "chore(deps)"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "04:00"
-    assignees:
-      - "BoBoBaSs84"
+      time: "03:00"
+      timezone: "Europe/Berlin"
+    assignees: ["BoBoBaSs84"]
+    labels: ["dependencies", "docker"]
+    commit-message:
+      prefix: "chore(deps)"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]

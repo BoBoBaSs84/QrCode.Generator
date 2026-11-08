@@ -1,0 +1,107 @@
+name: Continuous Deployment
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  SOLUTION: QrCode.Generator.slnx
+  CONFIGURATION: Release
+
+jobs:
+  build:
+    name: Build, Test & Publish
+    runs-on: windows-latest
+    outputs:
+      version: ${{ steps.version.outputs.VERSION }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          $tagName = "$env:GITHUB_REF" -replace '^refs/tags/v', ''
+          echo "VERSION=$tagName" >> $env:GITHUB_OUTPUT
+          echo "Extracted version: $tagName"
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOLUTION }}
+
+      - name: Build solution
+        run: >
+          dotnet build ${{ env.SOLUTION }}
+          --configuration ${{ env.CONFIGURATION }}
+          --no-restore
+          -p:VersionPrefix=${{ steps.version.outputs.VERSION }}
+          -p:VersionSuffix=
+          -p:FileVersion=${{ steps.version.outputs.VERSION }}
+          -p:PackageVersion=${{ steps.version.outputs.VERSION }}
+
+      - name: Run tests
+        run: dotnet test ${{ env.SOLUTION }} --configuration ${{ env.CONFIGURATION }} --no-build --report-trx --results-directory ./test-results
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results
+          path: ./test-results/*.trx
+
+      - name: Publish application
+        run: >
+          dotnet publish src/QrCode.Generator/QrCode.Generator.csproj
+          --configuration ${{ env.CONFIGURATION }}
+          --runtime win-x64
+          --output ./publish
+          -p:VersionPrefix=${{ steps.version.outputs.VERSION }}
+          -p:VersionSuffix=
+          -p:FileVersion=${{ steps.version.outputs.VERSION }}
+
+      - name: Archive published output
+        run: |
+          New-Item -ItemType Directory -Path ./artifacts -Force | Out-Null
+          Compress-Archive -Path ./publish/* -DestinationPath ./artifacts/QrCode.Generator.win-x64.${{ steps.version.outputs.VERSION }}.zip
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: QrCode.Generator
+          path: ./artifacts/QrCode.Generator.win-x64.${{ steps.version.outputs.VERSION }}.zip
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: QrCode.Generator
+          path: ./artifacts
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ needs.build.outputs.version }}
+          generate_release_notes: true
+          files: ./artifacts/QrCode.Generator.win-x64.${{ needs.build.outputs.version }}.zip
