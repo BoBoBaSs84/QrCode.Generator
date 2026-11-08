@@ -3,6 +3,7 @@
 The QrCode.Generator repository is a .NET solution that provides robust QR code generation capabilities through two main projects: a WPF desktop application and an ASP.NET Core Web API, both targeting .NET 10.0. These projects are designed to address a variety of QR code generation scenarios, including bookmarks, contact information, events, payment codes, email, and WiFi configuration.
 
 [![CI](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/ci.yml)
+[![CD](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/cd.yml)
 [![CodeQL](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/github-code-scanning/codeql)
 [![Dependabot](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/dependabot/dependabot-updates/badge.svg?branch=main)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/dependabot/dependabot-updates)
 [![Docker Image](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/docker-image.yml/badge.svg)](https://github.com/BoBoBaSs84/QrCode.Generator/actions/workflows/docker-image.yml)
@@ -12,7 +13,7 @@ The QrCode.Generator repository is a .NET solution that provides robust QR code 
 [![Issues](https://img.shields.io/github/issues/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/issues)
 [![Commit](https://img.shields.io/github/last-commit/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/commits/main/)
 [![RepoSize](https://img.shields.io/github/repo-size/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator)
-[![License](https://img.shields.io/github/license/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/BoBoBaSs84/QrCode.Generator)](https://github.com/BoBoBaSs84/QrCode.Generator/releases/latest)
 [![Container](https://img.shields.io/badge/ghcr.io-QrCode.Generator-2496ED?logo=docker&logoColor=white)](https://github.com/BoBoBaSs84/QrCode.Generator/pkgs/container/QrCode.Generator)
 
