@@ -13,6 +13,6 @@
     <PackageVersion Include="QRCoder.Xaml" Version="1.8.1" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.14" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="11.0.1" />
-    <PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="10.3.1" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="11.0.1" />
   </ItemGroup>
 </Project>
